@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,103 +12,121 @@
       --accent: #fff3cd;
       --dark: #343a40;
       --light: #f8f9fa;
-    }body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  margin: 0;
-  padding: 0;
-  background: var(--light);
-  color: #333;
-}
+    }
 
-header {
-  background: var(--primary);
-  color: #000;
-  padding: 1rem;
-  text-align: center;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-}
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: var(--light);
+      color: #333;
+    }
 
-header img {
-  width: 80px;
-  height: auto;
-  border-radius: 50%;
-  margin-bottom: 10px;
-}
+    header {
+      background: var(--primary);
+      color: #000;
+      padding: 1rem;
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
 
-nav {
-  background: var(--secondary);
-  padding: 0.7rem;
-  text-align: center;
-}
+    header img {
+      width: 80px;
+      height: auto;
+      border-radius: 50%;
+      margin-bottom: 10px;
+    }
 
-nav a {
-  color: white;
-  margin: 0 15px;
-  text-decoration: none;
-  font-weight: 600;
-  transition: color 0.3s ease;
-}
+    nav {
+      background: var(--secondary);
+      padding: 0.7rem;
+      text-align: center;
+    }
 
-nav a:hover {
-  color: var(--accent);
-}
+    nav a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
 
-section {
-  padding: 2rem 1rem;
-  text-align: center;
-  background: white;
-  margin: 1rem auto;
-  border-radius: 10px;
-  max-width: 900px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-}
+    nav a:hover {
+      color: var(--accent);
+    }
 
-h2, h3 {
-  color: var(--secondary);
-}
+    section {
+      padding: 2rem 1rem;
+      text-align: center;
+      background: white;
+      margin: 1rem auto;
+      border-radius: 10px;
+      max-width: 900px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    }
 
-.verse {
-  font-style: italic;
-  color: #555;
-  margin-top: 1rem;
-}
+    h2, h3 {
+      color: var(--secondary);
+    }
 
-ul {
-  list-style-type: none;
-  padding: 0;
-}
+    .verse {
+      font-style: italic;
+      color: #555;
+      margin-top: 1rem;
+    }
 
-ul li {
-  padding: 0.3rem 0;
-  font-size: 1rem;
-}
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
 
-iframe {
-  max-width: 100%;
-  border: none;
-  border-radius: 8px;
-  margin-top: 1rem;
-}
+    th, td {
+      border: 1px solid #ccc;
+      padding: 0.75rem;
+      text-align: left;
+    }
 
-#cta p, #services p {
-  font-size: 1rem;
-}
+    th {
+      background-color: #f1f1f1;
+    }
 
-footer {
-  background: var(--dark);
-  color: #fff;
-  text-align: center;
-  padding: 1.5rem 1rem;
-  margin-top: 2rem;
-}
+    iframe {
+      max-width: 100%;
+      border: none;
+      border-radius: 8px;
+      margin-top: 1rem;
+    }
 
+    .socials img {
+      width: 32px;
+      height: 32px;
+      margin: 0 10px;
+      vertical-align: middle;
+    }
+
+    .socials a {
+      text-decoration: none;
+    }
+
+    footer {
+      background: var(--dark);
+      color: #fff;
+      text-align: center;
+      padding: 1.5rem 1rem;
+      margin-top: 2rem;
+    }
   </style>
 </head>
-<body>  <header>
+<body>
+
+  <header>
     <img src="logo.png" alt="Church Logo">
     <h1>Oasis of Wisdom Bible Church</h1>
     <p><strong>"We Preach Christ"</strong></p>
-  </header>  <nav>
+  </header>
+
+  <nav>
     <a href="index.html">Home</a>
     <a href="about.html">About Us</a>
     <a href="contact.html">Contact</a>
@@ -115,37 +134,82 @@ footer {
     <a href="media.html">Media Library</a>
     <a href="gallery.html">Gallery</a>
     <a href="programs.html">Programs</a>
-  </nav>  <section class="hero">
+  </nav>
+
+  <section class="hero">
     <h2>Welcome to Oasis of Wisdom Bible Church</h2>
     <p>Join us as we grow in the knowledge of Christ and spread the gospel to the world.</p>
     <div class="verse">
       <p><em>"But ye are a chosen generation, a royal priesthood, an holy nation, a peculiar people; that ye should shew forth the praises of him who hath called you out of darkness into his marvellous light."</em> – 1 Peter 2:9</p>
     </div>
-  </section>  <section id="services">
+  </section>
+
+  <section id="daily-verse">
+    <h3>📖 Daily Bible Verse</h3>
+    <blockquote id="verse-text">Loading verse...</blockquote>
+    <small id="verse-ref"></small>
+    <script>
+      fetch("https://beta.ourmanna.com/api/v1/get/?format=json")
+        .then(res => res.json())
+        .then(data => {
+          document.getElementById("verse-text").innerText = data.verse.details.text;
+          document.getElementById("verse-ref").innerText = data.verse.details.reference;
+        });
+    </script>
+  </section>
+
+  <section id="services">
     <h3>Service Times</h3>
-    <ul>
-      <li><strong>Sunday:</strong> Leaders Breakfast – 7:00 AM</li>
-      <li>Wonders Of Wisdom Service – 9:00 AM</li>
-      <li><strong>Tuesday:</strong> Solution Mountain – 10:00 AM</li>
-      <li><strong>Wednesday:</strong> Bible Study – 6:00 PM</li>
-      <li><strong>Friday:</strong> Intercessory Hour – 5:00 PM</li>
-      <li><strong>Saturday:</strong> Praying Mothers & Unit Meetings – 4:00 PM</li>
-      <li>Ministry Corps Koinonia – 5:00 PM</li>
-    </ul>
-  </section>  <section id="latest-sermon">
-    <h3>Latest Sermon Series</h3>
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/videoseries?list=PL41j9bWXbj799l2hAGjosFiKrCuUo5Azb" allowfullscreen></iframe>
-  </section>  <section id="spotify-sermons">
-    <h3>Listen to Our Sermons</h3>
-    <iframe style="border-radius:12px" src="https://open.spotify.com/embed/show/0DVWzznTFh7y9y8nB5WiUH?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen loading="lazy"></iframe>
-  </section>  <section id="cta">
+    <table>
+      <tr><th>Day</th><th>Program</th><th>Time</th></tr>
+      <tr><td>Sunday</td><td>Leaders Breakfast</td><td>7:00 AM</td></tr>
+      <tr><td>Sunday</td><td>Wonders of Wisdom Service</td><td>9:00 AM</td></tr>
+      <tr><td>Tuesday</td><td>Solution Mountain</td><td>10:00 AM</td></tr>
+      <tr><td>Wednesday</td><td>Bible Study</td><td>6:00 PM</td></tr>
+      <tr><td>Friday</td><td>Intercessory Hour</td><td>5:00 PM</td></tr>
+      <tr><td>Saturday</td><td>Praying Mothers & Unit Meetings</td><td>4:00 PM</td></tr>
+      <tr><td>Saturday</td><td>Ministry Corps Koinonia</td><td>5:00 PM</td></tr>
+    </table>
+  </section>
+
+  <section id="latest-sermon">
+    <h3>🎥 Watch Our Sermons</h3>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/ev_j_vRwl6I" allowfullscreen></iframe>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/nG8R-gBk5oc" allowfullscreen></iframe>
+  </section>
+
+  <section id="listen-sermons">
+    <h3>🎧 Listen to Our Sermons</h3>
+    <iframe src="https://tr.ee/HOY-Sl0Cv7" width="100%" height="400" frameborder="0"></iframe>
+  </section>
+
+  <section id="rss-player">
+    <h3>📻 Audio Player (RSS)</h3>
+    <iframe src="https://anchor.fm/s/b3f408cc/podcast/rss" width="100%" height="150"></iframe>
+  </section>
+
+  <section id="cta">
     <h3>Plan a Visit</h3>
     <p>We’d love to worship with you! Come visit us at:</p>
     <p><strong>GJWX+PJ6 Old Ilorin, Jebba Rd, Ilorin 240102, Kwara State, Nigeria</strong></p>
     <iframe src="https://www.google.com/maps?q=GJWX%2BPJ6%20Old%20Ilorin,%20Jebba%20Rd,%20Ilorin%20240102,%20Kwara&output=embed" width="100%" height="300" style="border:0;" allowfullscreen loading="lazy"></iframe>
-  </section>  <footer>
+  </section>
+
+  <section class="socials">
+    <h3>📱 Connect With Us</h3>
+    <p>
+      <a href="https://www.facebook.com/oasisofwisdom" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook"></a>
+      <a href="https://www.instagram.com/oasisofwisdom" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/733/733558.png" alt="Instagram"></a>
+      <a href="https://youtube.com/@oasisofwisdom" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/733/733646.png" alt="YouTube"></a>
+      <a href="https://www.tiktok.com/@oasisofwisdom" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok"></a>
+    </p>
+  </section>
+
+  <footer>
     <p>&copy; 2025 Oasis of Wisdom Bible Church. All rights reserved.</p>
     <p>KM 11, Adjacent University of Ilorin Teaching Hospital, Ilorin, Kwara State, Nigeria</p>
     <p>Phone: 08035685882, 08060442459</p>
-  </footer></body>
+  </footer>
+
+</body>
 </html>
