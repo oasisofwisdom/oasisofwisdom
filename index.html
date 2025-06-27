@@ -1,3 +1,4 @@
+<!-- Updated full HTML with removed latest sermon section, added podcast platforms, Google Map, contact form and prayer request -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,133 +14,34 @@
       --dark: #343a40;
       --light: #f8f9fa;
     }
-
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: var(--light);
-      color: #333;
-    }
-
-    header {
-      background: var(--primary);
-      color: #000;
-      padding: 1rem;
-      text-align: center;
-      box-shadow: 0 2px 6px rgba( 0, 0, 0, 0.1);
-    }
-
-    header img {
-      width: 80px;
-      height: auto;
-      border-radius: 50%;
-      margin-bottom: 10px;
-    }
-
-    nav {
-      background: var(--secondary);
-      padding: 0.7rem;
-      text-align: center;
-    }
-
-    nav a {
-      color: white;
-      margin: 0 15px;
-      text-decoration: none;
-      font-weight: 600;
-      transition: color 0.3s ease;
-    }
-
-    nav a:hover {
-      color: var(--accent);
-    }
-
-    section {
-      padding: 2rem 1rem;
-      text-align: center;
-      background: white;
-      margin: 1rem auto;
-      border-radius: 10px;
-      max-width: 900px;
-      box-shadow: 0 4px 10px rgba( 0, 0, 0, 0.05);
-    }
-
-    h2, h3 {
-      color: var(--secondary);
-    }
-
-    .verse {
-      font-style: italic;
-      color: #555;
-      margin-top: 1rem;
-    }
-
-    iframe {
-      max-width: 100%;
-      border: none;
-      border-radius: 8px;
-      margin-top: 1rem;
-    }
-
-    .platform-links {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
-      margin-top: 1rem;
-    }
-
-    .platform-links a {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 0.6rem 1rem;
-      border-radius: 6px;
-      background-color: #eee;
-      color: #000;
-      text-decoration: none;
-      font-weight: bold;
-      transition: background 0.3s;
-    }
-
-    .platform-links a:hover {
-      background-color: #ddd;
-    }
-
-    .platform-links img {
-      width: 24px;
-      height: 24px;
-    }
-
-    footer {
-      background: var(--dark);
-      color: #fff;
-      text-align: center;
-      padding: 2rem 1rem;
-    }
-
-    footer a {
-      color: #ffc107;
-      text-decoration: none;
-      margin: 0 10px;
-    }
-
-    .social-icons img {
-      width: 30px;
-      margin: 0 8px;
-      vertical-align: middle;
-    }
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background: var(--light); color: #333; }
+    header { background: var(--primary); color: #000; padding: 1rem; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+    header img { width: 80px; height: auto; border-radius: 50%; margin-bottom: 10px; }
+    nav { background: var(--secondary); padding: 0.7rem; text-align: center; }
+    nav a { color: white; margin: 0 15px; text-decoration: none; font-weight: 600; transition: color 0.3s ease; }
+    nav a:hover { color: var(--accent); }
+    section { padding: 2rem 1rem; text-align: center; background: white; margin: 1rem auto; border-radius: 10px; max-width: 900px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+    h2, h3 { color: var(--secondary); }
+    .verse { font-style: italic; color: #555; margin-top: 1rem; }
+    iframe { max-width: 100%; border: none; border-radius: 8px; margin-top: 1rem; }
+    .platform-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 1rem; }
+    .platform-links a { display: flex; align-items: center; gap: 8px; padding: 0.6rem 1rem; border-radius: 6px; background-color: #eee; color: #000; text-decoration: none; font-weight: bold; transition: background 0.3s; }
+    .platform-links a:hover { background-color: #ddd; }
+    .platform-links img { width: 24px; height: 24px; }
+    form input, form textarea { width: 100%; padding: 0.8rem; margin: 0.5rem 0; border: 1px solid #ccc; border-radius: 5px; }
+    form button { background: var(--secondary); color: white; padding: 0.7rem 1.5rem; border: none; border-radius: 5px; cursor: pointer; }
+    form button:hover { background: #218838; }
+    footer { background: var(--dark); color: #fff; text-align: center; padding: 2rem 1rem; }
+    footer a { color: #ffc107; text-decoration: none; margin: 0 10px; }
+    .social-icons img { width: 30px; margin: 0 8px; vertical-align: middle; }
   </style>
 </head>
 <body>
-
   <header>
     <img src="logo.png" alt="Church Logo">
     <h1>Oasis of Wisdom Bible Church</h1>
     <p><strong>"We Preach Christ"</strong></p>
   </header>
-
   <nav>
     <a href="index.html">Home</a>
     <a href="about.html">About Us</a>
@@ -149,15 +51,13 @@
     <a href="gallery.html">Gallery</a>
     <a href="programs.html">Programs</a>
   </nav>
-
   <section class="hero">
     <h2>Welcome to Oasis of Wisdom Bible Church</h2>
     <p>Join us as we grow in the knowledge of Christ and spread the gospel to the world.</p>
     <div class="verse">
-      <p><em>"But ye are a chosen generation, a royal priesthood, an holy nation, a peculiar people; that ye should shew forth the praises of him who hath called you out of darkness into his marvellous light."</em> – 1 Peter 2:9</p>
+      <p><em>"But ye are a chosen generation..."</em> – 1 Peter 2:9</p>
     </div>
   </section>
-
   <section id="daily-verse">
     <h3>📖 Daily Bible Verse</h3>
     <blockquote id="verse-text">Loading verse...</blockquote>
@@ -171,33 +71,55 @@
         });
     </script>
   </section>
-
-  <section id="latest-sermon">
-    <h3>🔥 Latest Sermon</h3>
-    <iframe width="100%" height="315" src="https://www.youtube.com/embed?listType=user_uploads&list=oasisofwisdom" allowfullscreen></iframe>
-  </section>
-
   <section id="sermon-library">
-    <h3>📺 Watch More Sermons</h3>
+    <h3>📺 Watch Our Sermons</h3>
     <iframe width="100%" height="400" src="https://www.youtube.com/embed/videoseries?list=PL41j9bWXbj799l2hAGjosFiKrCuUo5Azb" allowfullscreen></iframe>
     <iframe width="100%" height="400" src="https://www.facebook.com/plugins/video.php?href=https://web.facebook.com/oasisofwisdom/videos&show_text=false&width=560" allowfullscreen></iframe>
   </section>
-
   <section id="listen-sermons">
     <h3>🎧 Listen to Our Sermons</h3>
     <iframe style="border-radius:12px" src="https://open.spotify.com/embed/show/0DVWzznTFh7y9y8nB5WiUH?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen loading="lazy"></iframe>
     <div class="platform-links">
-      <!-- Podcast links with logos here (omitted to save space, already done above) -->
+      <a href="https://podcasts.apple.com/us/podcast/wonders-of-wisdom-hour/id1642910204" target="_blank">Apple</a>
+      <a href="https://music.amazon.com/podcasts/643b0b45-69e5-4269-aafc-a702f8d851c6/oasisofwisdom" target="_blank">Amazon</a>
+      <a href="https://podcasts.google.com/feed/aHR0cHM6Ly9hbmNob3IuZm0vcy9iM2Y0MDhjYy9wb2RjYXN0L3Jzcw" target="_blank">Google Podcasts</a>
+      <a href="https://www.stitcher.com/show/1021997" target="_blank">Stitcher</a>
+      <a href="https://www.pandora.com/podcast/oasisofwisdom/PC:1001021997" target="_blank">Pandora</a>
+      <a href="https://anchor.fm/oasisofwisdom" target="_blank">Anchor</a>
+      <a href="https://radiopublic.com/oasisofwisdom-85Yy7m" target="_blank">RadioPublic</a>
+      <a href="https://pca.st/qz10xtgt" target="_blank">Pocket Casts</a>
+      <a href="https://deezer.com/show/4553217" target="_blank">Deezer</a>
+      <a href="https://afripods.africa/podcast/82fec0be-41cf-4caa-9034-a28877b95473" target="_blank">Afripods</a>
+      <a href="https://gaana.com/podcast/wonders-of-wisdom-hour-season-1" target="_blank">Gaana</a>
     </div>
   </section>
-
   <section id="offering">
     <h3>Online Giving</h3>
-    <p><em>"Each of you should give what you have decided in your heart to give, not reluctantly or under compulsion, for God loves a cheerful giver." – 2 Corinthians 9:7</em></p>
-    <p><strong>Give to:</strong></p>
-    <p>0223306192 – Wema Bank<br>2069289420 – UBA</p>
+    <p><em>"Each of you should give what you have decided in your heart to give..." – 2 Corinthians 9:7</em></p>
+    <p><strong>Give to:</strong><br>0223306192 – Wema Bank<br>2069289420 – UBA</p>
   </section>
-
+  <section id="map">
+    <h3>📍 Find Us</h3>
+    <iframe src="https://www.google.com/maps?q=GJWX+PJ6%20Old%20Ilorin%2C%20Jebba%20Rd%2C%20Ilorin%20240102%2C%20Kwara&output=embed" width="100%" height="300"></iframe>
+  </section>
+  <section id="prayer-request">
+    <h3>🙏 Submit a Prayer Request</h3>
+    <form action="mailto:oasisofwisdomchurch@gmail.com" method="POST" enctype="text/plain">
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="email" name="email" placeholder="Your Email" required>
+      <textarea name="message" rows="5" placeholder="Your Prayer Request" required></textarea>
+      <button type="submit">Send Request</button>
+    </form>
+  </section>
+  <section id="contact">
+    <h3>📞 Contact Us</h3>
+    <form action="mailto:oasisofwisdomchurch@gmail.com" method="POST" enctype="text/plain">
+      <input type="text" name="name" placeholder="Full Name" required>
+      <input type="email" name="email" placeholder="Email Address" required>
+      <textarea name="message" rows="4" placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
   <footer>
     <p><strong>Oasis of Wisdom Bible Church</strong></p>
     <p>KM 11, Adjacent University of Ilorin Teaching Hospital,<br>Ilorin, Kwara State, Nigeria</p>
@@ -207,10 +129,8 @@
       <a href="https://www.instagram.com/oasisofwisdom" target="_blank"><img src="https://img.icons8.com/color/48/instagram-new.png" alt="Instagram"></a>
       <a href="https://www.youtube.com/@oasisofwisdom" target="_blank"><img src="https://img.icons8.com/color/48/youtube-play.png" alt="YouTube"></a>
       <a href="https://www.tiktok.com/@oasisofwisdom" target="_blank"><img src="https://img.icons8.com/color/48/tiktok--v1.png" alt="TikTok"></a>
-      <a href="https://open.spotify.com/show/0DVWzznTFh7y9y8nB5WiUH" target="_blank"><img src="https://img.icons8.com/color/48/spotify--v1.png" alt="Spotify"></a>
     </div>
     <p>&copy; 2025 Oasis of Wisdom Bible Church. All rights reserved.</p>
   </footer>
-
 </body>
 </html>
