@@ -27,7 +27,7 @@
       color: #000;
       padding: 1rem;
       text-align: center;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 2px 6px rgba( 0, 0, 0, 0.1);
     }
 
     header img {
@@ -62,7 +62,7 @@
       margin: 1rem auto;
       border-radius: 10px;
       max-width: 900px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      box-shadow: 0 4px 10px rgba( 0, 0, 0, 0.05);
     }
 
     h2, h3 {
@@ -75,34 +75,11 @@
       margin-top: 1rem;
     }
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 1rem;
-    }
-
-    th, td {
-      border: 1px solid #ccc;
-      padding: 0.75rem;
-      text-align: left;
-    }
-
-    th {
-      background-color: #f1f1f1;
-    }
-
     iframe {
       max-width: 100%;
       border: none;
       border-radius: 8px;
       margin-top: 1rem;
-    }
-
-    .socials img {
-      width: 32px;
-      height: 32px;
-      margin: 0 10px;
-      vertical-align: middle;
     }
 
     .platform-links {
@@ -139,8 +116,19 @@
       background: var(--dark);
       color: #fff;
       text-align: center;
-      padding: 1.5rem 1rem;
-      margin-top: 2rem;
+      padding: 2rem 1rem;
+    }
+
+    footer a {
+      color: #ffc107;
+      text-decoration: none;
+      margin: 0 10px;
+    }
+
+    .social-icons img {
+      width: 30px;
+      margin: 0 8px;
+      vertical-align: middle;
     }
   </style>
 </head>
@@ -184,37 +172,45 @@
     </script>
   </section>
 
-  <section id="latest-video">
+  <section id="latest-sermon">
     <h3>🔥 Latest Sermon</h3>
-    <div id="latest-video-container">Loading latest video...</div>
-    <script>
-      fetch("https://www.youtube.com/feeds/videos.xml?channel_id=UC7wK5WYMa6NZZiGcLoXpZ3g")
-        .then(response => response.text())
-        .then(str => (new window.DOMParser()).parseFromString(str, "text/xml"))
-        .then(data => {
-          const videoId = data.querySelector("entry > yt\\:videoId").textContent;
-          const iframe = document.createElement("iframe");
-          iframe.src = `https://www.youtube.com/embed/${videoId}`;
-          iframe.width = "100%";
-          iframe.height = "315";
-          iframe.allowFullscreen = true;
-          document.getElementById("latest-video-container").innerHTML = "";
-          document.getElementById("latest-video-container").appendChild(iframe);
-        });
-    </script>
+    <iframe width="100%" height="315" src="https://www.youtube.com/embed?listType=user_uploads&list=oasisofwisdom" allowfullscreen></iframe>
   </section>
 
   <section id="sermon-library">
     <h3>📺 Watch More Sermons</h3>
-    <p><a href="https://www.youtube.com/@oasisofwisdom/playlists" target="_blank">Visit our YouTube Playlists</a> | <a href="https://web.facebook.com/oasisofwisdom/videos" target="_blank">Facebook Video Library</a></p>
+    <iframe width="100%" height="400" src="https://www.youtube.com/embed/videoseries?list=PL41j9bWXbj799l2hAGjosFiKrCuUo5Azb" allowfullscreen></iframe>
+    <iframe width="100%" height="400" src="https://www.facebook.com/plugins/video.php?href=https://web.facebook.com/oasisofwisdom/videos&show_text=false&width=560" allowfullscreen></iframe>
+  </section>
+
+  <section id="listen-sermons">
+    <h3>🎧 Listen to Our Sermons</h3>
+    <iframe style="border-radius:12px" src="https://open.spotify.com/embed/show/0DVWzznTFh7y9y8nB5WiUH?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen loading="lazy"></iframe>
+    <div class="platform-links">
+      <!-- Podcast links with logos here (omitted to save space, already done above) -->
+    </div>
   </section>
 
   <section id="offering">
-    <h3>💝 Online Giving</h3>
+    <h3>Online Giving</h3>
     <p><em>"Each of you should give what you have decided in your heart to give, not reluctantly or under compulsion, for God loves a cheerful giver." – 2 Corinthians 9:7</em></p>
     <p><strong>Give to:</strong></p>
     <p>0223306192 – Wema Bank<br>2069289420 – UBA</p>
   </section>
+
+  <footer>
+    <p><strong>Oasis of Wisdom Bible Church</strong></p>
+    <p>KM 11, Adjacent University of Ilorin Teaching Hospital,<br>Ilorin, Kwara State, Nigeria</p>
+    <p>Phone: 08035685882, 08060442459</p>
+    <div class="social-icons">
+      <a href="https://www.facebook.com/oasisofwisdom" target="_blank"><img src="https://img.icons8.com/color/48/facebook.png" alt="Facebook"></a>
+      <a href="https://www.instagram.com/oasisofwisdom" target="_blank"><img src="https://img.icons8.com/color/48/instagram-new.png" alt="Instagram"></a>
+      <a href="https://www.youtube.com/@oasisofwisdom" target="_blank"><img src="https://img.icons8.com/color/48/youtube-play.png" alt="YouTube"></a>
+      <a href="https://www.tiktok.com/@oasisofwisdom" target="_blank"><img src="https://img.icons8.com/color/48/tiktok--v1.png" alt="TikTok"></a>
+      <a href="https://open.spotify.com/show/0DVWzznTFh7y9y8nB5WiUH" target="_blank"><img src="https://img.icons8.com/color/48/spotify--v1.png" alt="Spotify"></a>
+    </div>
+    <p>&copy; 2025 Oasis of Wisdom Bible Church. All rights reserved.</p>
+  </footer>
 
 </body>
 </html>
