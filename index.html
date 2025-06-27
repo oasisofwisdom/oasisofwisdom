@@ -109,19 +109,34 @@
       text-decoration: none;
     }
 
+    .platform-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 1rem;
+    }
+
     .platform-links a {
-      display: inline-block;
-      margin: 0.3rem 0.5rem;
-      padding: 0.5rem 1rem;
-      background: #eee;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0.6rem 1rem;
+      border-radius: 6px;
+      background-color: #eee;
       color: #000;
-      border-radius: 5px;
       text-decoration: none;
+      font-weight: bold;
       transition: background 0.3s;
     }
 
     .platform-links a:hover {
-      background: #ddd;
+      background-color: #ddd;
+    }
+
+    .platform-links img {
+      width: 24px;
+      height: 24px;
     }
 
     footer {
@@ -189,7 +204,8 @@
 
   <section id="latest-sermon">
     <h3>🎥 Watch Our Sermons</h3>
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/live_stream?channel=UC7wK5WYMa6NZZiGcLoXpZ3g" allowfullscreen></iframe>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/videoseries?list=PL41j9bWXbj799l2hAGjosFiKrCuUo5Azb" allowfullscreen></iframe>
+    <p><a href="https://www.youtube.com/@oasisofwisdom/playlists" target="_blank">Visit our YouTube Playlists</a></p>
   </section>
 
   <section id="listen-sermons">
@@ -197,20 +213,21 @@
     <iframe style="border-radius:12px" src="https://open.spotify.com/embed/show/0DVWzznTFh7y9y8nB5WiUH?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen loading="lazy"></iframe>
 
     <div class="platform-links">
-      <a href="https://link.chtbl.com/lGX7xWBQ" target="_blank">Smart Link</a>
-      <a href="https://podcasts.apple.com/us/podcast/wonders-of-wisdom-hour/id1642910204" target="_blank">Apple Podcast</a>
-      <a href="https://music.amazon.com/podcasts/643b0b45-69e5-4269-aafc-a702f8d851c6/oasisofwisdom" target="_blank">Amazon Music</a>
-      <a href="https://podcasts.google.com/feed/aHR0cHM6Ly9hbmNob3IuZm0vcy9iM2Y0MDhjYy9wb2RjYXN0L3Jzcw" target="_blank">Google Podcasts</a>
-      <a href="https://www.stitcher.com/show/1021997" target="_blank">Stitcher</a>
-      <a href="https://www.pandora.com/podcast/oasisofwisdom/PC:1001021997" target="_blank">Pandora</a>
-      <a href="https://anchor.fm/oasisofwisdom" target="_blank">Anchor</a>
-      <a href="https://radiopublic.com/oasisofwisdom-85Yy7m" target="_blank">RadioPublic</a>
-      <a href="https://pca.st/qz10xtgt" target="_blank">Pocket Casts</a>
-      <a href="https://podcastindex.org/podcast/5660002" target="_blank">Podcast Index</a>
-      <a href="https://lnns.co/F0rRG5pSiDm" target="_blank">Listen Notes</a>
-      <a href="https://deezer.com/show/4553217" target="_blank">Deezer</a>
-      <a href="https://afripods.africa/podcast/82fec0be-41cf-4caa-9034-a28877b95473" target="_blank">Afripods</a>
-      <a href="https://gaana.com/podcast/wonders-of-wisdom-hour-season-1" target="_blank">Gaana</a>
+      <a href="https://link.chtbl.com/lGX7xWBQ" target="_blank"><img src="https://img.icons8.com/color/48/000000/linktree.png"/>Smart Link</a>
+      <a href="https://podcasts.apple.com/us/podcast/wonders-of-wisdom-hour/id1642910204" target="_blank"><img src="https://img.icons8.com/color/48/000000/apple-podcasts.png"/>Apple</a>
+      <a href="https://open.spotify.com/show/0DVWzznTFh7y9y8nB5WiUH" target="_blank"><img src="https://img.icons8.com/color/48/000000/spotify.png"/>Spotify</a>
+      <a href="https://music.amazon.com/podcasts/643b0b45-69e5-4269-aafc-a702f8d851c6/oasisofwisdom" target="_blank"><img src="https://img.icons8.com/color/48/000000/amazon.png"/>Amazon Music</a>
+      <a href="https://podcasts.google.com/feed/aHR0cHM6Ly9hbmNob3IuZm0vcy9iM2Y0MDhjYy9wb2RjYXN0L3Jzcw" target="_blank"><img src="https://img.icons8.com/color/48/000000/google-podcasts.png"/>Google</a>
+      <a href="https://www.stitcher.com/show/1021997" target="_blank"><img src="https://img.icons8.com/color/48/000000/rss.png"/>Stitcher</a>
+      <a href="https://www.pandora.com/podcast/oasisofwisdom/PC:1001021997" target="_blank"><img src="https://img.icons8.com/color/48/000000/pandora-logo.png"/>Pandora</a>
+      <a href="https://anchor.fm/oasisofwisdom" target="_blank"><img src="https://img.icons8.com/color/48/000000/anchor.png"/>Anchor</a>
+      <a href="https://radiopublic.com/oasisofwisdom-85Yy7m" target="_blank"><img src="https://img.icons8.com/ios-filled/48/000000/radio.png"/>RadioPublic</a>
+      <a href="https://pca.st/qz10xtgt" target="_blank"><img src="https://img.icons8.com/ios-filled/48/000000/cast.png"/>Pocket Casts</a>
+      <a href="https://podcastindex.org/podcast/5660002" target="_blank"><img src="https://img.icons8.com/ios/50/podcast.png"/>Podcast Index</a>
+      <a href="https://lnns.co/F0rRG5pSiDm" target="_blank"><img src="https://img.icons8.com/external-flat-juicy-fish/60/000000/external-audio-user-interface-flat-flat-juicy-fish.png"/>Listen Notes</a>
+      <a href="https://deezer.com/show/4553217" target="_blank"><img src="https://img.icons8.com/color/48/000000/deezer.png"/>Deezer</a>
+      <a href="https://afripods.africa/podcast/82fec0be-41cf-4caa-9034-a28877b95473" target="_blank"><img src="https://img.icons8.com/external-flatart-icons-outline-flatarticons/64/000000/external-africa-geography-flatart-icons-outline-flatarticons.png"/>Afripods</a>
+      <a href="https://gaana.com/podcast/wonders-of-wisdom-hour-season-1" target="_blank"><img src="https://img.icons8.com/color/48/000000/gaana.png"/>Gaana</a>
     </div>
   </section>
 
