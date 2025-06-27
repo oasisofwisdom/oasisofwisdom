@@ -105,10 +105,6 @@
       vertical-align: middle;
     }
 
-    .socials a {
-      text-decoration: none;
-    }
-
     .platform-links {
       display: flex;
       flex-wrap: wrap;
@@ -188,71 +184,37 @@
     </script>
   </section>
 
-  <section id="services">
-    <h3>Service Times</h3>
-    <table>
-      <tr><th>Day</th><th>Program</th><th>Time</th></tr>
-      <tr><td>Sunday</td><td>Leaders Breakfast</td><td>7:00 AM</td></tr>
-      <tr><td>Sunday</td><td>Wonders of Wisdom Service</td><td>9:00 AM</td></tr>
-      <tr><td>Tuesday</td><td>Solution Mountain</td><td>10:00 AM</td></tr>
-      <tr><td>Wednesday</td><td>Bible Study</td><td>6:00 PM</td></tr>
-      <tr><td>Friday</td><td>Intercessory Hour</td><td>5:00 PM</td></tr>
-      <tr><td>Saturday</td><td>Praying Mothers & Unit Meetings</td><td>4:00 PM</td></tr>
-      <tr><td>Saturday</td><td>Ministry Corps Koinonia</td><td>5:00 PM</td></tr>
-    </table>
+  <section id="latest-video">
+    <h3>🔥 Latest Sermon</h3>
+    <div id="latest-video-container">Loading latest video...</div>
+    <script>
+      fetch("https://www.youtube.com/feeds/videos.xml?channel_id=UC7wK5WYMa6NZZiGcLoXpZ3g")
+        .then(response => response.text())
+        .then(str => (new window.DOMParser()).parseFromString(str, "text/xml"))
+        .then(data => {
+          const videoId = data.querySelector("entry > yt\\:videoId").textContent;
+          const iframe = document.createElement("iframe");
+          iframe.src = `https://www.youtube.com/embed/${videoId}`;
+          iframe.width = "100%";
+          iframe.height = "315";
+          iframe.allowFullscreen = true;
+          document.getElementById("latest-video-container").innerHTML = "";
+          document.getElementById("latest-video-container").appendChild(iframe);
+        });
+    </script>
   </section>
 
-  <section id="latest-sermon">
-    <h3>🎥 Watch Our Sermons</h3>
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/videoseries?list=PL41j9bWXbj799l2hAGjosFiKrCuUo5Azb" allowfullscreen></iframe>
-    <p><a href="https://www.youtube.com/@oasisofwisdom/playlists" target="_blank">Visit our YouTube Playlists</a></p>
+  <section id="sermon-library">
+    <h3>📺 Watch More Sermons</h3>
+    <p><a href="https://www.youtube.com/@oasisofwisdom/playlists" target="_blank">Visit our YouTube Playlists</a> | <a href="https://web.facebook.com/oasisofwisdom/videos" target="_blank">Facebook Video Library</a></p>
   </section>
 
-  <section id="listen-sermons">
-    <h3>🎧 Listen to Our Sermons</h3>
-    <iframe style="border-radius:12px" src="https://open.spotify.com/embed/show/0DVWzznTFh7y9y8nB5WiUH?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen loading="lazy"></iframe>
-
-    <div class="platform-links">
-      <a href="https://link.chtbl.com/lGX7xWBQ" target="_blank"><img src="https://img.icons8.com/color/48/000000/linktree.png"/>Smart Link</a>
-      <a href="https://podcasts.apple.com/us/podcast/wonders-of-wisdom-hour/id1642910204" target="_blank"><img src="https://img.icons8.com/color/48/000000/apple-podcasts.png"/>Apple</a>
-      <a href="https://open.spotify.com/show/0DVWzznTFh7y9y8nB5WiUH" target="_blank"><img src="https://img.icons8.com/color/48/000000/spotify.png"/>Spotify</a>
-      <a href="https://music.amazon.com/podcasts/643b0b45-69e5-4269-aafc-a702f8d851c6/oasisofwisdom" target="_blank"><img src="https://img.icons8.com/color/48/000000/amazon.png"/>Amazon Music</a>
-      <a href="https://podcasts.google.com/feed/aHR0cHM6Ly9hbmNob3IuZm0vcy9iM2Y0MDhjYy9wb2RjYXN0L3Jzcw" target="_blank"><img src="https://img.icons8.com/color/48/000000/google-podcasts.png"/>Google</a>
-      <a href="https://www.stitcher.com/show/1021997" target="_blank"><img src="https://img.icons8.com/color/48/000000/rss.png"/>Stitcher</a>
-      <a href="https://www.pandora.com/podcast/oasisofwisdom/PC:1001021997" target="_blank"><img src="https://img.icons8.com/color/48/000000/pandora-logo.png"/>Pandora</a>
-      <a href="https://anchor.fm/oasisofwisdom" target="_blank"><img src="https://img.icons8.com/color/48/000000/anchor.png"/>Anchor</a>
-      <a href="https://radiopublic.com/oasisofwisdom-85Yy7m" target="_blank"><img src="https://img.icons8.com/ios-filled/48/000000/radio.png"/>RadioPublic</a>
-      <a href="https://pca.st/qz10xtgt" target="_blank"><img src="https://img.icons8.com/ios-filled/48/000000/cast.png"/>Pocket Casts</a>
-      <a href="https://podcastindex.org/podcast/5660002" target="_blank"><img src="https://img.icons8.com/ios/50/podcast.png"/>Podcast Index</a>
-      <a href="https://lnns.co/F0rRG5pSiDm" target="_blank"><img src="https://img.icons8.com/external-flat-juicy-fish/60/000000/external-audio-user-interface-flat-flat-juicy-fish.png"/>Listen Notes</a>
-      <a href="https://deezer.com/show/4553217" target="_blank"><img src="https://img.icons8.com/color/48/000000/deezer.png"/>Deezer</a>
-      <a href="https://afripods.africa/podcast/82fec0be-41cf-4caa-9034-a28877b95473" target="_blank"><img src="https://img.icons8.com/external-flatart-icons-outline-flatarticons/64/000000/external-africa-geography-flatart-icons-outline-flatarticons.png"/>Afripods</a>
-      <a href="https://gaana.com/podcast/wonders-of-wisdom-hour-season-1" target="_blank"><img src="https://img.icons8.com/color/48/000000/gaana.png"/>Gaana</a>
-    </div>
+  <section id="offering">
+    <h3>💝 Online Giving</h3>
+    <p><em>"Each of you should give what you have decided in your heart to give, not reluctantly or under compulsion, for God loves a cheerful giver." – 2 Corinthians 9:7</em></p>
+    <p><strong>Give to:</strong></p>
+    <p>0223306192 – Wema Bank<br>2069289420 – UBA</p>
   </section>
-
-  <section id="cta">
-    <h3>Plan a Visit</h3>
-    <p>We’d love to worship with you! Come visit us at:</p>
-    <p><strong>GJWX+PJ6 Old Ilorin, Jebba Rd, Ilorin 240102, Kwara State, Nigeria</strong></p>
-    <iframe src="https://www.google.com/maps?q=GJWX%2BPJ6%20Old%20Ilorin,%20Jebba%20Rd,%20Ilorin%20240102,%20Kwara&output=embed" width="100%" height="300" style="border:0;" allowfullscreen loading="lazy"></iframe>
-  </section>
-
-  <section class="socials">
-    <h3>📱 Connect With Us</h3>
-    <p>
-      <a href="https://www.facebook.com/oasisofwisdom" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook"></a>
-      <a href="https://www.instagram.com/oasisofwisdom" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/733/733558.png" alt="Instagram"></a>
-      <a href="https://youtube.com/@oasisofwisdom" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/733/733646.png" alt="YouTube"></a>
-      <a href="https://www.tiktok.com/@oasisofwisdom" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok"></a>
-    </p>
-  </section>
-
-  <footer>
-    <p>&copy; 2025 Oasis of Wisdom Bible Church. All rights reserved.</p>
-    <p>KM 11, Adjacent University of Ilorin Teaching Hospital, Ilorin, Kwara State, Nigeria</p>
-    <p>Phone: 08035685882, 08060442459</p>
-  </footer>
 
 </body>
 </html>
