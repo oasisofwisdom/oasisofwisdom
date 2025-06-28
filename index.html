@@ -227,7 +227,21 @@
 .social-connect a:hover {
   transform: scale(1.1);
 }
-    
+
+    .live-badge {
+  background: red;
+  color: white;
+  font-size: 0.65rem;
+  padding: 2px 5px;
+  margin-left: 5px;
+  border-radius: 3px;
+  animation: pulse 1.2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
   </style>
 </head>
 <body>
@@ -245,6 +259,10 @@
     <a href="#prayer">Prayer</a>
     <a href="#contact">Contact</a>
     <a href="updates.html">Updates</a>
+    <a href="watch-live.html" style="position: relative;">
+  Watch Live
+  <span class="live-badge">LIVE</span>
+    </a>
   </nav>
 
   <section class="bg">
