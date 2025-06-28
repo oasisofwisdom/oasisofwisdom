@@ -161,6 +161,37 @@
   object-fit: contain;
   display: inline-block;
 }
+    .updates-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.update-box {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 1rem;
+  width: 280px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  text-align: left;
+}
+
+.update-box h4 {
+  margin-bottom: 0.5rem;
+  color: #004225;
+}
+
+.update-box a {
+  color: #006400;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.update-box a:hover {
+  text-decoration: underline;
+}
   </style>
 </head>
 <body>
@@ -331,6 +362,27 @@
       <a href="https://youtube.com/@oasisofwisdom"><img src="youtube.png" alt="YouTube" /></a>
       <a href="https://tiktok.com/@oasisofwisdom"><img src="tiktok.png" alt="TikTok" /></a>
     </div>
+
+    <section id="updates">
+  <h3>📰 Church Updates</h3>
+  <div class="updates-grid">
+    <div class="update-box">
+      <h4>Jesus on the Street 2025</h4>
+      <p>Join us this April 13th as we take the gospel to the streets! It’s going to be a powerful time of worship, evangelism, and impact.</p>
+      <a href="updates.html#post1">Read more →</a>
+    </div>
+    <div class="update-box">
+      <h4>New Sermon Series Begins</h4>
+      <p>Our new series “Faith in a Broken World” starts this Sunday. Come with your expectations!</p>
+      <a href="updates.html#post2">Read more →</a>
+    </div>
+    <div class="update-box">
+      <h4>Upcoming: Mighty Men Convention</h4>
+      <p>June 27–29: A gathering of men for revival, leadership, and destiny. Don’t miss it.</p>
+      <a href="updates.html#post3">Read more →</a>
+    </div>
+  </div>
+</section>
   </footer>
 
 </body>
