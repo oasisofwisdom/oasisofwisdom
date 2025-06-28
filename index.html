@@ -182,6 +182,26 @@
     </div>
   </section>
 
+  <section id="daily-verse">
+  <h3>📖 Daily Bible Verse</h3>
+  <p id="verse-text">Loading verse...</p>
+  <small id="verse-ref"></small>
+</section>
+
+<script>
+  fetch("https://beta.ourmanna.com/api/v1/get?format=json&order=daily")
+    .then(res => res.json())
+    .then(data => {
+      const verse = data.verse.details;
+      document.getElementById("verse-text").innerText = verse.text;
+      document.getElementById("verse-ref").innerText = `— ${verse.reference}`;
+    })
+    .catch(() => {
+      document.getElementById("verse-text").innerText = "Unable to load verse.";
+    });
+</script>
+
+  
   <nav>
   ...
   <a href="programs.html">Programs</a>
