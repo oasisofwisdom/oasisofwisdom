@@ -450,84 +450,88 @@
 </section>
 
 <script>
-  const blogContainer = document.getElementById("blog-cards");
-  const postDisplay = document.getElementById("post-content");
+  fetch("https://api.allorigins.win/get?url=" + encodeURIComponent("https://oowbc.blogspot.com/feeds/posts/default?alt=rss"))
+    .then(response => response.json())
+    .then(data => {
+      const parser = new DOMParser();
+      const xml = parser.parseFromString(data.contents, "text/xml");
+      const entries = xml.querySelectorAll("entry");
+      const container = document.getElementById("blog-cards");
+      const postDisplay = document.getElementById("post-content");
+      container.innerHTML = "";
 
-  fetch("https://api.allorigins.win/get?url=" + encodeURIComponent("https://oowbc.blogspot.com/feeds/posts/default?alt=rss&t=" + new Date().getTime()))
-  .then(response => response.json())
-  .then(data => {
-    const parsed = new window.DOMParser().parseFromString(data.contents, "text/xml");
-    const items = parsed.querySelectorAll("entry");
-    const container = document.getElementById("blog-cards") || document.getElementById("home-blog-preview");
-    const postDisplay = document.getElementById("post-content");
-    container.innerHTML = "";
-    items.forEach(item => {
-      const title = item.querySelector("title").textContent;
-      const content = item.querySelector("content").textContent;
-      const link = item.querySelector("link[rel='alternate']").getAttribute("href");
-      const published = item.querySelector("published").textContent;
-      const thumbMatch = content.match(/<img[^>]+src="([^">]+)"/i);
-      const thumbnail = thumbMatch ? thumbMatch[1] : "https://via.placeholder.com/300x160?text=No+Image";
+      entries.forEach(entry => {
+        const title = entry.querySelector("title").textContent;
+        const content = entry.querySelector("content").textContent;
+        const published = entry.querySelector("published").textContent;
+        const link = entry.querySelector("link[rel='alternate']").getAttribute("href");
 
-      const card = document.createElement("div");
-      card.style.width = "300px";
-      card.style.border = "1px solid #ccc";
-      card.style.borderRadius = "8px";
-      card.style.overflow = "hidden";
-      card.style.background = "#fff";
-      card.style.boxShadow = "0 2px 8px rgba(0,0,0,0.05)";
+        const thumbMatch = content.match(/<img[^>]+src="([^">]+)"/i);
+        const thumbnail = thumbMatch ? thumbMatch[1] : "https://via.placeholder.com/300x160?text=No+Image";
 
-      const img = document.createElement("img");
-      img.src = thumbnail;
-      img.style.width = "100%";
-      img.style.height = "160px";
-      img.style.objectFit = "cover";
+        const card = document.createElement("div");
+        card.style.width = "300px";
+        card.style.border = "1px solid #ccc";
+        card.style.borderRadius = "8px";
+        card.style.overflow = "hidden";
+        card.style.background = "#fff";
+        card.style.boxShadow = "0 2px 8px rgba(0,0,0,0.05)";
+        card.style.margin = "0.5rem";
 
-      const box = document.createElement("div");
-      box.style.padding = "1rem";
+        const img = document.createElement("img");
+        img.src = thumbnail;
+        img.alt = title;
+        img.style.width = "100%";
+        img.style.height = "160px";
+        img.style.objectFit = "cover";
 
-      const h4 = document.createElement("h4");
-      h4.textContent = title;
-      h4.style.margin = "0 0 0.5rem 0";
-      h4.style.color = "#004225";
+        const box = document.createElement("div");
+        box.style.padding = "1rem";
 
-      const date = document.createElement("p");
-      date.textContent = new Date(published).toLocaleDateString();
-      date.style.color = "#666";
-      date.style.fontSize = "0.85rem";
+        const h4 = document.createElement("h4");
+        h4.textContent = title;
+        h4.style.margin = "0 0 0.5rem 0";
+        h4.style.color = "#004225";
 
-      const btn = document.createElement("button");
-      btn.textContent = "Read More";
-      btn.style.background = "#004225";
-      btn.style.color = "#fff";
-      btn.style.border = "none";
-      btn.style.padding = "0.5rem 1rem";
-      btn.style.borderRadius = "4px";
-      btn.style.cursor = "pointer";
-      btn.onclick = () => {
-        postDisplay.innerHTML = `
-          <h2>${title}</h2>
-          <p><em>${new Date(published).toLocaleString()}</em></p>
-          <div>${content}</div>
-          <hr/>
-        `;
-        postDisplay.scrollIntoView({ behavior: "smooth" });
-      };
+        const date = document.createElement("p");
+        date.textContent = new Date(published).toLocaleDateString();
+        date.style.color = "#777";
+        date.style.fontSize = "0.85rem";
 
-      box.appendChild(h4);
-      box.appendChild(date);
-      box.appendChild(btn);
+        const btn = document.createElement("button");
+        btn.textContent = "Read More";
+        btn.style.background = "#004225";
+        btn.style.color = "#fff";
+        btn.style.border = "none";
+        btn.style.padding = "0.5rem 1rem";
+        btn.style.borderRadius = "4px";
+        btn.style.cursor = "pointer";
+        btn.onclick = () => {
+          postDisplay.innerHTML = `
+            <h2>${title}</h2>
+            <p><em>${new Date(published).toLocaleString()}</em></p>
+            <div>${content}</div>
+            <hr/>
+          `;
+          postDisplay.scrollIntoView({ behavior: "smooth" });
+        };
 
-      card.appendChild(img);
-      card.appendChild(box);
-      container.appendChild(card);
+        box.appendChild(h4);
+        box.appendChild(date);
+        box.appendChild(btn);
+
+        card.appendChild(img);
+        card.appendChild(box);
+        container.appendChild(card);
+      });
+    })
+    .catch(err => {
+      const container = document.getElementById("blog-cards");
+      container.innerHTML = "<p style='color:red;'>Unable to load posts right now.</p>";
+      console.error("Fetch error:", err);
     });
-  })
-  .catch(err => {
-    console.error("Error fetching feed:", err);
-  });
-
 </script>
+
 
 
     
