@@ -1,45 +1,73 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>OOWBC - News</title>
-  <style>
-    body { font-family: sans-serif; padding: 2rem; background: #fdfdfd; color: #222; }
-    h1 { color: #006400; text-align: center; }
-    ul { list-style: none; padding: 0; max-width: 700px; margin: 2rem auto; }
-    li { margin: 1rem 0; padding: 1rem; background: #fff; border: 1px solid #ddd; border-radius: 6px; }
-    a { text-decoration: none; font-weight: bold; color: #004225; }
-    a:hover { color: #008000; }
-    .back { text-align: center; margin-top: 2rem; }
-  </style>
-</head>
-<body>
-  <h1>📰 OOWBC Blog News</h1>
-  <ul id="blog-news-feed">Loading news...</ul>
+<section id="blog-posts">
+  <h2 style="text-align:center;">📰 Latest News</h2>
+  <div id="blog-cards" style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;"></div>
+  <div id="post-content" style="margin-top: 2rem; max-width: 800px; margin-inline: auto;"></div>
+</section>
 
-  <div class="back">
-    <a href="index.html">← Back to Home</a>
-  </div>
+<script>
+  const blogContainer = document.getElementById("blog-cards");
+  const postDisplay = document.getElementById("post-content");
 
-  <script>
   fetch("https://api.rss2json.com/v1/api.json?rss_url=https://oowbc.blogspot.com/feeds/posts/default?alt=rss")
-    .then(response => response.json())
+    .then(res => res.json())
     .then(data => {
-      const ul = document.getElementById("blog-feed") || document.getElementById("blog-news-feed");
-      ul.innerHTML = "";
-      data.items.slice(0, 5).forEach(post => {
-        const li = document.createElement("li");
-        li.innerHTML = `<a href="${post.link}" target="_blank">${post.title}</a>`;
-        ul.appendChild(li);
+      blogContainer.innerHTML = "";
+      data.items.forEach(post => {
+        const card = document.createElement("div");
+        card.style.width = "300px";
+        card.style.border = "1px solid #ccc";
+        card.style.borderRadius = "8px";
+        card.style.overflow = "hidden";
+        card.style.background = "#fff";
+        card.style.boxShadow = "0 2px 8px rgba(0,0,0,0.05)";
+
+        const img = document.createElement("img");
+        img.src = post.thumbnail || "https://via.placeholder.com/300x160?text=No+Image";
+        img.alt = post.title;
+        img.style.width = "100%";
+        img.style.height = "160px";
+        img.style.objectFit = "cover";
+
+        const content = document.createElement("div");
+        content.style.padding = "1rem";
+
+        const title = document.createElement("h4");
+        title.textContent = post.title;
+        title.style.margin = "0 0 0.5rem 0";
+        title.style.fontSize = "1.1rem";
+        title.style.color = "#006400";
+
+        const date = document.createElement("p");
+        date.textContent = new Date(post.pubDate).toLocaleDateString();
+        date.style.fontSize = "0.9rem";
+        date.style.color = "#777";
+        date.style.margin = "0 0 0.75rem 0";
+
+        const btn = document.createElement("button");
+        btn.textContent = "Read More";
+        btn.style.background = "#004225";
+        btn.style.color = "#fff";
+        btn.style.border = "none";
+        btn.style.padding = "0.5rem 1rem";
+        btn.style.borderRadius = "4px";
+        btn.style.cursor = "pointer";
+        btn.onclick = () => {
+          postDisplay.innerHTML = `
+            <h2>${post.title}</h2>
+            <p><em>${new Date(post.pubDate).toLocaleString()}</em></p>
+            <div>${post.content}</div>
+            <hr/>
+          `;
+          postDisplay.scrollIntoView({ behavior: "smooth" });
+        };
+
+        content.appendChild(title);
+        content.appendChild(date);
+        content.appendChild(btn);
+
+        card.appendChild(img);
+        card.appendChild(content);
+        blogContainer.appendChild(card);
       });
-    })
-    .catch(error => {
-      const ul = document.getElementById("blog-feed") || document.getElementById("blog-news-feed");
-      ul.innerHTML = "<li>Unable to load posts right now.</li>";
-      console.error("RSS load error:", error);
     });
 </script>
-
-</body>
-</html>
