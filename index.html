@@ -453,72 +453,80 @@
   const blogContainer = document.getElementById("blog-cards");
   const postDisplay = document.getElementById("post-content");
 
-  fetch("https://api.rss2json.com/v1/api.json?rss_url=https://oowbc.blogspot.com/feeds/posts/default?alt=rss&t=" + new Date().getTime())
-    .then(res => res.json())
-    .then(data => {
-      blogContainer.innerHTML = "";
-      data.items.forEach(post => {
-        const card = document.createElement("div");
-        card.style.width = "300px";
-        card.style.border = "1px solid #ccc";
-        card.style.borderRadius = "8px";
-        card.style.overflow = "hidden";
-        card.style.background = "#fff";
-        card.style.boxShadow = "0 2px 8px rgba(0,0,0,0.05)";
+  fetch("https://api.allorigins.win/get?url=" + encodeURIComponent("https://oowbc.blogspot.com/feeds/posts/default?alt=rss&t=" + new Date().getTime()))
+  .then(response => response.json())
+  .then(data => {
+    const parsed = new window.DOMParser().parseFromString(data.contents, "text/xml");
+    const items = parsed.querySelectorAll("entry");
+    const container = document.getElementById("blog-cards") || document.getElementById("home-blog-preview");
+    const postDisplay = document.getElementById("post-content");
+    container.innerHTML = "";
+    items.forEach(item => {
+      const title = item.querySelector("title").textContent;
+      const content = item.querySelector("content").textContent;
+      const link = item.querySelector("link[rel='alternate']").getAttribute("href");
+      const published = item.querySelector("published").textContent;
+      const thumbMatch = content.match(/<img[^>]+src="([^">]+)"/i);
+      const thumbnail = thumbMatch ? thumbMatch[1] : "https://via.placeholder.com/300x160?text=No+Image";
 
-        const img = document.createElement("img");
-        img.src = post.thumbnail || "https://via.placeholder.com/300x160?text=No+Image";
-        img.alt = post.title;
-        img.style.width = "100%";
-        img.style.height = "160px";
-        img.style.objectFit = "cover";
+      const card = document.createElement("div");
+      card.style.width = "300px";
+      card.style.border = "1px solid #ccc";
+      card.style.borderRadius = "8px";
+      card.style.overflow = "hidden";
+      card.style.background = "#fff";
+      card.style.boxShadow = "0 2px 8px rgba(0,0,0,0.05)";
 
-        const content = document.createElement("div");
-        content.style.padding = "1rem";
+      const img = document.createElement("img");
+      img.src = thumbnail;
+      img.style.width = "100%";
+      img.style.height = "160px";
+      img.style.objectFit = "cover";
 
-        const title = document.createElement("h4");
-        title.textContent = post.title;
-        title.style.margin = "0 0 0.5rem 0";
-        title.style.fontSize = "1.1rem";
-        title.style.color = "#006400";
+      const box = document.createElement("div");
+      box.style.padding = "1rem";
 
-        const date = document.createElement("p");
-        date.textContent = new Date(post.pubDate).toLocaleDateString();
-        date.style.fontSize = "0.9rem";
-        date.style.color = "#777";
-        date.style.margin = "0 0 0.75rem 0";
+      const h4 = document.createElement("h4");
+      h4.textContent = title;
+      h4.style.margin = "0 0 0.5rem 0";
+      h4.style.color = "#004225";
 
-        const btn = document.createElement("button");
-        btn.textContent = "Read More";
-        btn.style.background = "#004225";
-        btn.style.color = "#fff";
-        btn.style.border = "none";
-        btn.style.padding = "0.5rem 1rem";
-        btn.style.borderRadius = "4px";
-        btn.style.cursor = "pointer";
-        btn.onclick = () => {
-          postDisplay.innerHTML = `
-            <h2>${post.title}</h2>
-            <p><em>${new Date(post.pubDate).toLocaleString()}</em></p>
-            <div>${post.content}</div>
-            <hr/>
-          `;
-          postDisplay.scrollIntoView({ behavior: "smooth" });
-        };
+      const date = document.createElement("p");
+      date.textContent = new Date(published).toLocaleDateString();
+      date.style.color = "#666";
+      date.style.fontSize = "0.85rem";
 
-        content.appendChild(title);
-        content.appendChild(date);
-        content.appendChild(btn);
+      const btn = document.createElement("button");
+      btn.textContent = "Read More";
+      btn.style.background = "#004225";
+      btn.style.color = "#fff";
+      btn.style.border = "none";
+      btn.style.padding = "0.5rem 1rem";
+      btn.style.borderRadius = "4px";
+      btn.style.cursor = "pointer";
+      btn.onclick = () => {
+        postDisplay.innerHTML = `
+          <h2>${title}</h2>
+          <p><em>${new Date(published).toLocaleString()}</em></p>
+          <div>${content}</div>
+          <hr/>
+        `;
+        postDisplay.scrollIntoView({ behavior: "smooth" });
+      };
 
-        card.appendChild(img);
-        card.appendChild(content);
-        blogContainer.appendChild(card);
-      });
-    })
-    .catch(error => {
-      blogContainer.innerHTML = "<p>Unable to load posts. Please try again later.</p>";
-      console.error("Error loading blog feed:", error);
+      box.appendChild(h4);
+      box.appendChild(date);
+      box.appendChild(btn);
+
+      card.appendChild(img);
+      card.appendChild(box);
+      container.appendChild(card);
     });
+  })
+  .catch(err => {
+    console.error("Error fetching feed:", err);
+  });
+
 </script>
 
 
