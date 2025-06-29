@@ -23,25 +23,32 @@
   </div>
 
   <script>
-    fetch('https://oowbc.blogspot.com/feeds/posts/default?alt=rss')
-      .then(response => response.text())
-      .then(str => (new window.DOMParser()).parseFromString(str, "text/xml"))
-      .then(data => {
-        const items = data.querySelectorAll("entry");
-        const ul = document.getElementById("blog-news-feed");
-        ul.innerHTML = "";
-        items.forEach(item => {
-          const title = item.querySelector("title").textContent;
-          const link = item.querySelector("link[rel='alternate']").getAttribute("href");
-          const li = document.createElement("li");
-          li.innerHTML = `<a href="${link}" target="_blank">${title}</a>`;
-          ul.appendChild(li);
+  fetch('https://oowbc.blogspot.com/feeds/posts/default?alt=rss')
+    .then(response => response.text())
+    .then(str => (new window.DOMParser()).parseFromString(str, "text/xml"))
+    .then(data => {
+      const items = data.querySelectorAll("entry");
+      const ul = document.getElementById("blog-feed") || document.getElementById("blog-news-feed");
+      ul.innerHTML = "";
+      items.forEach(item => {
+        const title = item.querySelector("title").textContent;
+        const links = item.querySelectorAll("link");
+        let link = "#";
+        links.forEach(l => {
+          if (l.getAttribute("rel") === "alternate") {
+            link = l.getAttribute("href");
+          }
         });
-      })
-      .catch(err => {
-        document.getElementById("blog-news-feed").innerHTML = "<li>Unable to load posts right now.</li>";
-        console.error(err);
+        const li = document.createElement("li");
+        li.innerHTML = `<a href="${link}" target="_blank">${title}</a>`;
+        ul.appendChild(li);
       });
-  </script>
+    })
+    .catch(err => {
+      const ul = document.getElementById("blog-feed") || document.getElementById("blog-news-feed");
+      ul.innerHTML = "<li>Unable to load posts right now.</li>";
+      console.error(err);
+    });
+</script>
 </body>
 </html>
