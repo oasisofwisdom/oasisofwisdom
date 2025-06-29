@@ -452,7 +452,7 @@
 </section>
 
 <script>
-  fetch("https://api.rss2json.com/v1/api.json?rss_url=https://oowbc.blogspot.com/feeds/posts/default?alt=rss")
+  fetch("https://api.rss2json.com/v1/api.json?rss_url=https://oowbc.blogspot.com/feeds/posts/default?alt=rss&t=" + new Date().getTime())
     .then(res => res.json())
     .then(data => {
       const container = document.getElementById("home-blog-preview");
