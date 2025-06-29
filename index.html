@@ -442,6 +442,33 @@
   </div>
 </footer>
 
+  <section id="updates">
+  <h3>📝 Latest News from Oasis</h3>
+  <ul id="blog-feed"></ul>
+</section>
+
+<script>
+  fetch('https://oowbc.blogspot.com/feeds/posts/default?alt=rss')
+    .then(response => response.text())
+    .then(str => (new window.DOMParser()).parseFromString(str, "text/xml"))
+    .then(data => {
+      const items = data.querySelectorAll("entry");
+      const ul = document.getElementById("blog-feed");
+      for (let i = 0; i < Math.min(5, items.length); i++) {
+        const item = items[i];
+        const title = item.querySelector("title").textContent;
+        const link = item.querySelector("link[rel="alternate"]')?.getAttribute("href") || "#";
+        const li = document.createElement("li");
+        li.innerHTML = `<a href="${link}" target="_blank">${title}</a>`;
+        ul.appendChild(li);
+      }
+    })
+    .catch(err => {
+      document.getElementById("blog-feed").innerHTML = "<li>Unable to load updates right now.</li>";
+      console.error(err);
+    });
+</script>
+
     <section id="updates">
   <h3>📰 Church Updates</h3>
   <div class="updates-grid">
