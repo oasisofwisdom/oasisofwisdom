@@ -9,7 +9,6 @@
   const postDisplay = document.getElementById("post-content");
 
   fetch("https://api.rss2json.com/v1/api.json?rss_url=https://oowbc.blogspot.com/feeds/posts/default?alt=rss&t=" + new Date().getTime())
-
     .then(res => res.json())
     .then(data => {
       blogContainer.innerHTML = "";
@@ -70,5 +69,9 @@
         card.appendChild(content);
         blogContainer.appendChild(card);
       });
+    })
+    .catch(error => {
+      blogContainer.innerHTML = "<p>Unable to load posts. Please try again later.</p>";
+      console.error("Error loading blog feed:", error);
     });
 </script>
