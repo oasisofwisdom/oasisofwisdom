@@ -292,13 +292,6 @@
     </div>
   </section>
   
-<section class="daily-prayer" style="padding: 20px; background: #fff7e6; border-radius: 12px; margin: 20px;">
-  <h2 style="color: #d32f2f;">Daily Prayer</h2>
-  <p><strong id="prayer-title" style="color: #2e7d32;"></strong></p>
-  <div id="prayer-preview" style="white-space: pre-wrap; font-size: 16px;"></div>
-  <a id="read-more-link" href="#" style="color: #1565c0; font-weight: bold; display: none;">Read More</a>
-</section>
-
 <script>
   const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTfrltH681QSU3m77WYDJh0wNAdWv-h1ppGbFaIFSQ08GWFAkRMRpOTDd193MNJulfuXSH_M4--5SqY/pub?output=csv';
 
@@ -308,7 +301,7 @@
       const rows = csv.trim().split('\n').map(row => row.split(','));
       const headers = rows[0].map(h => h.trim());
 
-      const today = new Date().toISOString().slice(0, 10);
+      const today = new Date().toLocaleDateString('en-CA'); // local timezone YYYY-MM-DD
 
       const dateIndex = headers.indexOf("Date");
       const titleIndex = headers.indexOf("Title");
@@ -329,13 +322,13 @@
           document.getElementById('read-more-link').href = `prayer.html?date=${today}`;
         }
       } else {
-        document.getElementById('prayer-title').textContent = "No prayer for today.";
-        document.getElementById('prayer-preview').textContent = "Please check back tomorrow or visit the prayer page.";
+        document.getElementById('prayer-title').textContent = "No prayer found for today.";
+        document.getElementById('prayer-preview').textContent = "Please check back later.";
       }
     })
     .catch(error => {
       console.error("Error fetching prayer:", error);
-      document.getElementById('prayer-preview').textContent = "Prayer could not be loaded at this time.";
+      document.getElementById('prayer-preview').textContent = "Prayer could not be loaded.";
     });
 </script>
 
