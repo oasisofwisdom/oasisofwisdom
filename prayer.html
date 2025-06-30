@@ -1,93 +1,205 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Daily Prayer | Oasis of Wisdom Bible Church</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Daily Prayers | Oasis of Wisdom</title>
+  <link rel="icon" href="favicon.png" />
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #f9f9f9;
-    }
-
-    header {
-      background-color: #2e7d32;
-      color: white;
-      padding: 20px;
-      text-align: center;
-    }
-
-    .container {
-      max-width: 900px;
-      margin: 30px auto;
-      background: white;
-      padding: 25px;
-      border-radius: 12px;
-      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
-    }
-
-    h1 {
-      margin-top: 0;
-      color: #d32f2f;
-    }
-
-    h2 {
-      color: #2e7d32;
-    }
-
-    .prayer-text {
-      white-space: pre-wrap;
+      background: #f9fff9;
+      color: #222;
+      max-width: 960px;
+      margin: auto;
+      padding: 1.5rem;
       line-height: 1.7;
-      font-size: 17px;
-      color: #333;
+    }
+    h1, h2, h3 {
+      color: #004225;
+    }
+    a {
+      color: #006400;
+      text-decoration: none;
+    }
+    section {
+      margin-bottom: 3rem;
+    }
+    form input, form textarea {
+      width: 100%;
+      padding: 0.8rem;
+      margin: 0.5rem 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    form button {
+      background: #004225;
+      color: white;
+      padding: 0.7rem 1.5rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    form button:hover {
+      background: #003a1f;
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>Daily Prayer</h1>
-  </header>
-
-  <div class="container">
-    <h2 id="prayer-title">Loading...</h2>
-    <div id="full-prayer" class="prayer-text">Please wait while we load today's prayer.</div>
-  </div>
-
+  <div id="site-header"></div>
   <script>
-    const urlParams = new URLSearchParams(window.location.search);
-    const dateParam = urlParams.get('date');
-
-    const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTfrltH681QSU3m77WYDJh0wNAdWv-h1ppGbFaIFSQ08GWFAkRMRpOTDd193MNJulfuXSH_M4--5SqY/pub?output=csv';
-
-    fetch(csvUrl)
+    fetch('/header.html')
       .then(res => res.text())
-      .then(csv => {
-        const rows = csv.trim().split('\n').map(row => row.split(','));
-        const headers = rows[0].map(h => h.trim());
-
-        const dateIndex = headers.indexOf("Date");
-        const titleIndex = headers.indexOf("Title");
-        const prayerIndex = headers.indexOf("Prayer");
-
-        const row = rows.find((r, i) => i !== 0 && r[dateIndex]?.trim() === dateParam);
-
-        if (row) {
-          document.getElementById('prayer-title').textContent = row[titleIndex];
-          document.getElementById('full-prayer').textContent = row[prayerIndex];
-        } else {
-          document.getElementById('prayer-title').textContent = "Prayer Not Found";
-          document.getElementById('full-prayer').textContent = "We could not find a prayer for this date. Please go back or check another day.";
-        }
-      })
-      .catch(error => {
-        console.error("Error loading prayer:", error);
-        document.getElementById('prayer-title').textContent = "Error";
-        document.getElementById('full-prayer').textContent = "Prayer could not be loaded. Please try again later.";
+      .then(data => {
+        document.getElementById('site-header').innerHTML = data;
       });
   </script>
+
+  <h1>📖 Full Daily Prayers</h1>
+
+  <section>
+    <h3>Monday, June 30, 2025</h3>
+    <p>I pray for you, in every area where you have been waiting for God’s manifestation, the Lord will show up for you. Your miracle will no longer tarry.</p>
+  </section>
+
+  <section>
+    <h3>Tuesday, July 1, 2025</h3>
+    <p>
+      We are so grateful dear Lord for thou has granted us life and favour, and your visitation hath preserved our spirit. Glory to God.
+      <br/><br/>
+      I pray for you that in this week, God’s favour will set you apart and distinguish you among your equals. You will be loved and not hated. You will be a sought after for good. You will prosper and succeed without struggle in the mighty name of Jesus.
+      <br/><br/>
+      God’s favour improves the value of those who carry it. I pray for you, God’s fragrance of favour will be upon you and make it impossible for conspiracy of the enemies to succeed against you in the name of Jesus.
+      <br/><br/>
+      God’s favour will open closed doors for you to fulfill your purpose in life. Those who are in the position to help you will not delay. You will not become weak and helpless in the name of Jesus.
+      <br/><br/>
+      In this week, angels of mercy and favour will visit your home with unexpected blessings. You will attain unimaginable heights that will make your poor background unbelievable in the name of Jesus.
+      <br/><br/>
+      Everywhere you turn to, you will enjoy the treatment of a king. You will enjoy the help that will put you on the track of ever increasing glory in the name of Jesus.
+      <br/><br/>
+      So shall it be, in Jesus name I have prayed.
+    </p>
+  </section>
+
+  <section>
+    <h3>Wednesday, July 2, 2025</h3>
+    <p>
+      Great is your faithfulness Abba Father, for your lovingkindness towards us. Hallelujah.
+      <br/><br/>
+      Psalms 23:4 – Yea, though I walk through the valley of the shadow of death, I will fear no evil: for thou art with me; thy rod and thy staff they comfort me.
+      <br/><br/>
+      As you step out today, evil will not cling on you. No problem that defies prayer will rise against you. You will not become a victim to be pitied and will not witness adverse conditions that make satanic suggestion appear reasonable.
+      <br/><br/>
+      The Lord will not allow you to go through any experience that ridicules the name of Christ. You will not be tempted to put your confidence in any other power. You shall not be tempted out of God’s will to do anything destructive.
+      <br/><br/>
+      The Spirit of God will dictate all your steps and keep vigil over you and everything that belongs to you.
+      <br/><br/>
+      Thank you Lord for answered prayer, in Jesus name I have prayed. Amen.
+    </p>
+  </section>
+
+  <section>
+    <h3>Thursday, July 3, 2025</h3>
+    <p>
+      Today, you will not miss divine instruction and direction to your location of divine intervention. You will not follow the path of absence of divine guidance in the name of Jesus.
+      <br/><br/>
+      As you take up your activities for today, the wonders of God will accompany you and help you to discover the spring of refreshing water that will nourish your soul and renew your strength.
+      <br/><br/>
+      Divine provision will surface for you during unexpected shortage. Your journey today will not end in frustration.
+      <br/><br/>
+      You will not give up on your aspirations. Discouragement will not replace your courage. Every effort for progress will not be frustrated in the mighty name of Jesus.
+      <br/><br/>
+      Psalms 23 will become your testimony now and forever in Jesus name.
+      <br/><br/>
+      Let us recite Psalms 23 together...
+      <br/>
+      The LORD is my shepherd; I shall not want.  
+      He maketh me to lie down in green pastures: he leadeth me beside the still waters.  
+      He restoreth my soul: he leadeth me in the paths of righteousness for his name's sake.  
+      Yea, though I walk through the valley of the shadow of death, I will fear no evil: for thou art with me; thy rod and thy staff they comfort me.  
+      Thou preparest a table before me in the presence of mine enemies: thou anointest my head with oil; my cup runneth over.  
+      Surely goodness and mercy shall follow me all the days of my life: and I will dwell in the house of the LORD for ever.
+    </p>
+  </section>
+
+  <section>
+    <h3>Friday, July 4, 2025</h3>
+    <p>
+      All power belongs to you Most High. Thank you Lord for thus far you have helped us this month. We are so grateful. Amen.
+      <br/><br/>
+      I pray for you, evil contradictions that make the first become last and the best serve the least will not affect you. Errors that terminate destinies will not happen in your life.
+      <br/><br/>
+      You will not labor in vain. Just like Joseph, all opposition will contribute to your promotion.
+      <br/><br/>
+      I command every inherited failure to lose hold over your life in Jesus name.
+      <br/><br/>
+      Your persecutors will regret how they contributed to God’s plan for you. You will not suffer pain while the unrighteous enjoy pleasures.
+      <br/><br/>
+      So shall it be, in Jesus name I have prayed. Amen.
+    </p>
+  </section>
+
+  <section>
+    <h3>Saturday, July 5, 2025</h3>
+    <p>
+      <strong>Topic: TRIUMPHING OVER LIFE CONTRADICTIONS</strong><br/>
+      Ecclesiastes 3:16 – And moreover, I saw under the sun the place of judgment, that wickedness was there; and the place of righteousness, that iniquity was there.
+      <br/><br/>
+      Nuggets:
+      <ol>
+        <li>Some who put in their best enjoy the least; while others enjoy from others' sweat.</li>
+        <li>We live in a world where good is called evil, and evil good.</li>
+        <li>People hide under religion to oppress others.</li>
+        <li>Strangers can be more friendly than family.</li>
+        <li>The global system celebrates the wicked and persecutes the righteous.</li>
+      </ol>
+      <br/>
+      Understand: God is a righteous judge. He will reward everyone.
+      <br/><br/>
+      <strong>Psalm 37:1–4</strong><br/>
+      Fret not thyself because of evildoers... Trust in the Lord, and do good... Delight thyself also in the LORD.
+    </p>
+  </section>
+
+  <section>
+    <h3>Sunday, July 6, 2025</h3>
+    <p>
+      God's angels are always on assignment.
+      <br/><br/>
+      Today, angel of help will fight for you. You will no longer be at the mercy of the enemy. Divine intervention will touch every part of your life.
+      <br/><br/>
+      Your hands will be upon the neck of your enemies. You will fulfill destiny. The Spirit of God will alert you of enemy moves and conduct you in ways that attract divine help.
+      <br/><br/>
+      Receive grace for exceptional favor. So shall it be, in Jesus name I have prayed. Amen.
+    </p>
+  </section>
+
+  <hr />
+
+  <h2>🙏 Submit a Prayer Request</h2>
+  <form action="https://formsubmit.co/8653cbdf8efa906d17fc35210591cb6e" method="POST">
+    <input type="hidden" name="_next" value="https://www.oowbc.com.ng/thank-you.html" />
+    <input type="hidden" name="_subject" value="New Prayer Request" />
+    <input type="text" name="name" placeholder="Your Name" required />
+    <input type="email" name="email" placeholder="Your Email" required />
+    <textarea name="message" rows="6" placeholder="Write your prayer request here..." required></textarea>
+    <button type="submit">Send Request</button>
+  </form>
+
+  <hr />
+
+  <h2>💬 Comments</h2>
+  <div id="cusdis_thread"
+    data-host="https://cusdis.com"
+    data-app-id="96e4e7ff-4b89-4299-bb83-9623f327eaf0"
+    data-page-id="prayer"
+    data-page-url="https://www.oowbc.com.ng/prayer.html"
+    data-page-title="Daily Prayer">
+  </div>
+  <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
+
+  <p style="margin-top:3rem;"><a href="index.html">← Back to Home</a></p>
 
 </body>
 </html>
