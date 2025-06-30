@@ -1,89 +1,140 @@
-<section id="blog-posts">
-  <h2 style="text-align:center;">📰 Latest News</h2>
-  <div id="blog-cards" style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;"></div>
-  <div id="post-content" style="margin-top: 2rem; max-width: 800px; margin-inline: auto;"></div>
-</section>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>OOWBC News</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f6fff6;
+      color: #222;
+      margin: 0;
+      padding: 2rem;
+    }
+    h2 {
+      text-align: center;
+      color: #006400;
+    }
+    #blog-cards {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .card {
+      width: 300px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    }
+    .card img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+    }
+    .card-content {
+      padding: 1rem;
+    }
+    .card-content h4 {
+      margin: 0;
+      font-size: 1.1rem;
+      color: #004225;
+    }
+    .card-content p {
+      font-size: 0.9rem;
+      color: #666;
+    }
+    .card-content button {
+      margin-top: 0.8rem;
+      background: #004225;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    #post-content {
+      max-width: 800px;
+      margin: 3rem auto 0;
+      padding: 1rem;
+      background: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 1px 6px rgba(0, 0, 0, 0.08);
+    }
+  </style>
+</head>
+<body>
 
-<script>
-  fetch("https://api.allorigins.win/get?url=" + encodeURIComponent("https://oowbc.blogspot.com/feeds/posts/default?alt=rss"))
-    .then(response => response.json())
-    .then(data => {
-      const parser = new DOMParser();
-      const xml = parser.parseFromString(data.contents, "text/xml");
-      const entries = xml.querySelectorAll("entry");
-      const container = document.getElementById("blog-cards");
-      const postDisplay = document.getElementById("post-content");
-      container.innerHTML = "";
+  <h2>📰 Latest News from Oasis Blog</h2>
 
-      entries.forEach(entry => {
-        const title = entry.querySelector("title").textContent;
-        const content = entry.querySelector("content").textContent;
-        const published = entry.querySelector("published").textContent;
-        const link = entry.querySelector("link[rel='alternate']").getAttribute("href");
+  <div id="blog-cards"></div>
+  <div id="post-content"></div>
 
-        const thumbMatch = content.match(/<img[^>]+src="([^">]+)"/i);
-        const thumbnail = thumbMatch ? thumbMatch[1] : "https://via.placeholder.com/300x160?text=No+Image";
+  <script>
+    fetch("https://api.allorigins.win/get?url=" + encodeURIComponent("https://oowbc.blogspot.com/feeds/posts/default?alt=rss"))
+      .then(response => response.json())
+      .then(data => {
+        const parser = new DOMParser();
+        const xml = parser.parseFromString(data.contents, "text/xml");
+        const entries = xml.querySelectorAll("entry");
+        const container = document.getElementById("blog-cards");
+        const postDisplay = document.getElementById("post-content");
 
-        const card = document.createElement("div");
-        card.style.width = "300px";
-        card.style.border = "1px solid #ccc";
-        card.style.borderRadius = "8px";
-        card.style.overflow = "hidden";
-        card.style.background = "#fff";
-        card.style.boxShadow = "0 2px 8px rgba(0,0,0,0.05)";
-        card.style.margin = "0.5rem";
+        container.innerHTML = "";
 
-        const img = document.createElement("img");
-        img.src = thumbnail;
-        img.alt = title;
-        img.style.width = "100%";
-        img.style.height = "160px";
-        img.style.objectFit = "cover";
+        entries.forEach(entry => {
+          const title = entry.querySelector("title").textContent;
+          const content = entry.querySelector("content").textContent;
+          const published = entry.querySelector("published").textContent;
 
-        const box = document.createElement("div");
-        box.style.padding = "1rem";
+          const thumbMatch = content.match(/<img[^>]+src="([^">]+)"/i);
+          const thumbnail = thumbMatch ? thumbMatch[1] : "https://via.placeholder.com/300x160?text=No+Image";
 
-        const h4 = document.createElement("h4");
-        h4.textContent = title;
-        h4.style.margin = "0 0 0.5rem 0";
-        h4.style.color = "#004225";
+          const card = document.createElement("div");
+          card.className = "card";
 
-        const date = document.createElement("p");
-        date.textContent = new Date(published).toLocaleDateString();
-        date.style.color = "#777";
-        date.style.fontSize = "0.85rem";
+          const img = document.createElement("img");
+          img.src = thumbnail;
 
-        const btn = document.createElement("button");
-        btn.textContent = "Read More";
-        btn.style.background = "#004225";
-        btn.style.color = "#fff";
-        btn.style.border = "none";
-        btn.style.padding = "0.5rem 1rem";
-        btn.style.borderRadius = "4px";
-        btn.style.cursor = "pointer";
-        btn.onclick = () => {
-          postDisplay.innerHTML = `
-            <h2>${title}</h2>
-            <p><em>${new Date(published).toLocaleString()}</em></p>
-            <div>${content}</div>
-            <hr/>
-          `;
-          postDisplay.scrollIntoView({ behavior: "smooth" });
-        };
+          const cardContent = document.createElement("div");
+          cardContent.className = "card-content";
 
-        box.appendChild(h4);
-        box.appendChild(date);
-        box.appendChild(btn);
+          const h4 = document.createElement("h4");
+          h4.textContent = title;
 
-        card.appendChild(img);
-        card.appendChild(box);
-        container.appendChild(card);
+          const date = document.createElement("p");
+          date.textContent = new Date(published).toLocaleDateString();
+
+          const btn = document.createElement("button");
+          btn.textContent = "Read More";
+          btn.onclick = () => {
+            postDisplay.innerHTML = `
+              <h2>${title}</h2>
+              <p><em>${new Date(published).toLocaleString()}</em></p>
+              <div>${content}</div>
+              <hr/>
+            `;
+            postDisplay.scrollIntoView({ behavior: "smooth" });
+          };
+
+          cardContent.appendChild(h4);
+          cardContent.appendChild(date);
+          cardContent.appendChild(btn);
+
+          card.appendChild(img);
+          card.appendChild(cardContent);
+          container.appendChild(card);
+        });
+      })
+      .catch(err => {
+        document.getElementById("blog-cards").innerHTML = "<p style='color:red;'>Unable to load posts. Please try again later.</p>";
+        console.error("Fetch error:", err);
       });
-    })
-    .catch(err => {
-      const container = document.getElementById("blog-cards");
-      container.innerHTML = "<p style='color:red;'>Unable to load posts right now.</p>";
-      console.error("Fetch error:", err);
-    });
-</script>
+  </script>
 
+</body>
+</html>
