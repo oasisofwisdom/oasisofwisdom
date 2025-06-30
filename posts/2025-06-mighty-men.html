@@ -48,7 +48,14 @@
 <meta property="og:type" content="article" />
 </head>
 <body>
-
+<div id="site-header"></div>
+<script>
+  fetch('/header.html')
+    .then(res => res.text())
+    .then(data => {
+      document.getElementById('site-header').innerHTML = data;
+    });
+</script>
   <h1>Mighty Men of David Convention 2025 | The Making</h1>
   <p><em>Posted on June 30, 2025</em></p>
 
