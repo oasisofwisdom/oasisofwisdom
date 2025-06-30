@@ -418,15 +418,31 @@
 </section>
 
 
-  <section id="prayer" class="bg">
-    <h3>🙏 Submit a Prayer Request</h3>
-    <form action="mailto:youremail@example.com" method="post" enctype="text/plain">
-      <input type="text" name="name" placeholder="Your Name" required />
-      <input type="email" name="email" placeholder="Your Email" required />
-      <textarea name="message" rows="5" placeholder="Your Prayer Request" required></textarea>
-      <button type="submit">Send</button>
-    </form>
-  </section>
+  <section id="prayer" class="bg" style="padding: 2rem; max-width: 700px; margin: auto;">
+  <h3 style="text-align:center; color:#004225;">🙏 Submit a Prayer Request</h3>
+  <form action="https://formsubmit.co/8653cbdf8efa906d17fc35210591cb6e" method="POST" style="margin-top: 1rem;">
+    <!-- Hidden FormSubmit config -->
+    <input type="hidden" name="_subject" value="New Prayer Request from Website">
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_next" value="https://www.oowbc.com.ng/thank-you.html">
+
+    <!-- Form Fields -->
+    <input type="text" name="name" placeholder="Your Name" required
+      style="width:100%; padding:0.8rem; margin:0.5rem 0; border:1px solid #ccc; border-radius:6px;">
+    
+    <input type="email" name="email" placeholder="Your Email (optional)"
+      style="width:100%; padding:0.8rem; margin:0.5rem 0; border:1px solid #ccc; border-radius:6px;">
+    
+    <textarea name="message" rows="5" placeholder="Your Prayer Request" required
+      style="width:100%; padding:0.8rem; margin:0.5rem 0; border:1px solid #ccc; border-radius:6px;"></textarea>
+    
+    <button type="submit"
+      style="background:#004225; color:white; padding:0.8rem 1.5rem; border:none; border-radius:5px; cursor:pointer;">
+      Send Prayer Request
+    </button>
+  </form>
+</section>
+
 
   <!-- Add Font Awesome in <head> if you haven’t already -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
