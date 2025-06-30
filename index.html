@@ -264,49 +264,6 @@
   </style>
 </head>
 <body>
-<script>
-const prayers = [
-  {
-    date: "Monday, June 30, 2025",
-    text: `I pray for you, in every area where you have been waiting for God’s manifestation, the Lord will show up for you. Your miracle will no longer tarry.`
-  },
-  {
-    date: "Tuesday, July 1, 2025",
-    text: `We are so grateful dear Lord for thou has granted us life and favour... So shall it be, in Jesus name I have prayed.`
-  },
-  {
-    date: "Wednesday, July 2, 2025",
-    text: `Great is your faithfulness Abba Father... Thank you Lord for answered prayer, in Jesus name I have prayed. Amen.`
-  },
-  {
-    date: "Thursday, July 3, 2025",
-    text: `Today, you will not miss divine instruction and direction... Psalms 23 will become your testimony now and forever in Jesus name.`
-  },
-  {
-    date: "Friday, July 4, 2025",
-    text: `All power belongs to you Most high... So shall it be, in Jesus name I have prayed. Amen`
-  },
-  {
-    date: "Saturday, July 5, 2025",
-    text: `<strong>Topic: TRIUMPHING OVER LIFE CONTRADICTIONS</strong><br/>
-    And moreover, I saw under the sun... Psalm 37:1–4`
-  },
-  {
-    date: "Sunday, July 6, 2025",
-    text: `It is essentially important for you to know that God’s angels are always on assignment... So shall it be, in Jesus name I have prayed. Amen.`
-  }
-];
-
-// Get today’s index from the start date
-const startDate = new Date("2025-06-30");
-const today = new Date();
-const diffDays = Math.floor((today - startDate) / (1000 * 60 * 60 * 24));
-const prayer = prayers[diffDays % prayers.length];
-
-// Display
-document.getElementById("prayer-date").textContent = prayer.date;
-document.getElementById("prayer-text").innerHTML = prayer.text;
-</script>
 
   <header>
     <img src="logo.png" alt="Church Logo" class="logo" />
@@ -537,6 +494,50 @@ document.getElementById("prayer-text").innerHTML = prayer.text;
   </div>
 </footer>   
   </footer>
+
+  <script>
+const prayers = [
+  {
+    date: "Monday, June 30, 2025",
+    text: `I pray for you, in every area where you have been waiting for God’s manifestation, the Lord will show up for you. Your miracle will no longer tarry.`
+  },
+  {
+    date: "Tuesday, July 1, 2025",
+    text: `We are so grateful dear Lord for thou has granted us life and favour... So shall it be, in Jesus name I have prayed.`
+  },
+  {
+    date: "Wednesday, July 2, 2025",
+    text: `Great is your faithfulness Abba Father... Thank you Lord for answered prayer, in Jesus name I have prayed. Amen.`
+  },
+  {
+    date: "Thursday, July 3, 2025",
+    text: `Today, you will not miss divine instruction and direction... Psalms 23 will become your testimony now and forever in Jesus name.`
+  },
+  {
+    date: "Friday, July 4, 2025",
+    text: `All power belongs to you Most high... So shall it be, in Jesus name I have prayed. Amen`
+  },
+  {
+    date: "Saturday, July 5, 2025",
+    text: `<strong>Topic: TRIUMPHING OVER LIFE CONTRADICTIONS</strong><br/>
+    And moreover, I saw under the sun... Psalm 37:1–4`
+  },
+  {
+    date: "Sunday, July 6, 2025",
+    text: `It is essentially important for you to know that God’s angels are always on assignment... So shall it be, in Jesus name I have prayed. Amen.`
+  }
+];
+
+// Get today’s index from the start date
+const startDate = new Date("2025-06-30");
+const today = new Date();
+const diffDays = Math.floor((today - startDate) / (1000 * 60 * 60 * 24));
+const prayer = prayers[diffDays % prayers.length];
+
+// Display
+document.getElementById("prayer-date").textContent = prayer.date;
+document.getElementById("prayer-text").innerHTML = prayer.text;
+</script>
 
 </body>
 </html>
