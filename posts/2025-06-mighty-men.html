@@ -153,17 +153,34 @@
 </div>
 
 <!-- ✅ Comment Section -->
-<div class="comments-section">
-  <h3>💬 Leave a Comment</h3>
-  <div id="cusdis_thread"
-    data-host="https://cusdis.com"
-    data-app-id="96e4e7ff-4b89-4299-bb83-9623f327eaf0"
-    data-page-id="2025-06-mighty-men"
-    data-page-url="https://www.oowbc.com.ng/posts/2025-06-mighty-men.html"
-    data-page-title="Mighty Men of David Convention 2025 | The Making">
-  </div>
-</div>
-<script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
+<section style="margin-top: 4rem; max-width: 700px; margin-inline: auto;">
+  <h3 style="color:#004225; text-align:center;">💬 Leave a Comment</h3>
+  <form action="https://formsubmit.co/oasisofwisdomchurch1@gmail.com" method="POST">
+    <!-- Hidden FormSubmit settings -->
+    <input type="hidden" name="_subject" value="New comment on blog post!">
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_template" value="box">
+    <input type="hidden" name="_next" value="https://www.oowbc.com.ng/thank-you.html">
+
+    <!-- Name -->
+    <input type="text" name="name" placeholder="Your Name" required 
+      style="width:100%; padding:0.8rem; margin:0.5rem 0; border:1px solid #ccc; border-radius:5px;">
+
+    <!-- Email (optional) -->
+    <input type="email" name="email" placeholder="Your Email (optional)" 
+      style="width:100%; padding:0.8rem; margin:0.5rem 0; border:1px solid #ccc; border-radius:5px;">
+
+    <!-- Comment -->
+    <textarea name="message" placeholder="Your comment..." required rows="5" 
+      style="width:100%; padding:0.8rem; margin:0.5rem 0; border:1px solid #ccc; border-radius:5px;"></textarea>
+    
+    <!-- Submit Button -->
+    <button type="submit" 
+      style="background:#004225; color:white; padding:0.8rem 1.5rem; border:none; border-radius:5px; cursor:pointer;">
+      Submit Comment
+    </button>
+  </form>
+</section>
 
 
   <a class="back" href="../news.html">← Back to News</a>
