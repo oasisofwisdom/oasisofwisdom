@@ -52,34 +52,40 @@
   </header>
 
   <div class="container">
-    <h2 id="prayer-title">Loading title...</h2>
-    <div id="full-prayer" class="prayer-text">Loading prayer...</div>
+    <h2 id="prayer-title">Loading...</h2>
+    <div id="full-prayer" class="prayer-text">Please wait while we load today's prayer.</div>
   </div>
 
   <script>
     const urlParams = new URLSearchParams(window.location.search);
     const dateParam = urlParams.get('date');
 
-    const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSpMlKmPNv0ebJdTr6ntFuRUtE9T2z3tEdZSYQAzsVBYdzKTCgQhxnhS4BAfBRDvZFW7Vj2FG0Gl2M-/pub?output=csv';
+    const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTfrltH681QSU3m77WYDJh0wNAdWv-h1ppGbFaIFSQ08GWFAkRMRpOTDd193MNJulfuXSH_M4--5SqY/pub?output=csv';
 
     fetch(csvUrl)
       .then(res => res.text())
       .then(csv => {
         const rows = csv.trim().split('\n').map(row => row.split(','));
-        const headers = rows[0];
+        const headers = rows[0].map(h => h.trim());
 
         const dateIndex = headers.indexOf("Date");
         const titleIndex = headers.indexOf("Title");
         const prayerIndex = headers.indexOf("Prayer");
 
-        const row = rows.find((r, i) => i !== 0 && r[dateIndex] === dateParam);
+        const row = rows.find((r, i) => i !== 0 && r[dateIndex]?.trim() === dateParam);
+
         if (row) {
           document.getElementById('prayer-title').textContent = row[titleIndex];
           document.getElementById('full-prayer').textContent = row[prayerIndex];
         } else {
           document.getElementById('prayer-title').textContent = "Prayer Not Found";
-          document.getElementById('full-prayer').textContent = "Please check the date or return to the home page.";
+          document.getElementById('full-prayer').textContent = "We could not find a prayer for this date. Please go back or check another day.";
         }
+      })
+      .catch(error => {
+        console.error("Error loading prayer:", error);
+        document.getElementById('prayer-title').textContent = "Error";
+        document.getElementById('full-prayer').textContent = "Prayer could not be loaded. Please try again later.";
       });
   </script>
 
