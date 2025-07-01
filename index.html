@@ -397,38 +397,99 @@
 </section>
 
 
-
-
-  <section class="bg" id="podcast">
+<section class="bg" id="podcast">
   <h3>🎧 Listen to Our Podcast: Wonders of Wisdom Hour</h3>
-  <p>Catch up on our latest messages and teachings. Powered by Spotify, Anchor, Google Podcasts, and more.</p>
+  <p>Stream our messages on your favorite platform. Updated weekly with inspired teachings.</p>
 
-  <!-- Embed playlist via ListenNotes -->
-  <iframe 
-    src="https://lnns.co/F0rRG5pSiDm?theme=light" 
-    width="100%" 
-    height="352px" 
-    frameborder="0" 
-    scrolling="no" 
-    loading="lazy">
-  </iframe>
+  <!-- Try ListenNotes Embed -->
+  <div style="margin: 1rem 0;">
+    <iframe 
+      src="https://lnns.co/F0rRG5pSiDm?theme=light" 
+      width="100%" 
+      height="352px" 
+      frameborder="0" 
+      scrolling="no" 
+      loading="lazy"
+      onerror="this.style.display='none';">
+    </iframe>
+  </div>
 
-  <!-- Direct follow link and platforms -->
-  <div style="margin-top:1rem; display:flex; flex-wrap:wrap; gap:10px;">
+  <h4 style="color:#004225; margin-top: 2rem;">📡 Available On:</h4>
+
+  <div class="podcast-platforms">
     <a href="https://open.spotify.com/show/0DVWzznTFh7y9y8nB5WiUH" target="_blank">
-      <img src="https://img.icons8.com/color/48/spotify--v1.png" alt="Spotify" width="32" /> Spotify
+      <img src="https://img.icons8.com/color/48/spotify--v1.png" alt="Spotify" /> Spotify
     </a>
     <a href="https://podcasts.apple.com/us/podcast/wonders-of-wisdom-hour/id1642910204" target="_blank">
-      <img src="https://img.icons8.com/color/48/apple-podcasts.png" alt="Apple" width="32" /> Apple Podcasts
+      <img src="https://img.icons8.com/color/48/apple-podcasts.png" alt="Apple Podcasts" /> Apple
     </a>
     <a href="https://music.amazon.com/podcasts/643b0b45-69e5-4269-aafc-a702f8d851c6/oasisofwisdom" target="_blank">
-      <img src="https://img.icons8.com/color/48/amazon.png" alt="Amazon" width="32" /> Amazon Music
+      <img src="https://img.icons8.com/color/48/amazon.png" alt="Amazon" /> Amazon
     </a>
     <a href="https://podcasts.google.com/feed/aHR0cHM6Ly9hbmNob3IuZm0vcy9iM2Y0MDhjYy9wb2RjYXN0L3Jzcw" target="_blank">
-      <img src="https://img.icons8.com/color/48/google-logo.png" alt="Google" width="32" /> Google Podcasts
+      <img src="https://img.icons8.com/color/48/google-logo.png" alt="Google" /> Google
+    </a>
+    <a href="https://www.stitcher.com/show/1021997" target="_blank">
+      <img src="https://img.icons8.com/fluency/48/radio.png" alt="Stitcher" /> Stitcher
+    </a>
+    <a href="https://www.pandora.com/podcast/oasisofwisdom/PC:1001021997" target="_blank">
+      <img src="https://img.icons8.com/color/48/pandora-logo.png" alt="Pandora" /> Pandora
+    </a>
+    <a href="https://anchor.fm/oasisofwisdom" target="_blank">
+      <img src="https://img.icons8.com/color/48/microphone--v2.png" alt="Anchor" /> Anchor
+    </a>
+    <a href="https://radiopublic.com/oasisofwisdom-85Yy7m" target="_blank">
+      <img src="https://img.icons8.com/color/48/radio--v1.png" alt="RadioPublic" /> RadioPublic
+    </a>
+    <a href="https://pca.st/qz10xtgt" target="_blank">
+      <img src="https://img.icons8.com/color/48/cast.png" alt="Pocket Casts" /> Pocket Casts
+    </a>
+    <a href="https://podcastindex.org/podcast/5660002" target="_blank">
+      <img src="https://img.icons8.com/fluency/48/cloud-radio.png" alt="Podcast Index" /> Podcast Index
+    </a>
+    <a href="https://deezer.com/show/4553217" target="_blank">
+      <img src="https://img.icons8.com/color/48/deezer.png" alt="Deezer" /> Deezer
+    </a>
+    <a href="https://afripods.africa/podcast/82fec0be-41cf-4caa-9034-a28877b95473" target="_blank">
+      <img src="https://img.icons8.com/color/48/africa.png" alt="Afripods" /> Afripods
+    </a>
+    <a href="https://gaana.com/podcast/wonders-of-wisdom-hour-season-1" target="_blank">
+      <img src="https://img.icons8.com/color/48/music.png" alt="Gaana" /> Gaana
     </a>
   </div>
+
+  <style>
+    .podcast-platforms {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 12px;
+      margin-top: 1rem;
+    }
+    .podcast-platforms a {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px;
+      background: #f0fff0;
+      border: 1px solid #d4edd4;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+      color: #004225;
+      transition: 0.2s ease;
+    }
+    .podcast-platforms a:hover {
+      background: #e8f8e8;
+      transform: translateY(-2px);
+    }
+    .podcast-platforms img {
+      width: 24px;
+      height: 24px;
+    }
+  </style>
 </section>
+
+  
 
 
   <section class="bg" id="giving">
