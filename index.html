@@ -373,7 +373,82 @@
   </div>
 </section>
 
+<!-- 🎙️ Live Radio Stream with Play/Stop -->
+<div class="radio-card">
+  <h3>📻 Live Radio Broadcast</h3>
+  <p>Click below to listen to our audio stream — worship, word, and encouragement wherever you are.</p>
 
+  <div id="radio-container" style="display: none; margin-top: 1rem;">
+    <iframe 
+      id="radio-player"
+      src="https://stream.zeno.fm/r3ijk6mzim6uv" 
+      width="100%" 
+      height="120" 
+      frameborder="0" 
+      style="border-radius: 10px; background: #f0fff0;">
+    </iframe>
+  </div>
+
+  <button id="radio-toggle" onclick="toggleRadio()" class="radio-btn">🔊 Start Radio</button>
+</div>
+
+<style>
+  .radio-card {
+    background: #f5fff5;
+    border-left: 5px solid #004225;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+
+  .radio-card h3 {
+    margin-top: 0;
+    color: #004225;
+  }
+
+  .radio-card p {
+    color: #333;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .radio-btn {
+    background-color: #004225;
+    color: white;
+    padding: 10px 20px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: 0.3s;
+  }
+
+  .radio-btn:hover {
+    background-color: #006633;
+  }
+</style>
+
+<script>
+  let radioPlaying = false;
+  function toggleRadio() {
+    const player = document.getElementById('radio-container');
+    const btn = document.getElementById('radio-toggle');
+
+    if (!radioPlaying) {
+      player.style.display = 'block';
+      btn.textContent = '⏹️ Stop Radio';
+      radioPlaying = true;
+    } else {
+      player.style.display = 'none';
+      btn.textContent = '🔊 Start Radio';
+      radioPlaying = false;
+    }
+  }
+</script>
+  
  <section class="bg" id="media">
   <h3>🎥 Live & Recent Sermons</h3>
   <p>Watch our latest livestreams and powerful sessions from Oasis of Wisdom Bible Church.</p>
