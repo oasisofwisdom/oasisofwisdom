@@ -373,23 +373,15 @@
   </div>
 </section>
 
-<!-- 🎙️ Live Radio Stream with Play/Stop -->
-<div class="radio-card">
+<!-- 🎙️ Live Radio Stream with Custom Player -->
+<div class="radio-card" id="radio">
   <h3>📻 Live Radio Broadcast</h3>
   <p>Click below to listen to our audio stream — worship, word, and encouragement wherever you are.</p>
 
-  <div id="radio-container" style="display: none; margin-top: 1rem;">
-    <iframe 
-      id="radio-player"
-      src="https://stream.zeno.fm/r3ijk6mzim6uv" 
-      width="100%" 
-      height="120" 
-      frameborder="0" 
-      style="border-radius: 10px; background: #f0fff0;">
-    </iframe>
-  </div>
-
-  <button id="radio-toggle" onclick="toggleRadio()" class="radio-btn">🔊 Start Radio</button>
+  <audio id="oasisRadio" controls preload="none" style="width: 100%; max-width: 500px; margin-top: 10px; border-radius: 8px;">
+    <source src="https://stream.zeno.fm/r3ijk6mzim6uv" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
 </div>
 
 <style>
@@ -413,41 +405,8 @@
     font-size: 1rem;
     margin-bottom: 1rem;
   }
-
-  .radio-btn {
-    background-color: #004225;
-    color: white;
-    padding: 10px 20px;
-    font-weight: bold;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 10px;
-    transition: 0.3s;
-  }
-
-  .radio-btn:hover {
-    background-color: #006633;
-  }
 </style>
 
-<script>
-  let radioPlaying = false;
-  function toggleRadio() {
-    const player = document.getElementById('radio-container');
-    const btn = document.getElementById('radio-toggle');
-
-    if (!radioPlaying) {
-      player.style.display = 'block';
-      btn.textContent = '⏹️ Stop Radio';
-      radioPlaying = true;
-    } else {
-      player.style.display = 'none';
-      btn.textContent = '🔊 Start Radio';
-      radioPlaying = false;
-    }
-  }
-</script>
   
  <section class="bg" id="media">
   <h3>🎥 Live & Recent Sermons</h3>
