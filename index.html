@@ -293,59 +293,29 @@
     </div>
   </section>
 
-  <section id="daily-prayer" class="bg" style="padding: 2rem; max-width: 900px; margin: auto;">
-  <h3>🕊️ Today in Prophecy Prayer Altar</h3>
-  <p id="prayer-date" style="font-weight: bold; color: #004225;"></p>
-  <div id="prayer-text" style="margin-top: 1rem; line-height: 1.8;"></div>
+<section id="daily-prayer" class="bg">
+  <h3>📖 Today in Prophecy Prayer Altar</h3>
+  <div id="prayer-preview"></div>
+  <a href="prayer.html" style="display:inline-block; margin-top: 1rem; color: #006400; font-weight: bold; text-decoration: underline;">Read More →</a>
 </section>
 
 <script>
-const prayers = [
-  {
-    date: "Monday, June 30, 2025",
-    text: `I pray for you, in every area where you have been waiting for God’s manifestation, the Lord will show up for you. Your miracle will no longer tarry.`
-  },
-  {
-    date: "Tuesday, July 1, 2025",
-    text: `We are so grateful dear Lord for thou has granted us life and favour, and your visitation hath preserved our spirit...`
-  },
-  {
-    date: "Wednesday, July 2, 2025",
-    text: `Great is your faithfulness Abba Father, for your lovingkindness towards us...`
-  },
-  {
-    date: "Thursday, July 3, 2025",
-    text: `Today, you will not miss divine instruction and direction...`
-  },
-  {
-    date: "Friday, July 4, 2025",
-    text: `All power belongs to you Most high. Thank you Lord for thus far you have helped us in this month...`
-  },
-  {
-    date: "Saturday, July 5, 2025",
-    text: `Topic: TRIUMPHING OVER LIFE CONTRADICTIONS — And moreover, I saw under the sun the place of judgment...`
-  },
-  {
-    date: "Sunday, July 6, 2025",
-    text: `It is essentially important for you to know that God’s angels are always on assignment...`
-  }
-];
+  const prayers = [
+    "I pray for you, in every area where you have been waiting for God’s manifestation, the Lord will show up for you...",
+    "We are so grateful dear Lord for thou has granted us life and favour... God’s favour will open closed doors...",
+    "Great is your faithfulness Abba Father... The Lord will not allow you to go through any negative experience...",
+    "Today, you will not miss divine instruction and direction... Divine provision will surface for you...",
+    "All power belongs to you Most High... I command all inherited genes of failure and backwardness to loose their influence...",
+    "Topic: TRIUMPHING OVER LIFE CONTRADICTIONS — Psalm 37:1-4... Delight thyself also in the Lord...",
+    "God’s angels are always on assignment... You will ride on the back of your enemies to fulfill God’s purpose..."
+  ];
 
-const startDate = new Date("2025-06-30");
-const today = new Date();
-const diffDays = Math.floor((today - startDate) / (1000 * 60 * 60 * 24));
-const prayer = prayers[diffDays % prayers.length];
+  const start = new Date("2025-06-30");
+  const today = new Date();
+  const dayIndex = Math.floor((today - start) / (1000 * 60 * 60 * 24)) % prayers.length;
 
-document.addEventListener("DOMContentLoaded", () => {
-  document.getElementById("prayer-date").textContent = prayer.date;
-  const shortPreview = prayer.text.length > 250
-    ? `${prayer.text.slice(0, 250)}... <br><br><a href="prayer.html" style="color:#006400;font-weight:bold;">Read Full Prayer</a>`
-    : prayer.text;
-  document.getElementById("prayer-text").innerHTML = shortPreview;
-});
+  document.getElementById("prayer-preview").innerHTML = `<p>${prayers[dayIndex]}</p>`;
 </script>
-
-
   
   <nav>
   ...
