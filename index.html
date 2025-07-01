@@ -293,11 +293,24 @@
     </div>
   </section>
 
-<section id="daily-prayer" class="bg">
-  <h3>📖 Today in Prophecy Prayer Altar</h3>
-  <div id="prayer-preview"></div>
-  <a href="prayer.html" style="display:inline-block; margin-top: 1rem; color: #006400; font-weight: bold; text-decoration: underline;">Read More →</a>
+  <section id="daily-prayer" class="bg">
+  <h3>📖 Daily Prayer</h3>
+  <div class="prayer-frame" id="prayer-preview"></div>
+  <a href="prayer.html" style="display:inline-block; margin-top: 1rem; background:#004225; color:white; padding: 8px 16px; border-radius: 4px; text-decoration: none;">Read Full Prayer</a>
 </section>
+
+<style>
+  .prayer-frame {
+    border-left: 5px solid #004225;
+    background: #f5fff5;
+    padding: 1rem 1.2rem;
+    font-style: italic;
+    color: #222;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    margin-top: 10px;
+  }
+</style>
 
 <script>
   const prayers = [
