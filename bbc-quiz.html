@@ -110,10 +110,7 @@
       <input type="hidden" name="Score Breakdown" id="scoreBreakdown" value="">
       <input type="hidden" name="Total Score" id="totalScore" value="">
 
-      <!-- Hidden Correct Answers -->
-      <input type="hidden" id="answerKey" value="A,A,A,A,A,A,A,A,A,A" />
-
-      <!-- User Details -->
+      <!-- User Info -->
       <div id="userInfo">
         <label for="name">Full Name</label>
         <input type="text" name="Name" id="name" required />
@@ -126,7 +123,7 @@
 
       <!-- Quiz Content -->
       <div id="quizContent">
-        <div id="timer">⏱ 15s</div>
+        <div class="timer" id="timer">⏱ 15s</div>
         <div class="warning" id="warning">⚠️ You switched tabs! Quiz will be submitted.</div>
         <div class="question" id="questionBox"></div>
         <div id="progress">Question 1 of 10</div>
@@ -137,21 +134,63 @@
 
   <script>
     const questions = [
-      { q: "Who betrayed Jesus?", a: ["Judas Iscariot", "Peter", "Thomas", "Paul"] },
-      { q: "Which book contains the Ten Commandments?", a: ["Exodus", "Genesis", "Leviticus", "Numbers"] },
-      { q: "Where was Jesus born?", a: ["Bethlehem", "Nazareth", "Jerusalem", "Galilee"] },
-      { q: "Who led the Israelites across the Red Sea?", a: ["Moses", "Abraham", "Joshua", "David"] },
-      { q: "Who was swallowed by a great fish?", a: ["Jonah", "Noah", "Elijah", "Daniel"] },
-      { q: "What is the last book of the Bible?", a: ["Revelation", "Jude", "Malachi", "Acts"] },
-      { q: "Which king wrote many of the Psalms?", a: ["David", "Solomon", "Saul", "Hezekiah"] },
-      { q: "How many books are in the Bible?", a: ["66", "72", "60", "70"] },
-      { q: "What did Jesus feed 5,000 people with?", a: ["5 loaves and 2 fish", "Bread and wine", "Manna", "Fish only"] },
-      { q: "What did God create on the first day?", a: ["Light", "Sky", "Land", "Animals"] }
+      {
+        q: "Who betrayed Jesus?",
+        a: ["Peter", "Paul", "Judas Iscariot", "Thomas"],
+        correct: "C"
+      },
+      {
+        q: "Which book contains the Ten Commandments?",
+        a: ["Leviticus", "Genesis", "Exodus", "Numbers"],
+        correct: "C"
+      },
+      {
+        q: "Where was Jesus born?",
+        a: ["Nazareth", "Bethlehem", "Jerusalem", "Galilee"],
+        correct: "B"
+      },
+      {
+        q: "Who led the Israelites across the Red Sea?",
+        a: ["Abraham", "David", "Joshua", "Moses"],
+        correct: "D"
+      },
+      {
+        q: "Who was swallowed by a great fish?",
+        a: ["Noah", "Daniel", "Jonah", "Elijah"],
+        correct: "C"
+      },
+      {
+        q: "What is the last book of the Bible?",
+        a: ["Revelation", "Jude", "Malachi", "Acts"],
+        correct: "A"
+      },
+      {
+        q: "Which king wrote many of the Psalms?",
+        a: ["Solomon", "David", "Saul", "Hezekiah"],
+        correct: "B"
+      },
+      {
+        q: "How many books are in the Bible?",
+        a: ["60", "72", "66", "70"],
+        correct: "C"
+      },
+      {
+        q: "What did Jesus feed 5,000 people with?",
+        a: ["Bread and wine", "Manna", "5 loaves and 2 fish", "Fish only"],
+        correct: "C"
+      },
+      {
+        q: "What did God create on the first day?",
+        a: ["Light", "Sky", "Land", "Animals"],
+        correct: "A"
+      }
     ];
 
     let index = 0;
     let timer = 15;
     let interval;
+    let score = 0;
+    let breakdown = "";
 
     function startQuiz() {
       if (!document.getElementById("name").value || !document.getElementById("exam").value) {
@@ -165,7 +204,6 @@
 
     function showQuestion() {
       if (index >= questions.length) return submitForm();
-
       const q = questions[index];
       const name = `Q${index + 1}`;
       let html = `<h4>${index + 1}. ${q.q}</h4>`;
@@ -191,10 +229,10 @@
 
     function nextQuestion() {
       const selected = document.querySelector(`input[name="Q${index + 1}"]:checked`);
-      if (!selected) {
-        alert("Please select an answer.");
-        return;
-      }
+      const chosen = selected ? selected.value : "None";
+      const correct = questions[index].correct;
+      if (chosen === correct) score++;
+      breakdown += `Q${index + 1}: ${chosen} (Correct: ${correct})\n`;
       index++;
       if (index < questions.length) {
         showQuestion();
@@ -205,21 +243,12 @@
 
     function submitForm() {
       clearInterval(interval);
-      const correctAnswers = document.getElementById("answerKey").value.split(",");
-      let score = 0;
-      let breakdown = "";
-      correctAnswers.forEach((ans, i) => {
-        const picked = document.querySelector(`input[name="Q${i + 1}"]:checked`);
-        const chosen = picked ? picked.value : "None";
-        if (chosen === ans) score++;
-        breakdown += `Q${i + 1}: ${chosen} (Correct: ${ans})\n`;
-      });
       document.getElementById("scoreBreakdown").value = breakdown.trim();
-      document.getElementById("totalScore").value = `${score} / 10`;
+      document.getElementById("totalScore").value = `${score} / ${questions.length}`;
       document.getElementById("quizForm").submit();
     }
 
-    // Malpractice detection
+    // Malpractice Detection
     document.addEventListener("visibilitychange", () => {
       if (document.hidden) {
         document.getElementById("warning").style.display = "block";
