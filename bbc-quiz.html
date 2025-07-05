@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BBC Quiz | Oasis of Wisdom</title>
+  <meta name="description" content="BBC Exam 1 — Online Bible Quiz Challenge" />
+  <meta name="keywords" content="Bible quiz, Oasis of Wisdom, BBC, Bible Challenge, Ilorin Church, Youth Ministry" />
+  <meta name="author" content="Oasis of Wisdom Media Team" />
+  <meta property="og:title" content="BBC Quiz | Oasis of Wisdom Church" />
+  <meta property="og:description" content="Participate in BBC Exam 1 — online timed Bible quiz for students." />
+  <meta property="og:image" content="https://www.oowbc.com.ng/logo.png" />
+  <meta property="og:url" content="https://www.oowbc.com.ng/bbc-quiz.html" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="BBC Quiz | Oasis of Wisdom Church" />
+  <meta name="twitter:description" content="Participate in BBC Exam 1 — online timed Bible quiz for students." />
+  <meta name="twitter:image" content="https://www.oowbc.com.ng/logo.png" />
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-12R09Q1G31"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-12R09Q1G31');
+  </script>
+
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f8fff8;
+      margin: 0;
+      padding: 0;
+      color: #222;
+    }
+    header {
+      background: #004225;
+      color: white;
+      padding: 1.5rem 1rem;
+      text-align: center;
+    }
+    header h1 { margin: 0; }
+    main {
+      padding: 2rem;
+      max-width: 900px;
+      margin: auto;
+      background: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+    .question {
+      margin: 1.5rem 0;
+      display: none;
+    }
+    .question.active {
+      display: block;
+    }
+    .question h4 {
+      margin-bottom: 0.5rem;
+      color: #004225;
+    }
+    .question label {
+      display: block;
+      margin: 5px 0;
+      cursor: pointer;
+    }
+    input[type="text"], input[type="number"] {
+      padding: 10px;
+      width: 100%;
+      max-width: 300px;
+      margin: 0.5rem 0 1rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .submit-btn {
+      background: #004225;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-weight: bold;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 1rem;
+    }
+    .timer {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #b30000;
+      text-align: right;
+      margin-bottom: 1rem;
+    }
+    .warning {
+      color: red;
+      font-weight: bold;
+      display: none;
+    }
+    .back-link {
+      display: block;
+      margin-top: 1rem;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>📖 Back to the Bible Challenge (BBC)</h1>
+    <p>Answer each question within 15 seconds. Do not switch tabs.</p>
+  </header>
+
+  <main>
+    <form action="https://formsubmit.co/8653cbdf8efa906d17fc35210591cb6e" method="POST" id="quizForm">
+      <input type="hidden" name="_next" value="https://www.oowbc.com.ng/bbc.html" />
+      <label for="name">Full Name</label>
+      <input type="text" name="Name" id="name" required />
+
+      <label for="exam">Exam Number</label>
+      <input type="text" name="Exam Number" id="exam" required />
+
+      <div class="timer" id="timer">⏱ 00:15</div>
+      <div class="warning" id="warning">⚠️ You switched tabs! Quiz is invalidated.</div>
+
+      <div class="question active">
+        <h4>1. Who betrayed Jesus?</h4>
+        <label><input type="radio" name="Q1" value="A" required> A. Judas Iscariot</label>
+        <label><input type="radio" name="Q1" value="B"> B. Peter</label>
+        <label><input type="radio" name="Q1" value="C"> C. Thomas</label>
+        <label><input type="radio" name="Q1" value="D"> D. Paul</label>
+      </div>
+
+      <div class="question">
+        <h4>2. Where was Jesus born?</h4>
+        <label><input type="radio" name="Q2" value="A" required> A. Bethlehem</label>
+        <label><input type="radio" name="Q2" value="B"> B. Nazareth</label>
+        <label><input type="radio" name="Q2" value="C"> C. Jerusalem</label>
+        <label><input type="radio" name="Q2" value="D"> D. Galilee</label>
+      </div>
+
+      <div class="question">
+        <h4>3. Which book contains the Ten Commandments?</h4>
+        <label><input type="radio" name="Q3" value="A" required> A. Exodus</label>
+        <label><input type="radio" name="Q3" value="B"> B. Genesis</label>
+        <label><input type="radio" name="Q3" value="C"> C. Leviticus</label>
+        <label><input type="radio" name="Q3" value="D"> D. Numbers</label>
+      </div>
+
+      <div class="question">
+        <h4>4. What did Jesus feed 5,000 with?</h4>
+        <label><input type="radio" name="Q4" value="A" required> A. 5 loaves and 2 fish</label>
+        <label><input type="radio" name="Q4" value="B"> B. Bread and wine</label>
+        <label><input type="radio" name="Q4" value="C"> C. Manna</label>
+        <label><input type="radio" name="Q4" value="D"> D. Fish only</label>
+      </div>
+
+      <div class="question">
+        <h4>5. What is the last book of the Bible?</h4>
+        <label><input type="radio" name="Q5" value="A" required> A. Revelation</label>
+        <label><input type="radio" name="Q5" value="B"> B. Jude</label>
+        <label><input type="radio" name="Q5" value="C"> C. Malachi</label>
+        <label><input type="radio" name="Q5" value="D"> D. Acts</label>
+      </div>
+
+      <div class="question">
+        <h4>6. Who led the Israelites across the Red Sea?</h4>
+        <label><input type="radio" name="Q6" value="A" required> A. Moses</label>
+        <label><input type="radio" name="Q6" value="B"> B. Abraham</label>
+        <label><input type="radio" name="Q6" value="C"> C. Joshua</label>
+        <label><input type="radio" name="Q6" value="D"> D. David</label>
+      </div>
+
+      <div class="question">
+        <h4>7. What did God create on the first day?</h4>
+        <label><input type="radio" name="Q7" value="A" required> A. Light</label>
+        <label><input type="radio" name="Q7" value="B"> B. Sky</label>
+        <label><input type="radio" name="Q7" value="C"> C. Land</label>
+        <label><input type="radio" name="Q7" value="D"> D. Animals</label>
+      </div>
+
+      <div class="question">
+        <h4>8. How many books are in the Bible?</h4>
+        <label><input type="radio" name="Q8" value="A" required> A. 66</label>
+        <label><input type="radio" name="Q8" value="B"> B. 72</label>
+        <label><input type="radio" name="Q8" value="C"> C. 60</label>
+        <label><input type="radio" name="Q8" value="D"> D. 70</label>
+      </div>
+
+      <div class="question">
+        <h4>9. Who wrote many of the Psalms?</h4>
+        <label><input type="radio" name="Q9" value="A" required> A. David</label>
+        <label><input type="radio" name="Q9" value="B"> B. Solomon</label>
+        <label><input type="radio" name="Q9" value="C"> C. Saul</label>
+        <label><input type="radio" name="Q9" value="D"> D. Hezekiah</label>
+      </div>
+
+      <div class="question">
+        <h4>10. Who was swallowed by a great fish?</h4>
+        <label><input type="radio" name="Q10" value="A" required> A. Jonah</label>
+        <label><input type="radio" name="Q10" value="B"> B. Noah</label>
+        <label><input type="radio" name="Q10" value="C"> C. Elijah</label>
+        <label><input type="radio" name="Q10" value="D"> D. Daniel</label>
+      </div>
+
+      <button type="submit" class="submit-btn">Submit Quiz</button>
+    </form>
+  </main>
+
+  <script>
+    let current = 0;
+    const questions = document.querySelectorAll(".question");
+    const form = document.getElementById("quizForm");
+    const timerDisplay = document.getElementById("timer");
+    let time = 15;
+    let invalid = false;
+
+    function showQuestion(i) {
+      questions.forEach((q, idx) => q.classList.toggle("active", idx === i));
+    }
+
+    function startTimer() {
+      const interval = setInterval(() => {
+        time--;
+        timerDisplay.textContent = `⏱ 00:${time < 10 ? "0" + time : time}`;
+        if (time <= 0) {
+          current++;
+          if (current < questions.length) {
+            showQuestion(current);
+            time = 15;
+          } else {
+            clearInterval(interval);
+            form.submit();
+          }
+        }
+      }, 1000);
+    }
+
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden && !invalid) {
+        document.getElementById("warning").style.display = "block";
+        setTimeout(() => {
+          form.submit();
+        }, 2000);
+        invalid = true;
+      }
+    });
+
+    showQuestion(current);
+    startTimer();
+  </script>
+</body>
+</html>
