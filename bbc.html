@@ -1,23 +1,23 @@
+<!-- Save this as bbc.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <title>Back to the Bible Challenge (BBC) | Oasis of Wisdom</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Back to the Bible Challenge for Higher Institution Students by Oasis of Wisdom Bible Church" />
-  <meta name="keywords" content="Bible Quiz, BBC, Oasis of Wisdom, Youth Bible Challenge, Church Programs" />
+  <meta name="description" content="Back to the Bible Challenge - Digital Bible Quiz for Students by Oasis of Wisdom" />
+  <meta name="keywords" content="Bible Quiz, Back to the Bible, Oasis Church, Christian Quiz" />
   <meta name="author" content="Oasis of Wisdom Media Team" />
-  <meta property="og:title" content="BBC - Back to the Bible Challenge" />
-  <meta property="og:description" content="Test your Bible knowledge through our digital quiz platform designed for youth and students." />
+  <meta property="og:title" content="BBC | Back to the Bible Challenge" />
   <meta property="og:image" content="logo.png" />
   <meta property="og:url" content="https://www.oowbc.com.ng/bbc.html" />
+
   <link rel="icon" href="favicon.png" type="image/png" />
 
-  <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-12R09Q1G31"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){ dataLayer.push(arguments); }
+    function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-12R09Q1G31');
   </script>
@@ -25,96 +25,149 @@
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
-      background: #f9fdf9;
+      background: #f6fff7;
       margin: 0;
-      padding: 0;
       color: #222;
     }
-
     header {
       background: #004225;
       color: white;
-      padding: 2rem 1rem;
+      padding: 1.5rem 1rem;
       text-align: center;
     }
-
-    header h1 {
-      margin: 0;
-      font-size: 2rem;
+    header img.logo {
+      width: 60px;
+      border-radius: 50%;
+      margin-bottom: 8px;
     }
-
+    header h1 {
+      margin: 0.3rem 0;
+      font-size: 1.6rem;
+    }
+    header p {
+      font-size: 1rem;
+      margin: 0;
+    }
+    nav {
+      background: #006400;
+      text-align: center;
+      padding: 0.8rem;
+    }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 10px;
+      font-weight: bold;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    .live-badge {
+      background: red;
+      color: white;
+      font-size: 0.6rem;
+      padding: 2px 5px;
+      border-radius: 4px;
+      position: absolute;
+      top: -8px;
+      right: -20px;
+      animation: blink 1s infinite;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
     main {
-      max-width: 960px;
+      max-width: 900px;
       margin: auto;
       padding: 2rem;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
     }
-
-    section {
-      background: #ffffff;
-      padding: 1.5rem 2rem;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    .intro {
+      text-align: center;
       margin-bottom: 2rem;
     }
-
-    h2 {
+    .quiz-card {
+      background: #e3fce3;
+      text-align: center;
+      padding: 2rem;
+      border-radius: 10px;
+      border: 1px solid #a8e6a8;
+      font-weight: bold;
+      font-size: 1.2rem;
+      text-decoration: none;
       color: #004225;
-      margin-top: 0;
+      display: block;
+      transition: all 0.3s ease;
+      max-width: 400px;
+      margin: auto;
     }
-
-    p {
-      line-height: 1.7;
+    .quiz-card:hover {
+      background: #d5f5d5;
+      transform: scale(1.03);
     }
-
-    .start-quiz {
-      display: inline-block;
-      margin-top: 1rem;
+    footer {
       background: #004225;
       color: white;
-      padding: 12px 24px;
-      border-radius: 6px;
-      font-weight: bold;
-      text-decoration: none;
+      text-align: center;
+      padding: 2rem 1rem;
+      margin-top: 3rem;
     }
-
-    .start-quiz:hover {
-      background: #006400;
+    .social-icons img {
+      width: 28px;
+      margin: 0 8px;
+      vertical-align: middle;
+    }
+    .social-icons a {
+      text-decoration: none;
     }
   </style>
 </head>
 <body>
+
   <header>
-    <h1>Back to the Bible Challenge (BBC)</h1>
+    <img src="logo.png" alt="Church Logo" class="logo" />
+    <h1>Oasis of Wisdom Bible Church</h1>
+    <p><strong>The Church of the Distinguished Generation</strong></p>
   </header>
 
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="index.html#programs">Programs</a>
+    <a href="index.html#media">Media</a>
+    <a href="index.html#giving">Giving</a>
+    <a href="index.html#prayer">Prayer</a>
+    <a href="index.html#contact">Contact</a>
+    <a href="news.html">Oasis News</a>
+    <a href="watch-live.html">Watch Live <span class="live-badge">LIVE</span></a>
+    <a href="bbc.html" style="text-decoration: underline;">BBC</a>
+  </nav>
+
   <main>
-    <section>
-      <h2>About the Program</h2>
+    <div class="intro">
+      <h2>Back to the Bible Challenge (BBC)</h2>
       <p>
-        The Back to the Bible Challenge (BBC) is an annual Bible quiz organized by Oasis of Wisdom Bible Church. It is designed for higher institution students across Kwara State and beyond to deepen their knowledge of the Scriptures and strengthen their walk with God.
+        A digital Bible quiz initiative for higher institution students to grow deeper in the Word.
+        Participate from your campus or home and challenge your knowledge of Scripture!
       </p>
-      <p>
-        Participants are given specific books of the Bible to study, and the final quiz tests their comprehension, speed, and accuracy. This year, we're taking it digital to allow broader participation and ensure a fair, monitored quiz environment online.
-      </p>
-    </section>
+    </div>
 
-    <section>
-      <h2>Rules and Guidelines</h2>
-      <ul>
-        <li>Each quiz consists of 10 multiple-choice Bible questions (A–D).</li>
-        <li>Each question has a time limit of 15 seconds.</li>
-        <li>Participants must enable camera and microphone for proctoring purposes.</li>
-        <li>Switching tabs, excessive noise, or suspicious activity will end the quiz automatically.</li>
-        <li>Make sure your network is stable and your browser supports media access.</li>
-        <li>Only one attempt per participant.</li>
-      </ul>
-    </section>
-
-    <section>
-      <h2>Start Quiz</h2>
-      <p>Click below to begin BBC Test Exam 1. Ensure your webcam and microphone are enabled before proceeding.</p>
-      <a class="start-quiz" href="bbc-quiz.html">Try BBC Test Exam 1</a>
-    </section>
+    <a href="bbc-quiz.html" class="quiz-card">Try BBC Test Exam 1</a>
   </main>
+
+  <footer>
+    <p>&copy; 2025 Oasis of Wisdom Bible Church. All rights reserved.</p>
+    <p>KM 11, Adjacent UITH, Ilorin, Kwara State, Nigeria</p>
+    <p>08035685882 | 08060442459</p>
+    <div class="social-icons">
+      <a href="https://facebook.com/oasisofwisdom"><img src="facebook.png" alt="Facebook" /></a>
+      <a href="https://instagram.com/oasisofwisdom"><img src="instagram.png" alt="Instagram" /></a>
+      <a href="https://youtube.com/@oasisofwisdom"><img src="youtube.png" alt="YouTube" /></a>
+      <a href="https://tiktok.com/@oasisofwisdom"><img src="tiktok.png" alt="TikTok" /></a>
+    </div>
+  </footer>
+
 </body>
 </html>
