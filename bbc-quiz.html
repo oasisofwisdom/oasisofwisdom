@@ -4,16 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>BBC Quiz | Oasis of Wisdom</title>
-  <meta name="description" content="Back to the Bible Challenge - Digital Bible Quiz by Oasis of Wisdom Bible Church." />
-  <meta name="keywords" content="Bible Quiz, Back to the Bible Challenge, Oasis of Wisdom, Church, Ilorin, Scripture Challenge, Christian Test" />
-  <meta name="author" content="Oasis Media Team" />
-
-  <!-- Social Meta -->
-  <meta property="og:title" content="BBC Quiz - Back to the Bible Challenge" />
-  <meta property="og:description" content="Test your Bible knowledge in our online quiz with webcam monitoring and timer." />
-  <meta property="og:image" content="logo.png" />
-  <meta property="og:url" content="https://www.oowbc.com.ng/bbc-quiz.html" />
-  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="description" content="Back to the Bible Challenge - Digital Bible Quiz" />
+  <meta name="keywords" content="Bible Quiz, Back to Bible, Oasis of Wisdom, BBC" />
+  <meta name="author" content="Oasis of Wisdom Media Team" />
 
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-12R09Q1G31"></script>
@@ -27,210 +20,238 @@
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
-      margin: 0; padding: 0;
       background: #f4fff4;
-      color: #222;
+      margin: 0;
+      padding: 0;
     }
     header {
       background: #004225;
       color: white;
-      text-align: center;
       padding: 1.5rem 1rem;
+      text-align: center;
     }
     main {
-      padding: 2rem;
-      max-width: 800px;
+      max-width: 700px;
       margin: auto;
-      background: white;
-      border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-    }
-    h1 { margin: 0; font-size: 1.5rem; }
-    .question { display: none; }
-    .question.active { display: block; }
-    h4 { color: #004225; }
-    .timer { text-align: right; font-weight: bold; color: red; }
-    .progress-bar {
-      height: 8px;
-      background: #ccc;
+      padding: 2rem;
+      background: #fff;
       border-radius: 10px;
-      margin-bottom: 1rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
     }
-    .progress-fill {
-      height: 8px;
-      background: #28a745;
-      border-radius: 10px;
-      width: 0%;
-      transition: width 0.3s;
-    }
-    button {
-      background: #004225;
-      color: white;
-      border: none;
-      padding: 10px 18px;
-      border-radius: 5px;
-      font-weight: bold;
+    .question { margin-bottom: 1rem; }
+    .question h4 { color: #004225; }
+    label {
+      display: block;
+      background: #f0f0f0;
+      margin: 8px 0;
+      padding: 10px;
+      border-radius: 6px;
       cursor: pointer;
-      margin-top: 1rem;
+    }
+    .question input[type="radio"] {
+      margin-right: 10px;
     }
     .hidden { display: none; }
-    .thank-you { text-align: center; font-weight: bold; font-size: 1.2rem; color: green; }
-    .webcam-box { text-align: center; margin: 1rem auto; }
-    video { width: 180px; border-radius: 8px; }
+    button {
+      margin-top: 1rem;
+      background: #004225;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    #progress {
+      text-align: center;
+      margin-bottom: 1rem;
+      font-weight: bold;
+      color: #444;
+    }
+    video {
+      width: 160px;
+      height: auto;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: 2px solid #ccc;
+    }
   </style>
 </head>
 <body>
+  <header>
+    <h1>Back to the Bible Challenge</h1>
+    <p>Digital Bible Quiz Platform</p>
+  </header>
 
-<header>
-  <h1>Back to the Bible Challenge (BBC)</h1>
-  <p>Answer each question quickly and honestly. You'll be monitored via camera and mic.</p>
-</header>
-
-<main>
-  <div class="webcam-box">
-    <video id="webcam" autoplay muted></video>
-  </div>
-
-  <form id="quizForm" method="POST">
-    <label>Full Name</label>
-    <input type="text" name="Name" required><br>
-    <label>Exam Number</label>
-    <input type="text" name="Exam Number" required><br>
-    <button type="button" id="startBtn">Start Quiz</button>
-
-    <div class="timer hidden" id="timer">⏱ 00:15</div>
-    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
-
-    <div id="questionsContainer" class="hidden">
-
-      <!-- QUESTIONS -->
-      <div class="question" data-index="1">
-        <h4>1. What was the first miracle of Jesus?</h4>
-        <label><input type="radio" name="Q1" value="B"> Turning water into wine</label><br>
-        <label><input type="radio" name="Q1" value="A"> Healing the blind man</label><br>
-        <label><input type="radio" name="Q1" value="C"> Feeding the 5000</label><br>
-        <label><input type="radio" name="Q1" value="D"> Walking on water</label><br>
+  <main>
+    <form id="quizForm">
+      <div id="details">
+        <label>Full Name:</label>
+        <input type="text" name="Name" required />
+        <label>Exam Number:</label>
+        <input type="text" name="Exam Number" required />
+        <button type="button" onclick="startQuiz()">Start Test</button>
       </div>
 
-      <div class="question" data-index="2">
-        <h4>2. Who was the mother of Samuel?</h4>
-        <label><input type="radio" name="Q2" value="A"> Hannah</label><br>
-        <label><input type="radio" name="Q2" value="B"> Elizabeth</label><br>
-        <label><input type="radio" name="Q2" value="C"> Mary</label><br>
-        <label><input type="radio" name="Q2" value="D"> Deborah</label><br>
+      <div id="quizArea" class="hidden">
+        <div id="progress"></div>
+        <div id="questionBox"></div>
+        <button type="button" id="nextBtn" onclick="nextQuestion()">Next</button>
+        <button type="submit" id="submitBtn" class="hidden">Submit</button>
       </div>
+    </form>
 
-      <div class="question" data-index="3">
-        <h4>3. What did God create on the 4th day?</h4>
-        <label><input type="radio" name="Q3" value="C"> Sun, moon, and stars</label><br>
-        <label><input type="radio" name="Q3" value="A"> Plants and trees</label><br>
-        <label><input type="radio" name="Q3" value="B"> Earth and sea</label><br>
-        <label><input type="radio" name="Q3" value="D"> Birds and fish</label><br>
-      </div>
-
-      <!-- Add more questions up to Q10 as done above -->
-
-      <div class="question" data-index="10">
-        <h4>10. How many disciples did Jesus have?</h4>
-        <label><input type="radio" name="Q10" value="D"> 12</label><br>
-        <label><input type="radio" name="Q10" value="A"> 10</label><br>
-        <label><input type="radio" name="Q10" value="B"> 11</label><br>
-        <label><input type="radio" name="Q10" value="C"> 15</label><br>
-      </div>
-
+    <div id="thankYou" class="hidden">
+      <h3>✅ Thank you for participating!</h3>
+      <p>Your answers have been submitted successfully.</p>
+      <a href="bbc.html">← Go back to BBC Home</a>
     </div>
 
-    <button type="button" id="nextBtn" class="hidden">Next</button>
-    <button type="submit" id="submitBtn" class="hidden">Submit</button>
+    <video id="camera" autoplay muted></video>
+  </main>
 
-    <div class="thank-you hidden" id="thankYou">✅ Your answers have been submitted. Thank you for participating!<br><a href="bbc.html">← Back to BBC Home</a></div>
-
-    <!-- Hidden fields for Web3Forms -->
-    <input type="hidden" name="access_key" value="99dc2fe8-9b17-47af-ab28-cf6e48489d11">
-    <input type="hidden" name="Subject" value="BBC Quiz Submission" />
-    <input type="hidden" name="redirect" value="">
-  </form>
-</main>
-
-<script>
-  const webcam = document.getElementById("webcam");
-  if (navigator.mediaDevices.getUserMedia) {
-    navigator.mediaDevices.getUserMedia({ video: true, audio: true })
-      .then(stream => webcam.srcObject = stream)
-      .catch(err => console.log("Webcam not accessible", err));
-  }
-
-  const startBtn = document.getElementById("startBtn");
-  const quizForm = document.getElementById("quizForm");
-  const timer = document.getElementById("timer");
-  const progressFill = document.getElementById("progressFill");
-  const nextBtn = document.getElementById("nextBtn");
-  const submitBtn = document.getElementById("submitBtn");
-  const thankYou = document.getElementById("thankYou");
-  const questions = document.querySelectorAll(".question");
-  const container = document.getElementById("questionsContainer");
-
-  let currentIndex = 0;
-  let interval;
-  const totalQuestions = questions.length;
-
-  startBtn.addEventListener("click", () => {
-    startBtn.classList.add("hidden");
-    container.classList.remove("hidden");
-    timer.classList.remove("hidden");
-    nextBtn.classList.remove("hidden");
-    questions[0].classList.add("active");
-    startTimer();
-  });
-
-  nextBtn.addEventListener("click", () => {
-    if (currentIndex < totalQuestions - 1) {
-      questions[currentIndex].classList.remove("active");
-      currentIndex++;
-      questions[currentIndex].classList.add("active");
-      updateProgress();
-      resetTimer();
-    } else {
-      nextBtn.classList.add("hidden");
-      submitBtn.classList.remove("hidden");
-      timer.classList.add("hidden");
-    }
-  });
-
-  quizForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-    thankYou.classList.remove("hidden");
-    quizForm.querySelectorAll("input, button").forEach(el => el.style.display = "none");
-
-    fetch("https://api.web3forms.com/submit", {
-      method: "POST",
-      body: new FormData(quizForm)
-    });
-  });
-
-  function startTimer() {
-    let timeLeft = 15;
-    timer.textContent = `⏱ 00:${timeLeft}`;
-    interval = setInterval(() => {
-      timeLeft--;
-      timer.textContent = `⏱ 00:${timeLeft < 10 ? "0" + timeLeft : timeLeft}`;
-      if (timeLeft <= 0) {
-        clearInterval(interval);
-        nextBtn.click();
+  <script>
+    const questions = [
+      {
+        q: "What did Jesus feed 5,000 people with?",
+        options: ["Bread and wine", "5 loaves and 2 fish", "Fish only", "Manna"],
+        correct: "B"
+      },
+      {
+        q: "Where was Jesus born?",
+        options: ["Nazareth", "Bethlehem", "Jerusalem", "Galilee"],
+        correct: "B"
+      },
+      {
+        q: "Which book contains the Ten Commandments?",
+        options: ["Genesis", "Leviticus", "Exodus", "Numbers"],
+        correct: "C"
+      },
+      {
+        q: "What did God create on the first day?",
+        options: ["Sky", "Land", "Animals", "Light"],
+        correct: "D"
+      },
+      {
+        q: "Who was swallowed by a great fish?",
+        options: ["Elijah", "Jonah", "Daniel", "Noah"],
+        correct: "B"
+      },
+      {
+        q: "Which king wrote many of the Psalms?",
+        options: ["Solomon", "David", "Saul", "Hezekiah"],
+        correct: "B"
+      },
+      {
+        q: "How many books are in the Bible?",
+        options: ["66", "72", "60", "70"],
+        correct: "A"
+      },
+      {
+        q: "Who betrayed Jesus?",
+        options: ["Thomas", "Peter", "Judas Iscariot", "Paul"],
+        correct: "C"
+      },
+      {
+        q: "What is the last book of the Bible?",
+        options: ["Jude", "Malachi", "Acts", "Revelation"],
+        correct: "D"
+      },
+      {
+        q: "Who led the Israelites across the Red Sea?",
+        options: ["Abraham", "Moses", "Joshua", "David"],
+        correct: "B"
       }
-    }, 1000);
-  }
+    ];
 
-  function resetTimer() {
-    clearInterval(interval);
-    startTimer();
-  }
+    let current = 0, score = 0;
+    const userAnswers = [];
 
-  function updateProgress() {
-    const percent = ((currentIndex + 1) / totalQuestions) * 100;
-    progressFill.style.width = percent + "%";
-  }
-</script>
+    function shuffle(arr) {
+      for (let i = arr.length - 1; i > 0; i--) {
+        let j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+    }
 
+    shuffle(questions);
+
+    const quizArea = document.getElementById("quizArea");
+    const questionBox = document.getElementById("questionBox");
+    const progress = document.getElementById("progress");
+    const nextBtn = document.getElementById("nextBtn");
+    const submitBtn = document.getElementById("submitBtn");
+    const quizForm = document.getElementById("quizForm");
+
+    function startQuiz() {
+      document.getElementById("details").classList.add("hidden");
+      quizArea.classList.remove("hidden");
+      showQuestion();
+      startCamera();
+    }
+
+    function showQuestion() {
+      const q = questions[current];
+      progress.innerText = `Question ${current + 1} of ${questions.length}`;
+      let html = `<div class="question"><h4>${q.q}</h4>`;
+      q.options.forEach((opt, i) => {
+        const label = String.fromCharCode(65 + i);
+        html += `<label><input type="radio" name="q${current}" value="${label}" required /> ${label}. ${opt}</label>`;
+      });
+      html += `</div>`;
+      questionBox.innerHTML = html;
+
+      nextBtn.classList.toggle("hidden", current === questions.length - 1);
+      submitBtn.classList.toggle("hidden", current !== questions.length - 1);
+    }
+
+    function nextQuestion() {
+      const selected = quizForm.querySelector(`input[name="q${current}"]:checked`);
+      if (!selected) return alert("Please select an answer");
+
+      const answer = selected.value;
+      userAnswers.push({ q: questions[current].q, selected: answer, correct: questions[current].correct });
+      if (answer === questions[current].correct) score++;
+
+      current++;
+      showQuestion();
+    }
+
+    quizForm.addEventListener("submit", async function(e) {
+      e.preventDefault();
+      const lastSelected = quizForm.querySelector(`input[name="q${current}"]:checked`);
+      if (!lastSelected) return alert("Please select an answer");
+      const answer = lastSelected.value;
+      userAnswers.push({ q: questions[current].q, selected: answer, correct: questions[current].correct });
+      if (answer === questions[current].correct) score++;
+
+      const formData = new FormData();
+      formData.append("Name", quizForm.Name.value);
+      formData.append("Exam Number", quizForm["Exam Number"].value);
+      userAnswers.forEach((ans, i) => {
+        formData.append(`Q${i + 1}`, `You chose: ${ans.selected} | Correct: ${ans.correct}`);
+      });
+      formData.append("Score", `${score} / ${questions.length}`);
+
+      await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { 'Accept': 'application/json' },
+        body: new URLSearchParams({
+          access_key: "99dc2fe8-9b17-47af-ab28-cf6e48489d11",
+          ...Object.fromEntries(formData)
+        })
+      });
+
+      quizArea.classList.add("hidden");
+      document.getElementById("thankYou").classList.remove("hidden");
+    });
+
+    function startCamera() {
+      navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+        .then(stream => {
+          document.getElementById("camera").srcObject = stream;
+        }).catch(() => {});
+    }
+  </script>
 </body>
 </html>
