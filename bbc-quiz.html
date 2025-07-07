@@ -4,16 +4,22 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>BBC Quiz | Oasis of Wisdom</title>
-  <meta name="description" content="Back to the Bible Challenge - Digital Bible Quiz" />
-  <meta name="keywords" content="Bible Quiz, BBC, Back to the Bible, Oasis Church, Online Quiz, Gospel Test" />
-  <meta name="author" content="Oasis of Wisdom Media Team" />
-  <link rel="icon" href="logo.png" type="image/png" />
+  <meta name="description" content="Back to the Bible Challenge - Digital Bible Quiz by Oasis of Wisdom Bible Church." />
+  <meta name="keywords" content="Bible Quiz, Back to the Bible Challenge, Oasis of Wisdom, Church, Ilorin, Scripture Challenge, Christian Test" />
+  <meta name="author" content="Oasis Media Team" />
+
+  <!-- Social Meta -->
+  <meta property="og:title" content="BBC Quiz - Back to the Bible Challenge" />
+  <meta property="og:description" content="Test your Bible knowledge in our online quiz with webcam monitoring and timer." />
+  <meta property="og:image" content="logo.png" />
+  <meta property="og:url" content="https://www.oowbc.com.ng/bbc-quiz.html" />
+  <meta name="twitter:card" content="summary_large_image" />
 
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-12R09Q1G31"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){ dataLayer.push(arguments); }
+    function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-12R09Q1G31');
   </script>
@@ -21,226 +27,210 @@
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
-      background: #f8fff8;
-      margin: 0;
-      padding: 0;
+      margin: 0; padding: 0;
+      background: #f4fff4;
       color: #222;
     }
     header {
       background: #004225;
       color: white;
-      padding: 1.5rem 1rem;
       text-align: center;
+      padding: 1.5rem 1rem;
     }
-    header h1 { margin: 0; }
     main {
       padding: 2rem;
       max-width: 800px;
       margin: auto;
-      background: #fff;
+      background: white;
       border-radius: 8px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
     }
-    .question, .details { display: none; }
-    .question.active, .details.active { display: block; }
-    .question h4 { color: #004225; }
-    label { display: block; margin: 0.4rem 0; cursor: pointer; }
-    input[type="text"] {
-      padding: 10px;
-      width: 100%;
+    h1 { margin: 0; font-size: 1.5rem; }
+    .question { display: none; }
+    .question.active { display: block; }
+    h4 { color: #004225; }
+    .timer { text-align: right; font-weight: bold; color: red; }
+    .progress-bar {
+      height: 8px;
+      background: #ccc;
+      border-radius: 10px;
       margin-bottom: 1rem;
-      border-radius: 5px;
-      border: 1px solid #ccc;
+    }
+    .progress-fill {
+      height: 8px;
+      background: #28a745;
+      border-radius: 10px;
+      width: 0%;
+      transition: width 0.3s;
     }
     button {
       background: #004225;
       color: white;
-      padding: 0.6rem 1.4rem;
       border: none;
+      padding: 10px 18px;
       border-radius: 5px;
-      cursor: pointer;
       font-weight: bold;
+      cursor: pointer;
       margin-top: 1rem;
     }
-    .timer { text-align: right; font-weight: bold; color: #b30000; }
-    .result-message {
-      display: none;
-      margin-top: 2rem;
-      padding: 1rem;
-      background: #d4fcd4;
-      border-left: 4px solid #004225;
-      color: #004225;
-      font-weight: bold;
-    }
-    #cameraPreview {
-      width: 140px;
-      height: 100px;
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.3);
-      background: black;
-      z-index: 999;
-    }
+    .hidden { display: none; }
+    .thank-you { text-align: center; font-weight: bold; font-size: 1.2rem; color: green; }
+    .webcam-box { text-align: center; margin: 1rem auto; }
+    video { width: 180px; border-radius: 8px; }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Back to the Bible Challenge (BBC)</h1>
-    <p>Test your knowledge in this 10-question timed quiz</p>
-  </header>
 
-  <main>
-    <form id="quizForm">
-      <!-- User Details -->
-      <div class="details active">
-        <label>Full Name</label>
-        <input type="text" name="Name" required>
-        <label>Exam Number</label>
-        <input type="text" name="Exam Number" required>
-        <button type="button" onclick="startQuiz()">Start Test</button>
+<header>
+  <h1>Back to the Bible Challenge (BBC)</h1>
+  <p>Answer each question quickly and honestly. You'll be monitored via camera and mic.</p>
+</header>
+
+<main>
+  <div class="webcam-box">
+    <video id="webcam" autoplay muted></video>
+  </div>
+
+  <form id="quizForm" method="POST">
+    <label>Full Name</label>
+    <input type="text" name="Name" required><br>
+    <label>Exam Number</label>
+    <input type="text" name="Exam Number" required><br>
+    <button type="button" id="startBtn">Start Quiz</button>
+
+    <div class="timer hidden" id="timer">⏱ 00:15</div>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+
+    <div id="questionsContainer" class="hidden">
+
+      <!-- QUESTIONS -->
+      <div class="question" data-index="1">
+        <h4>1. What was the first miracle of Jesus?</h4>
+        <label><input type="radio" name="Q1" value="B"> Turning water into wine</label><br>
+        <label><input type="radio" name="Q1" value="A"> Healing the blind man</label><br>
+        <label><input type="radio" name="Q1" value="C"> Feeding the 5000</label><br>
+        <label><input type="radio" name="Q1" value="D"> Walking on water</label><br>
       </div>
 
-      <div class="timer" id="timer" style="display:none;">Time left: <span id="countdown">15</span>s</div>
-
-      <!-- Questions -->
-      <div class="question" data-correct="A">
-        <h4>1. Who betrayed Jesus?</h4>
-        <label><input type="radio" name="Q1" value="A. Judas Iscariot"> A. Judas Iscariot</label>
-        <label><input type="radio" name="Q1" value="B. Peter"> B. Peter</label>
-        <label><input type="radio" name="Q1" value="C. John"> C. John</label>
-        <label><input type="radio" name="Q1" value="D. Matthew"> D. Matthew</label>
+      <div class="question" data-index="2">
+        <h4>2. Who was the mother of Samuel?</h4>
+        <label><input type="radio" name="Q2" value="A"> Hannah</label><br>
+        <label><input type="radio" name="Q2" value="B"> Elizabeth</label><br>
+        <label><input type="radio" name="Q2" value="C"> Mary</label><br>
+        <label><input type="radio" name="Q2" value="D"> Deborah</label><br>
       </div>
 
-      <div class="question" data-correct="B">
-        <h4>2. What is the first book of the New Testament?</h4>
-        <label><input type="radio" name="Q2" value="A. Mark"> A. Mark</label>
-        <label><input type="radio" name="Q2" value="B. Matthew"> B. Matthew</label>
-        <label><input type="radio" name="Q2" value="C. Luke"> C. Luke</label>
-        <label><input type="radio" name="Q2" value="D. Acts"> D. Acts</label>
+      <div class="question" data-index="3">
+        <h4>3. What did God create on the 4th day?</h4>
+        <label><input type="radio" name="Q3" value="C"> Sun, moon, and stars</label><br>
+        <label><input type="radio" name="Q3" value="A"> Plants and trees</label><br>
+        <label><input type="radio" name="Q3" value="B"> Earth and sea</label><br>
+        <label><input type="radio" name="Q3" value="D"> Birds and fish</label><br>
       </div>
 
-      <!-- Add more questions as needed -->
+      <!-- Add more questions up to Q10 as done above -->
 
-      <div class="question" data-correct="D">
-        <h4>10. What did Jesus feed 5,000 with?</h4>
-        <label><input type="radio" name="Q10" value="A. Manna"> A. Manna</label>
-        <label><input type="radio" name="Q10" value="B. Fish only"> B. Fish only</label>
-        <label><input type="radio" name="Q10" value="C. Bread and wine"> C. Bread and wine</label>
-        <label><input type="radio" name="Q10" value="D. 5 loaves and 2 fish"> D. 5 loaves and 2 fish</label>
-        <button type="submit">Submit Quiz</button>
+      <div class="question" data-index="10">
+        <h4>10. How many disciples did Jesus have?</h4>
+        <label><input type="radio" name="Q10" value="D"> 12</label><br>
+        <label><input type="radio" name="Q10" value="A"> 10</label><br>
+        <label><input type="radio" name="Q10" value="B"> 11</label><br>
+        <label><input type="radio" name="Q10" value="C"> 15</label><br>
       </div>
-    </form>
 
-    <div class="result-message" id="thankYouMessage">
-      ✅ Your answers have been submitted. Thank you for participating in BBC.
-      <br><br>
-      <a href="bbc.html" style="color:#004225; text-decoration:underline;">← Back to BBC Home</a>
     </div>
-  </main>
 
-  <!-- 🎥 Live Camera Preview -->
-  <video id="cameraPreview" autoplay playsinline muted></video>
+    <button type="button" id="nextBtn" class="hidden">Next</button>
+    <button type="submit" id="submitBtn" class="hidden">Submit</button>
 
-  <script>
-    let current = 0, total = document.querySelectorAll('.question').length;
-    let timer, seconds = 15;
+    <div class="thank-you hidden" id="thankYou">✅ Your answers have been submitted. Thank you for participating!<br><a href="bbc.html">← Back to BBC Home</a></div>
 
-    function startQuiz() {
-      navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then(stream => {
-        // Show camera preview
-        const video = document.getElementById("cameraPreview");
-        video.srcObject = stream;
+    <!-- Hidden fields for Web3Forms -->
+    <input type="hidden" name="access_key" value="99dc2fe8-9b17-47af-ab28-cf6e48489d11">
+    <input type="hidden" name="Subject" value="BBC Quiz Submission" />
+    <input type="hidden" name="redirect" value="">
+  </form>
+</main>
 
-        // Start quiz
-        document.querySelector('.details').classList.remove('active');
-        showQuestion(current);
-        document.getElementById('timer').style.display = 'block';
-        startTimer();
-      }).catch(() => {
-        alert("Camera and Mic access are required to continue.");
-      });
+<script>
+  const webcam = document.getElementById("webcam");
+  if (navigator.mediaDevices.getUserMedia) {
+    navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+      .then(stream => webcam.srcObject = stream)
+      .catch(err => console.log("Webcam not accessible", err));
+  }
+
+  const startBtn = document.getElementById("startBtn");
+  const quizForm = document.getElementById("quizForm");
+  const timer = document.getElementById("timer");
+  const progressFill = document.getElementById("progressFill");
+  const nextBtn = document.getElementById("nextBtn");
+  const submitBtn = document.getElementById("submitBtn");
+  const thankYou = document.getElementById("thankYou");
+  const questions = document.querySelectorAll(".question");
+  const container = document.getElementById("questionsContainer");
+
+  let currentIndex = 0;
+  let interval;
+  const totalQuestions = questions.length;
+
+  startBtn.addEventListener("click", () => {
+    startBtn.classList.add("hidden");
+    container.classList.remove("hidden");
+    timer.classList.remove("hidden");
+    nextBtn.classList.remove("hidden");
+    questions[0].classList.add("active");
+    startTimer();
+  });
+
+  nextBtn.addEventListener("click", () => {
+    if (currentIndex < totalQuestions - 1) {
+      questions[currentIndex].classList.remove("active");
+      currentIndex++;
+      questions[currentIndex].classList.add("active");
+      updateProgress();
+      resetTimer();
+    } else {
+      nextBtn.classList.add("hidden");
+      submitBtn.classList.remove("hidden");
+      timer.classList.add("hidden");
     }
+  });
 
-    function showQuestion(index) {
-      document.querySelectorAll('.question').forEach((q, i) => {
-        q.classList.toggle('active', i === index);
-      });
-    }
+  quizForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    thankYou.classList.remove("hidden");
+    quizForm.querySelectorAll("input, button").forEach(el => el.style.display = "none");
 
-    function startTimer() {
-      clearInterval(timer);
-      seconds = 15;
-      document.getElementById("countdown").textContent = seconds;
-      timer = setInterval(() => {
-        seconds--;
-        document.getElementById("countdown").textContent = seconds;
-        if (seconds === 0) {
-          clearInterval(timer);
-          nextQuestion();
-        }
-      }, 1000);
-    }
-
-    document.querySelectorAll('.question input[type=radio]').forEach(input => {
-      input.addEventListener('change', () => {
-        clearInterval(timer);
-        nextQuestion();
-      });
+    fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      body: new FormData(quizForm)
     });
+  });
 
-    function nextQuestion() {
-      if (current < total - 1) {
-        current++;
-        showQuestion(current);
-        startTimer();
+  function startTimer() {
+    let timeLeft = 15;
+    timer.textContent = `⏱ 00:${timeLeft}`;
+    interval = setInterval(() => {
+      timeLeft--;
+      timer.textContent = `⏱ 00:${timeLeft < 10 ? "0" + timeLeft : timeLeft}`;
+      if (timeLeft <= 0) {
+        clearInterval(interval);
+        nextBtn.click();
       }
-    }
+    }, 1000);
+  }
 
-    // Tab switch = auto-submit
-    document.addEventListener("visibilitychange", () => {
-      if (document.hidden) {
-        alert("You switched tabs. Submitting now.");
-        document.getElementById("quizForm").submit();
-      }
-    });
+  function resetTimer() {
+    clearInterval(interval);
+    startTimer();
+  }
 
-    // Submit via Web3Forms without redirect
-    document.getElementById("quizForm").addEventListener("submit", function(e){
-      e.preventDefault();
-      const form = e.target;
-      const formData = new FormData(form);
-      const answers = [];
-      let score = 0;
+  function updateProgress() {
+    const percent = ((currentIndex + 1) / totalQuestions) * 100;
+    progressFill.style.width = percent + "%";
+  }
+</script>
 
-      document.querySelectorAll(".question").forEach((q, i) => {
-        const name = "Q" + (i+1);
-        const selected = formData.get(name);
-        const correct = q.dataset.correct;
-        if (selected && selected.startsWith(correct)) score++;
-        answers.push(`Q${i+1}: You chose: ${selected || 'None'} | Correct: ${correct}`);
-      });
-
-      formData.append("access_key", "99dc2fe8-9b17-47af-ab28-cf6e48489d11");
-      formData.append("Total Score", `${score} / ${total}`);
-      formData.append("Answers", answers.join("\n"));
-
-      fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        body: formData
-      }).then(res => res.json()).then(data => {
-        if (data.success) {
-          form.style.display = "none";
-          document.getElementById("thankYouMessage").style.display = "block";
-        } else {
-          alert("There was a problem submitting. Try again.");
-        }
-      }).catch(err => {
-        alert("Error submitting quiz.");
-        console.error(err);
-      });
-    });
-  </script>
 </body>
 </html>
