@@ -49,7 +49,7 @@
     }
     .hidden { display: none; }
     .question-box { margin-bottom: 1.5rem; }
-    h2 { color: #004225; }
+    h3 { color: #004225; }
     label {
       display: block;
       margin: 0.4rem 0;
@@ -87,6 +87,12 @@
       font-weight: bold;
       border-radius: 6px;
     }
+    .timer {
+      font-weight: bold;
+      color: #b30000;
+      margin: 1rem 0;
+      text-align: right;
+    }
   </style>
 </head>
 <body>
@@ -99,6 +105,7 @@
     <form action="https://api.web3forms.com/submit" method="POST" id="quizForm">
       <input type="hidden" name="access_key" value="99dc2fe8-9b17-47af-ab28-cf6e48489d11" />
 
+      <!-- START FORM -->
       <div id="startScreen">
         <label>Full Name:</label>
         <input type="text" name="Name" required>
@@ -107,15 +114,19 @@
         <button type="button" class="btn" onclick="startQuiz()">Start Test</button>
       </div>
 
+      <!-- QUIZ FORM -->
       <div id="quizContainer" class="hidden">
         <div class="progress" id="progressText">Question 1 of 10</div>
+        <div class="timer" id="timer">⏱ 15</div>
         <div class="question-box" id="qBox"></div>
         <button type="button" class="btn" id="nextBtn" onclick="nextQuestion()">Next</button>
         <button type="submit" class="btn hidden" id="submitBtn">Submit</button>
       </div>
 
+      <!-- THANK YOU -->
       <div id="thankYou" class="message hidden">
-        🎉 Your answers have been submitted! Thank you.<br>
+        🎉 Your answers have been submitted!<br>
+        Thank you for participating in the BBC Quiz.<br>
         <a href="bbc.html" class="btn" style="margin-top: 1rem;">Back to BBC Home</a>
       </div>
     </form>
@@ -176,11 +187,12 @@
     ];
 
     let current = 0;
-    let timer;
-    const qBox = document.getElementById('qBox');
-    const nextBtn = document.getElementById('nextBtn');
-    const submitBtn = document.getElementById('submitBtn');
-    const progressText = document.getElementById('progressText');
+    let timerInterval;
+    let qBox = document.getElementById("qBox");
+    let nextBtn = document.getElementById("nextBtn");
+    let submitBtn = document.getElementById("submitBtn");
+    let timerDisplay = document.getElementById("timer");
+    let progressText = document.getElementById("progressText");
 
     function startQuiz() {
       navigator.mediaDevices.getUserMedia({ video: true, audio: true })
@@ -190,55 +202,62 @@
           showQuestion();
         })
         .catch(() => {
-          alert("Camera and microphone access are required to take this quiz.");
+          alert("Camera and microphone permission are required.");
         });
     }
 
     function showQuestion() {
-      clearTimeout(timer);
+      clearInterval(timerInterval);
       const q = questions[current];
       progressText.textContent = `Question ${current + 1} of ${questions.length}`;
       const shuffled = q.options.sort(() => Math.random() - 0.5);
-
       let html = `<h3>${q.question}</h3>`;
       shuffled.forEach((opt, i) => {
         const val = ['A', 'B', 'C', 'D'][i];
-        html += `
-          <label>
-            <input type="radio" name="${q.name}" value="${val}. ${opt}" required />
-            ${val}. ${opt}
-          </label>
-        `;
+        html += `<label><input type="radio" name="${q.name}" value="${val}. ${opt}" required> ${val}. ${opt}</label>`;
       });
-
       qBox.innerHTML = html;
 
-      // 15-sec timer
-      timer = setTimeout(() => nextQuestion(), 15000);
+      // Timer
+      let timeLeft = 15;
+      timerDisplay.textContent = `⏱ ${timeLeft}`;
+      timerInterval = setInterval(() => {
+        timeLeft--;
+        timerDisplay.textContent = `⏱ ${timeLeft}`;
+        if (timeLeft <= 0) {
+          clearInterval(timerInterval);
+          nextQuestion();
+        }
+      }, 1000);
+
+      // Button toggle
+      nextBtn.classList.remove("hidden");
+      submitBtn.classList.add("hidden");
+      if (current === questions.length - 1) {
+        nextBtn.classList.add("hidden");
+        submitBtn.classList.remove("hidden");
+      }
     }
 
     function nextQuestion() {
       if (current < questions.length - 1) {
         current++;
         showQuestion();
-        if (current === questions.length - 1) {
-          nextBtn.classList.add("hidden");
-          submitBtn.classList.remove("hidden");
-        }
       }
     }
 
-    // Prevent tab switch
+    // Tab switch detection
     document.addEventListener("visibilitychange", () => {
       if (document.hidden) {
-        alert("Tab switch detected. Submitting quiz.");
+        alert("Tab switch detected. Quiz is being submitted.");
         document.getElementById("quizForm").submit();
       }
     });
 
-    // Submit form
+    // Handle submission
     document.getElementById("quizForm").addEventListener("submit", function (e) {
       e.preventDefault();
+      clearInterval(timerInterval);
       document.getElementById("quizContainer").classList.add("hidden");
       document.getElementById("thankYou").classList.remove("hidden");
       this.submit();
