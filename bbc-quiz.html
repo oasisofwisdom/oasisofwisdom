@@ -40,8 +40,6 @@
       text-align: center;
     }
 
-    header h1 { margin: 0; }
-
     main {
       padding: 2rem;
       max-width: 800px;
@@ -90,7 +88,28 @@
       display: none;
     }
 
-    #quizContent { display: none; }
+    #quizContent, #resultMessage {
+      display: none;
+    }
+
+    #resultMessage {
+      text-align: center;
+      margin-top: 2rem;
+      padding: 1.5rem;
+      background: #e8fbee;
+      border: 1px solid #c2f2ce;
+      border-radius: 8px;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 8px 16px;
+      background: #004225;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+    }
   </style>
 </head>
 <body>
@@ -101,16 +120,13 @@
 
   <main>
     <form id="quizForm" action="https://formsubmit.co/8653cbdf8efa906d17fc35210591cb6e" method="POST">
-      <!-- FormSubmit Settings -->
       <input type="hidden" name="_template" value="table" />
       <input type="hidden" name="_captcha" value="false" />
-      <input type="hidden" name="_next" value="https://www.oowbc.com.ng/bbc.html" />
 
-      <!-- Score Breakdown Field -->
-      <input type="hidden" name="Score Breakdown" id="scoreBreakdown" value="">
-      <input type="hidden" name="Total Score" id="totalScore" value="">
+      <!-- Score Capture -->
+      <input type="hidden" name="Score Breakdown" id="scoreBreakdown" />
+      <input type="hidden" name="Total Score" id="totalScore" />
 
-      <!-- User Info -->
       <div id="userInfo">
         <label for="name">Full Name</label>
         <input type="text" name="Name" id="name" required />
@@ -121,15 +137,21 @@
         <button type="button" onclick="startQuiz()">Start Test</button>
       </div>
 
-      <!-- Quiz Content -->
       <div id="quizContent">
         <div class="timer" id="timer">⏱ 15s</div>
         <div class="warning" id="warning">⚠️ You switched tabs! Quiz will be submitted.</div>
         <div class="question" id="questionBox"></div>
         <div id="progress">Question 1 of 10</div>
-        <button type="button" onclick="nextQuestion()">Next</button>
+        <button type="button" id="nextBtn" onclick="nextQuestion()">Next</button>
+        <button type="submit" id="submitBtn" style="display:none;">Submit Quiz</button>
       </div>
     </form>
+
+    <div id="resultMessage">
+      <h3>✅ Your answers have been submitted successfully!</h3>
+      <p>Thank you for participating in the BBC Challenge.</p>
+      <a class="back-link" href="bbc.html">← Back to BBC Home</a>
+    </div>
   </main>
 
   <script>
@@ -187,14 +209,14 @@
     ];
 
     let index = 0;
-    let timer = 15;
-    let interval;
     let score = 0;
     let breakdown = "";
+    let timer = 15;
+    let interval;
 
     function startQuiz() {
       if (!document.getElementById("name").value || !document.getElementById("exam").value) {
-        alert("Please enter your name and exam number.");
+        alert("Please fill in your name and exam number.");
         return;
       }
       document.getElementById("userInfo").style.display = "none";
@@ -203,7 +225,6 @@
     }
 
     function showQuestion() {
-      if (index >= questions.length) return submitForm();
       const q = questions[index];
       const name = `Q${index + 1}`;
       let html = `<h4>${index + 1}. ${q.q}</h4>`;
@@ -213,6 +234,10 @@
       });
       document.getElementById("questionBox").innerHTML = html;
       document.getElementById("progress").textContent = `Question ${index + 1} of ${questions.length}`;
+
+      document.getElementById("nextBtn").style.display = index < questions.length - 1 ? "inline-block" : "none";
+      document.getElementById("submitBtn").style.display = index === questions.length - 1 ? "inline-block" : "none";
+
       startTimer();
     }
 
@@ -237,22 +262,25 @@
       if (index < questions.length) {
         showQuestion();
       } else {
-        submitForm();
+        clearInterval(interval);
+        document.getElementById("scoreBreakdown").value = breakdown;
+        document.getElementById("totalScore").value = `${score} / ${questions.length}`;
       }
     }
 
-    function submitForm() {
-      clearInterval(interval);
-      document.getElementById("scoreBreakdown").value = breakdown.trim();
+    document.getElementById("quizForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      document.getElementById("scoreBreakdown").value = breakdown;
       document.getElementById("totalScore").value = `${score} / ${questions.length}`;
-      document.getElementById("quizForm").submit();
-    }
+      this.style.display = "none";
+      document.getElementById("resultMessage").style.display = "block";
+    });
 
-    // Malpractice Detection
     document.addEventListener("visibilitychange", () => {
       if (document.hidden) {
         document.getElementById("warning").style.display = "block";
-        submitForm();
+        clearInterval(interval);
+        document.getElementById("quizForm").submit();
       }
     });
   </script>
