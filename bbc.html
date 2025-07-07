@@ -1,19 +1,18 @@
-<!-- Save this as bbc.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Back to the Bible Challenge (BBC) | Oasis of Wisdom</title>
+  <title>Back to the Bible Challenge | Oasis of Wisdom</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Back to the Bible Challenge - Digital Bible Quiz for Students by Oasis of Wisdom" />
-  <meta name="keywords" content="Bible Quiz, Back to the Bible, Oasis Church, Christian Quiz" />
+  <meta name="description" content="Join the Back to the Bible Challenge - a digital Bible quiz by Oasis of Wisdom Bible Church" />
+  <meta name="keywords" content="Bible Quiz, BBC, Oasis Church, Digital Challenge" />
   <meta name="author" content="Oasis of Wisdom Media Team" />
-  <meta property="og:title" content="BBC | Back to the Bible Challenge" />
+  <meta property="og:title" content="Back to the Bible Challenge (BBC)" />
   <meta property="og:image" content="logo.png" />
   <meta property="og:url" content="https://www.oowbc.com.ng/bbc.html" />
-
   <link rel="icon" href="favicon.png" type="image/png" />
 
+  <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-12R09Q1G31"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -25,103 +24,105 @@
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
-      background: #f6fff7;
+      background: #f9fff9;
       margin: 0;
+      padding: 0;
       color: #222;
     }
+
     header {
       background: #004225;
       color: white;
-      padding: 1.5rem 1rem;
       text-align: center;
+      padding: 1.5rem 1rem;
     }
+
     header img.logo {
-      width: 60px;
+      width: 70px;
       border-radius: 50%;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
+
     header h1 {
-      margin: 0.3rem 0;
-      font-size: 1.6rem;
-    }
-    header p {
-      font-size: 1rem;
       margin: 0;
+      font-size: 1.8rem;
     }
+
+    header p {
+      font-size: 1.1rem;
+    }
+
     nav {
       background: #006400;
+      padding: 0.75rem;
       text-align: center;
-      padding: 0.8rem;
     }
+
     nav a {
-      color: #fff;
-      text-decoration: none;
+      color: white;
       margin: 0 10px;
+      text-decoration: none;
       font-weight: bold;
+      font-size: 0.95rem;
+      position: relative;
     }
+
     nav a:hover {
       text-decoration: underline;
     }
-    .live-badge {
-      background: red;
-      color: white;
-      font-size: 0.6rem;
-      padding: 2px 5px;
-      border-radius: 4px;
-      position: absolute;
-      top: -8px;
-      right: -20px;
-      animation: blink 1s infinite;
-    }
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0; }
-    }
+
     main {
-      max-width: 900px;
-      margin: auto;
-      padding: 2rem;
-      background: #fff;
-      border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-    }
-    .intro {
-      text-align: center;
-      margin-bottom: 2rem;
-    }
-    .quiz-card {
-      background: #e3fce3;
-      text-align: center;
+      max-width: 960px;
+      margin: 2rem auto;
+      background: white;
       padding: 2rem;
       border-radius: 10px;
-      border: 1px solid #a8e6a8;
-      font-weight: bold;
-      font-size: 1.2rem;
-      text-decoration: none;
+      box-shadow: 0 5px 12px rgba(0,0,0,0.05);
+    }
+
+    h2 {
       color: #004225;
-      display: block;
-      transition: all 0.3s ease;
-      max-width: 400px;
-      margin: auto;
     }
-    .quiz-card:hover {
-      background: #d5f5d5;
-      transform: scale(1.03);
+
+    ul {
+      padding-left: 20px;
     }
-    footer {
+
+    .btn {
+      display: inline-block;
       background: #004225;
       color: white;
+      padding: 12px 20px;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: bold;
+      margin-top: 2rem;
+    }
+
+    .btn:hover {
+      background: #006f3a;
+    }
+
+    footer {
+      background: #222;
+      color: #eee;
       text-align: center;
       padding: 2rem 1rem;
-      margin-top: 3rem;
     }
-    .social-icons img {
-      width: 28px;
+
+    .social-icons {
+      margin: 1rem 0;
+    }
+
+    .social-icons a img {
+      width: 32px;
       margin: 0 8px;
       vertical-align: middle;
     }
-    .social-icons a {
-      text-decoration: none;
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
     }
   </style>
 </head>
@@ -130,7 +131,7 @@
   <header>
     <img src="logo.png" alt="Church Logo" class="logo" />
     <h1>Oasis of Wisdom Bible Church</h1>
-    <p><strong>The Church of the Distinguished Generation</strong></p>
+    <p>The Church of the Distinguished Generation</p>
   </header>
 
   <nav>
@@ -141,32 +142,49 @@
     <a href="index.html#prayer">Prayer</a>
     <a href="index.html#contact">Contact</a>
     <a href="news.html">Oasis News</a>
-    <a href="watch-live.html">Watch Live <span class="live-badge">LIVE</span></a>
-    <a href="bbc.html" style="text-decoration: underline;">BBC</a>
+    <a href="watch-live.html">
+      Watch Live
+      <span style="background: red; color: white; font-size: 0.6rem; padding: 2px 5px; border-radius: 4px; animation: blink 1s infinite; position: absolute; top: -8px; right: -5px;">LIVE</span>
+    </a>
+    <a href="bbc.html">BBC</a>
   </nav>
 
   <main>
-    <div class="intro">
-      <h2>Back to the Bible Challenge (BBC)</h2>
-      <p>
-        A digital Bible quiz initiative for higher institution students to grow deeper in the Word.
-        Participate from your campus or home and challenge your knowledge of Scripture!
-      </p>
-    </div>
+    <h2>Back to the Bible Challenge (BBC)</h2>
+    <p>The BBC is a Bible-based quiz initiative organized by Oasis of Wisdom Bible Church, designed to challenge and reward Higher Institution students in Kwara State who are passionate about God’s Word. Participants study selected portions of Scripture and compete digitally via this platform.</p>
 
-    <a href="bbc-quiz.html" class="quiz-card">Try BBC Test Exam 1</a>
+    <h3>Instructions & Guidelines:</h3>
+    <ul>
+      <li>Fill in your Full Name and Exam Number before starting.</li>
+      <li>Each quiz has 10 multiple-choice questions (A–D).</li>
+      <li>You have <strong>15 seconds per question</strong>.</li>
+      <li>Once you select an answer, you can click <strong>Next</strong> or wait for it to auto-advance.</li>
+      <li><strong>Do not switch tabs</strong> – it will auto-submit the quiz as malpractice.</li>
+      <li>Camera and microphone access will be requested for proctoring.</li>
+      <li>Attempt only when ready. You can only submit once.</li>
+    </ul>
+
+    <a href="bbc-quiz.html" class="btn">Start BBC Test Exam</a>
   </main>
 
   <footer>
-    <p>&copy; 2025 Oasis of Wisdom Bible Church. All rights reserved.</p>
-    <p>KM 11, Adjacent UITH, Ilorin, Kwara State, Nigeria</p>
-    <p>08035685882 | 08060442459</p>
+    <p>KM 11, Adjacent University of Ilorin Teaching Hospital, Ilorin, Kwara State, Nigeria</p>
+    <p>Phone: 08035685882 | 08060442459</p>
     <div class="social-icons">
-      <a href="https://facebook.com/oasisofwisdom"><img src="facebook.png" alt="Facebook" /></a>
-      <a href="https://instagram.com/oasisofwisdom"><img src="instagram.png" alt="Instagram" /></a>
-      <a href="https://youtube.com/@oasisofwisdom"><img src="youtube.png" alt="YouTube" /></a>
-      <a href="https://tiktok.com/@oasisofwisdom"><img src="tiktok.png" alt="TikTok" /></a>
+      <a href="https://facebook.com/oasisofwisdom" target="_blank">
+        <img src="https://img.icons8.com/color/32/facebook-new.png" alt="Facebook" />
+      </a>
+      <a href="https://instagram.com/oasisofwisdom" target="_blank">
+        <img src="https://img.icons8.com/color/32/instagram-new.png" alt="Instagram" />
+      </a>
+      <a href="https://youtube.com/@oasisofwisdom" target="_blank">
+        <img src="https://img.icons8.com/color/32/youtube-play.png" alt="YouTube" />
+      </a>
+      <a href="https://tiktok.com/@oasisofwisdom" target="_blank">
+        <img src="https://img.icons8.com/color/32/tiktok--v1.png" alt="TikTok" />
+      </a>
     </div>
+    <p>&copy; <script>document.write(new Date().getFullYear());</script> Oasis of Wisdom Bible Church. All Rights Reserved.</p>
   </footer>
 
 </body>
