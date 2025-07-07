@@ -2,123 +2,150 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Back to the Bible Challenge | Oasis of Wisdom</title>
-  <meta name="description" content="Back to the Bible Challenge (BBC) – Online Bible Quiz platform for students. Participate, learn, grow." />
-  <meta name="keywords" content="Bible quiz, BBC, Back to the Bible, Oasis of Wisdom Church, Christian Quiz, Kwara State Students" />
+  <title>Back to the Bible Challenge (BBC) | Oasis of Wisdom</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Participate in the BBC - Back to the Bible Challenge Quiz at Oasis of Wisdom Bible Church" />
+  <meta name="keywords" content="Bible Quiz, Christian Youth, Oasis Church, BBC, Back to the Bible" />
   <meta name="author" content="Oasis of Wisdom Media Team" />
-  <meta property="og:title" content="Back to the Bible Challenge | Oasis of Wisdom" />
-  <meta property="og:description" content="Join the online Bible quiz challenge from Oasis of Wisdom Church. Participate, learn, grow in Christ." />
-  <meta property="og:image" content="https://www.oowbc.com.ng/logo.png" />
+  <meta property="og:title" content="BBC - Back to the Bible Challenge" />
+  <meta property="og:image" content="logo.png" />
+  <meta property="og:description" content="Digital Bible Quiz for Students. Join the Challenge Today." />
   <meta property="og:url" content="https://www.oowbc.com.ng/bbc.html" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Back to the Bible Challenge | Oasis of Wisdom" />
-  <meta name="twitter:description" content="Online Bible Quiz for Higher Institution Students – Oasis of Wisdom Church." />
-  <meta name="twitter:image" content="https://www.oowbc.com.ng/logo.png" />
+  <link rel="icon" href="favicon.png" type="image/png" />
 
-  <!-- Google tag (gtag.js) -->
+  <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-12R09Q1G31"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag(){ dataLayer.push(arguments); }
     gtag('js', new Date());
     gtag('config', 'G-12R09Q1G31');
   </script>
 
   <style>
-    body { font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; background: #f4fff4; color: #222; }
-    header { background: #004225; color: white; padding: 1.5rem 1rem; text-align: center; }
-    nav { background: #006400; padding: 0.75rem; text-align: center; }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background-color: #f4fff4;
+      color: #222;
+    }
+    header {
+      background: #004225;
+      color: white;
+      padding: 1.5rem 1rem;
+      text-align: center;
+    }
+    header img {
+      width: 60px;
+      border-radius: 50%;
+      margin-bottom: 10px;
+    }
+    header h1 {
+      margin: 0.2rem 0;
+      font-size: 1.8rem;
+    }
+    nav {
+      background: #006400;
+      text-align: center;
+      padding: 0.75rem;
+    }
     nav a {
       color: white;
       margin: 0 10px;
       text-decoration: none;
       font-weight: bold;
-      font-size: 0.95rem;
-      position: relative;
     }
-    nav a:hover { text-decoration: underline; }
-    .live-badge {
-      background: red;
-      color: white;
-      font-size: 0.6rem;
-      padding: 2px 5px;
-      border-radius: 4px;
-      position: absolute;
-      top: -8px;
-      right: -20px;
-      animation: blink 1s infinite;
+    nav a:hover {
+      text-decoration: underline;
     }
-    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
-    main { padding: 2rem 1rem; max-width: 800px; margin: auto; }
-    h2 { color: #004225; text-align: center; }
-    section {
-      background: #fff;
+    main {
       padding: 2rem;
-      border-radius: 8px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      max-width: 900px;
+      margin: auto;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.08);
     }
-    ul { line-height: 1.7; margin-top: 1rem; padding-left: 1.2rem; }
-    .btn {
+    h2 {
+      color: #004225;
+    }
+    ul {
+      padding-left: 1.5rem;
+    }
+    .cta-button {
+      display: inline-block;
       background: #004225;
       color: white;
-      padding: 12px 20px;
-      font-weight: bold;
-      text-decoration: none;
+      padding: 12px 24px;
       border-radius: 6px;
-      display: inline-block;
+      text-decoration: none;
+      font-weight: bold;
       margin-top: 1.5rem;
     }
-    .btn:hover { background: #006400; }
+    .cta-button:hover {
+      background: #006400;
+    }
     footer {
       text-align: center;
-      padding: 2rem 1rem;
-      background: #f0f0f0;
-      color: #555;
+      padding: 2rem;
+      background: #222;
+      color: #fff;
       font-size: 0.9rem;
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <img src="logo.png" alt="Church Logo" style="width:70px; border-radius:50%; margin-bottom:10px;" />
-    <h1>Oasis of Wisdom Bible Church</h1>
-    <p><strong>The Church of the Distinguished Generation</strong></p>
-  </header>
+<header>
+  <img src="logo.png" alt="Church Logo" />
+  <h1>Back to the Bible Challenge (BBC)</h1>
+  <p>Organized by Oasis of Wisdom Bible Church</p>
+</header>
 
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="index.html#programs">Programs</a>
-    <a href="index.html#media">Media</a>
-    <a href="index.html#giving">Giving</a>
-    <a href="index.html#prayer">Prayer</a>
-    <a href="index.html#contact">Contact</a>
-    <a href="news.html">Oasis News</a>
-    <a href="watch-live.html">Watch Live <span class="live-badge">LIVE</span></a>
-  </nav>
+<nav>
+  <a href="index.html">Home</a>
+  <a href="index.html#programs">Programs</a>
+  <a href="index.html#media">Media</a>
+  <a href="index.html#giving">Giving</a>
+  <a href="index.html#prayer">Prayer</a>
+  <a href="index.html#contact">Contact</a>
+  <a href="news.html">Oasis News</a>
+  <a href="watch-live.html">Watch Live</a>
+</nav>
 
-  <main>
-    <h2>📖 Back to the Bible Challenge (BBC)</h2>
-    <section>
-      <p>Welcome to the <strong>Back to the Bible Challenge</strong> – a Bible quiz initiative for higher institution students across Kwara State. Study the Bible, participate in quizzes, and grow in the Word of God!</p>
+<main>
+  <h2>Welcome to the BBC Quiz Portal</h2>
+  <p>The <strong>Back to the Bible Challenge (BBC)</strong> is a digital Bible quiz competition for higher institution students across Kwara State, organized by Oasis of Wisdom Bible Church.</p>
 
-      <h3 style="color:#004225; margin-top:2rem;">📜 BBC Test Rules</h3>
-      <ul>
-        <li>⏱ Each question has <strong>15 seconds</strong>.</li>
-        <li>🧭 Once the timer runs out, you’ll be taken to the next question automatically.</li>
-        <li>🚫 Switching browser tabs will end the test immediately.</li>
-        <li>📝 Attempt all <strong>10 questions</strong>. No going back once answered.</li>
-        <li>📤 Submissions are final. Ensure your name and exam number are correct.</li>
-      </ul>
+  <h3>📝 Quiz Structure:</h3>
+  <ul>
+    <li>📚 10 Multiple Choice Bible Questions</li>
+    <li>⏱ 15 seconds per question (auto-switch or manually click “Next”)</li>
+    <li>📦 Quiz auto-submits at the end or upon rule violations</li>
+  </ul>
 
-      <p style="margin-top: 2rem;">Ready to begin? Click below to try a sample test.</p>
-      <a href="bbc-quiz.html" class="btn">👉 Let's Try BBC TEST EXAM 1</a>
-    </section>
-  </main>
+  <h3>🔒 Security & Integrity:</h3>
+  <ul>
+    <li>🎥 Webcam required — you must remain visible during the quiz</li>
+    <li>🎙️ Microphone detection — avoid background noise</li>
+    <li>📵 Tab switch detection — switching ends your test</li>
+  </ul>
 
-  <footer>
-    &copy; 2025 Oasis of Wisdom Bible Church | BBC Quiz Initiative
-  </footer>
+  <h3>⚠️ Rules:</h3>
+  <ul>
+    <li>Do not switch browser tabs or open new apps</li>
+    <li>Ensure your camera and microphone are turned on</li>
+    <li>Do not get external help or background assistance</li>
+    <li>Answer honestly and independently</li>
+  </ul>
+
+  <a class="cta-button" href="bbc-quiz.html">🧠 Try the BBC Quiz Now</a>
+</main>
+
+<footer>
+  KM 11, Adjacent University of Ilorin Teaching Hospital, Ilorin, Kwara State, Nigeria  
+  <br>📞 08035685882 | 08060442459
+</footer>
+
 </body>
 </html>
