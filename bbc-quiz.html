@@ -121,9 +121,6 @@
   <main>
     <form id="quizForm" action="https://api.web3forms.com/submit" method="POST">
       <input type="hidden" name="access_key" value="99dc2fe8-9b17-47af-ab28-cf6e48489d11" />
-      <input type="hidden" name="redirect" value="https://www.oowbc.com.ng/thank-you.html" />
-
-      <!-- Score Capture -->
       <input type="hidden" name="Score Breakdown" id="scoreBreakdown" />
       <input type="hidden" name="Total Score" id="totalScore" />
 
@@ -156,56 +153,16 @@
 
   <script>
     const questions = [
-      {
-        q: "Who betrayed Jesus?",
-        a: ["Peter", "Paul", "Judas Iscariot", "Thomas"],
-        correct: "C"
-      },
-      {
-        q: "Which book contains the Ten Commandments?",
-        a: ["Leviticus", "Genesis", "Exodus", "Numbers"],
-        correct: "C"
-      },
-      {
-        q: "Where was Jesus born?",
-        a: ["Nazareth", "Bethlehem", "Jerusalem", "Galilee"],
-        correct: "B"
-      },
-      {
-        q: "Who led the Israelites across the Red Sea?",
-        a: ["Abraham", "David", "Joshua", "Moses"],
-        correct: "D"
-      },
-      {
-        q: "Who was swallowed by a great fish?",
-        a: ["Noah", "Daniel", "Jonah", "Elijah"],
-        correct: "C"
-      },
-      {
-        q: "What is the last book of the Bible?",
-        a: ["Revelation", "Jude", "Malachi", "Acts"],
-        correct: "A"
-      },
-      {
-        q: "Which king wrote many of the Psalms?",
-        a: ["Solomon", "David", "Saul", "Hezekiah"],
-        correct: "B"
-      },
-      {
-        q: "How many books are in the Bible?",
-        a: ["60", "72", "66", "70"],
-        correct: "C"
-      },
-      {
-        q: "What did Jesus feed 5,000 people with?",
-        a: ["Bread and wine", "Manna", "5 loaves and 2 fish", "Fish only"],
-        correct: "C"
-      },
-      {
-        q: "What did God create on the first day?",
-        a: ["Light", "Sky", "Land", "Animals"],
-        correct: "A"
-      }
+      { q: "Who betrayed Jesus?", a: ["Peter", "Paul", "Judas Iscariot", "Thomas"], correct: "C" },
+      { q: "Which book contains the Ten Commandments?", a: ["Leviticus", "Genesis", "Exodus", "Numbers"], correct: "C" },
+      { q: "Where was Jesus born?", a: ["Nazareth", "Bethlehem", "Jerusalem", "Galilee"], correct: "B" },
+      { q: "Who led the Israelites across the Red Sea?", a: ["Abraham", "David", "Joshua", "Moses"], correct: "D" },
+      { q: "Who was swallowed by a great fish?", a: ["Noah", "Daniel", "Jonah", "Elijah"], correct: "C" },
+      { q: "What is the last book of the Bible?", a: ["Revelation", "Jude", "Malachi", "Acts"], correct: "A" },
+      { q: "Which king wrote many of the Psalms?", a: ["Solomon", "David", "Saul", "Hezekiah"], correct: "B" },
+      { q: "How many books are in the Bible?", a: ["60", "72", "66", "70"], correct: "C" },
+      { q: "What did Jesus feed 5,000 people with?", a: ["Bread and wine", "Manna", "5 loaves and 2 fish", "Fish only"], correct: "C" },
+      { q: "What did God create on the first day?", a: ["Light", "Sky", "Land", "Animals"], correct: "A" }
     ];
 
     let index = 0;
@@ -234,10 +191,8 @@
       });
       document.getElementById("questionBox").innerHTML = html;
       document.getElementById("progress").textContent = `Question ${index + 1} of ${questions.length}`;
-
       document.getElementById("nextBtn").style.display = index < questions.length - 1 ? "inline-block" : "none";
       document.getElementById("submitBtn").style.display = index === questions.length - 1 ? "inline-block" : "none";
-
       startTimer();
     }
 
@@ -272,8 +227,22 @@
       e.preventDefault();
       document.getElementById("scoreBreakdown").value = breakdown;
       document.getElementById("totalScore").value = `${score} / ${questions.length}`;
-      this.style.display = "none";
-      document.getElementById("resultMessage").style.display = "block";
+      const formData = new FormData(this);
+      fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData
+      })
+      .then(response => {
+        if (response.ok) {
+          this.style.display = "none";
+          document.getElementById("resultMessage").style.display = "block";
+        } else {
+          alert("❌ Submission failed. Please try again.");
+        }
+      })
+      .catch(() => {
+        alert("❌ An error occurred. Please try again later.");
+      });
     });
 
     document.addEventListener("visibilitychange", () => {
