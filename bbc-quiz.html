@@ -62,12 +62,12 @@
       font-weight: bold;
       cursor: pointer;
     }
-    #progress {
+    #progress, #timer {
       text-align: center;
       margin-bottom: 1rem;
       font-weight: bold;
-      color: #444;
     }
+    #timer { color: #c00000; }
     video {
       width: 160px;
       height: auto;
@@ -95,6 +95,7 @@
 
       <div id="quizArea" class="hidden">
         <div id="progress"></div>
+        <div id="timer"></div>
         <div id="questionBox"></div>
         <button type="button" id="nextBtn" onclick="nextQuestion()">Next</button>
         <button type="submit" id="submitBtn" class="hidden">Submit</button>
@@ -112,65 +113,25 @@
 
   <script>
     const questions = [
-      {
-        q: "What did Jesus feed 5,000 people with?",
-        options: ["Bread and wine", "5 loaves and 2 fish", "Fish only", "Manna"],
-        correct: "B"
-      },
-      {
-        q: "Where was Jesus born?",
-        options: ["Nazareth", "Bethlehem", "Jerusalem", "Galilee"],
-        correct: "B"
-      },
-      {
-        q: "Which book contains the Ten Commandments?",
-        options: ["Genesis", "Leviticus", "Exodus", "Numbers"],
-        correct: "C"
-      },
-      {
-        q: "What did God create on the first day?",
-        options: ["Sky", "Land", "Animals", "Light"],
-        correct: "D"
-      },
-      {
-        q: "Who was swallowed by a great fish?",
-        options: ["Elijah", "Jonah", "Daniel", "Noah"],
-        correct: "B"
-      },
-      {
-        q: "Which king wrote many of the Psalms?",
-        options: ["Solomon", "David", "Saul", "Hezekiah"],
-        correct: "B"
-      },
-      {
-        q: "How many books are in the Bible?",
-        options: ["66", "72", "60", "70"],
-        correct: "A"
-      },
-      {
-        q: "Who betrayed Jesus?",
-        options: ["Thomas", "Peter", "Judas Iscariot", "Paul"],
-        correct: "C"
-      },
-      {
-        q: "What is the last book of the Bible?",
-        options: ["Jude", "Malachi", "Acts", "Revelation"],
-        correct: "D"
-      },
-      {
-        q: "Who led the Israelites across the Red Sea?",
-        options: ["Abraham", "Moses", "Joshua", "David"],
-        correct: "B"
-      }
+      { q: "What did Jesus feed 5,000 people with?", options: ["Bread and wine", "5 loaves and 2 fish", "Fish only", "Manna"], correct: "B" },
+      { q: "Where was Jesus born?", options: ["Nazareth", "Bethlehem", "Jerusalem", "Galilee"], correct: "B" },
+      { q: "Which book contains the Ten Commandments?", options: ["Genesis", "Leviticus", "Exodus", "Numbers"], correct: "C" },
+      { q: "What did God create on the first day?", options: ["Sky", "Land", "Animals", "Light"], correct: "D" },
+      { q: "Who was swallowed by a great fish?", options: ["Elijah", "Jonah", "Daniel", "Noah"], correct: "B" },
+      { q: "Which king wrote many of the Psalms?", options: ["Solomon", "David", "Saul", "Hezekiah"], correct: "B" },
+      { q: "How many books are in the Bible?", options: ["66", "72", "60", "70"], correct: "A" },
+      { q: "Who betrayed Jesus?", options: ["Thomas", "Peter", "Judas Iscariot", "Paul"], correct: "C" },
+      { q: "What is the last book of the Bible?", options: ["Jude", "Malachi", "Acts", "Revelation"], correct: "D" },
+      { q: "Who led the Israelites across the Red Sea?", options: ["Abraham", "Moses", "Joshua", "David"], correct: "B" }
     ];
 
-    let current = 0, score = 0;
+    let current = 0, score = 0, timer = 15, interval;
     const userAnswers = [];
 
-    function shuffle(arr) {
-      for (let i = arr.length - 1; i > 0; i--) {
-        let j = Math.floor(Math.random() * (i + 1));
-        [arr[i], arr[j]] = [arr[j], arr[i]];
+    function shuffle(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
       }
     }
 
@@ -179,6 +140,7 @@
     const quizArea = document.getElementById("quizArea");
     const questionBox = document.getElementById("questionBox");
     const progress = document.getElementById("progress");
+    const timerEl = document.getElementById("timer");
     const nextBtn = document.getElementById("nextBtn");
     const submitBtn = document.getElementById("submitBtn");
     const quizForm = document.getElementById("quizForm");
@@ -190,25 +152,58 @@
       startCamera();
     }
 
+    function startTimer() {
+      timer = 15;
+      timerEl.textContent = `⏱ ${timer} seconds remaining`;
+      interval = setInterval(() => {
+        timer--;
+        timerEl.textContent = `⏱ ${timer} seconds remaining`;
+        if (timer <= 0) {
+          clearInterval(interval);
+          autoAdvance();
+        }
+      }, 1000);
+    }
+
+    function autoAdvance() {
+      const selected = quizForm.querySelector(`input[name="q${current}"]:checked`);
+      const answer = selected ? selected.value : "No Answer";
+      userAnswers.push({ q: questions[current].q, selected: answer, correct: questions[current].correct });
+      if (answer === questions[current].correct) score++;
+
+      current++;
+      if (current < questions.length) {
+        showQuestion();
+      } else {
+        nextBtn.classList.add("hidden");
+        submitBtn.classList.remove("hidden");
+        showQuestion();
+      }
+    }
+
     function showQuestion() {
+      clearInterval(interval);
       const q = questions[current];
-      progress.innerText = `Question ${current + 1} of ${questions.length}`;
+      progress.textContent = `Question ${current + 1} of ${questions.length}`;
+      timerEl.textContent = "";
       let html = `<div class="question"><h4>${q.q}</h4>`;
+      shuffle(q.options);
       q.options.forEach((opt, i) => {
         const label = String.fromCharCode(65 + i);
-        html += `<label><input type="radio" name="q${current}" value="${label}" required /> ${label}. ${opt}</label>`;
+        html += `<label><input type="radio" name="q${current}" value="${label}"> ${label}. ${opt}</label>`;
       });
       html += `</div>`;
       questionBox.innerHTML = html;
 
       nextBtn.classList.toggle("hidden", current === questions.length - 1);
       submitBtn.classList.toggle("hidden", current !== questions.length - 1);
+      startTimer();
     }
 
     function nextQuestion() {
+      clearInterval(interval);
       const selected = quizForm.querySelector(`input[name="q${current}"]:checked`);
       if (!selected) return alert("Please select an answer");
-
       const answer = selected.value;
       userAnswers.push({ q: questions[current].q, selected: answer, correct: questions[current].correct });
       if (answer === questions[current].correct) score++;
@@ -219,13 +214,14 @@
 
     quizForm.addEventListener("submit", async function(e) {
       e.preventDefault();
+      clearInterval(interval);
       const lastSelected = quizForm.querySelector(`input[name="q${current}"]:checked`);
-      if (!lastSelected) return alert("Please select an answer");
-      const answer = lastSelected.value;
+      const answer = lastSelected ? lastSelected.value : "No Answer";
       userAnswers.push({ q: questions[current].q, selected: answer, correct: questions[current].correct });
       if (answer === questions[current].correct) score++;
 
-      const formData = new FormData();
+      const formData = new URLSearchParams();
+      formData.append("access_key", "99dc2fe8-9b17-47af-ab28-cf6e48489d11");
       formData.append("Name", quizForm.Name.value);
       formData.append("Exam Number", quizForm["Exam Number"].value);
       userAnswers.forEach((ans, i) => {
@@ -235,11 +231,8 @@
 
       await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        headers: { 'Accept': 'application/json' },
-        body: new URLSearchParams({
-          access_key: "99dc2fe8-9b17-47af-ab28-cf6e48489d11",
-          ...Object.fromEntries(formData)
-        })
+        body: formData,
+        headers: { 'Accept': 'application/json' }
       });
 
       quizArea.classList.add("hidden");
@@ -250,7 +243,8 @@
       navigator.mediaDevices.getUserMedia({ video: true, audio: true })
         .then(stream => {
           document.getElementById("camera").srcObject = stream;
-        }).catch(() => {});
+        })
+        .catch(() => {});
     }
   </script>
 </body>
