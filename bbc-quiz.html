@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>BBC Quiz | Oasis of Wisdom</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Digital Bible Quiz - BBC by Oasis of Wisdom Bible Church" />
-  <meta name="keywords" content="Bible Quiz, Oasis Church, Youth, Challenge, BBC" />
+  <title>Back to the Bible Challenge (BBC) | Oasis of Wisdom</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Digital Bible Quiz for Higher Institution Students - Oasis of Wisdom Bible Church" />
+  <meta name="keywords" content="Bible Quiz, Oasis Church, BBC, Youth Challenge, Test" />
   <meta name="author" content="Oasis of Wisdom Media Team" />
-  <meta property="og:title" content="BBC Quiz | Oasis of Wisdom" />
+  <meta property="og:title" content="BBC | Back to the Bible Challenge" />
   <meta property="og:image" content="logo.png" />
-  <meta property="og:url" content="https://www.oowbc.com.ng/bbc-quiz.html" />
+  <meta property="og:url" content="https://www.oowbc.com.ng/bbc.html" />
 
   <link rel="icon" href="favicon.png" type="image/png" />
 
@@ -25,248 +25,159 @@
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
-      background: #f4fdf4;
       margin: 0;
-      padding: 0;
+      background: #f9fdf9;
       color: #222;
     }
     header {
       background: #004225;
       color: white;
-      padding: 1.5rem;
+      padding: 1.5rem 1rem;
       text-align: center;
     }
+    header img.logo {
+      width: 60px;
+      border-radius: 50%;
+      margin-bottom: 8px;
+    }
     header h1 {
+      margin: 0.3rem 0;
+      font-size: 1.6rem;
+    }
+    header p {
+      font-size: 1rem;
       margin: 0;
     }
+
+    nav {
+      background: #006400;
+      text-align: center;
+      padding: 0.8rem;
+    }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 10px;
+      font-weight: bold;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    .live-badge {
+      background: red;
+      color: white;
+      font-size: 0.6rem;
+      padding: 2px 5px;
+      border-radius: 4px;
+      position: absolute;
+      top: -8px;
+      right: -20px;
+      animation: blink 1s infinite;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
     main {
-      max-width: 900px;
+      max-width: 960px;
       margin: auto;
       padding: 2rem;
       background: #fff;
-      border-radius: 10px;
-      box-shadow: 0 5px 10px rgba(0,0,0,0.05);
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
     }
-    .timer, .question-count {
-      font-weight: bold;
-      color: #b30000;
-      margin-bottom: 1rem;
-      text-align: right;
-    }
-    .question {
-      margin-bottom: 1.5rem;
-    }
-    .question h4 {
+
+    h2 {
+      text-align: center;
       color: #004225;
-      margin-bottom: 0.5rem;
     }
-    .question label {
+
+    .intro {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .quiz-card {
       display: block;
-      padding: 5px;
+      background: #e8f7e8;
+      border: 1px solid #cceccc;
+      padding: 1.5rem;
+      border-radius: 8px;
+      text-align: center;
+      color: #004225;
+      font-weight: bold;
+      text-decoration: none;
+      margin: auto;
+      max-width: 400px;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.05);
+      transition: 0.3s ease;
     }
-    input[type="text"] {
-      width: 100%;
-      padding: 10px;
-      margin: 10px 0;
-      border-radius: 6px;
-      border: 1px solid #ccc;
+    .quiz-card:hover {
+      background: #d6f0d6;
+      transform: scale(1.02);
     }
-    button {
+
+    footer {
       background: #004225;
       color: white;
-      padding: 10px 20px;
-      border: none;
-      font-weight: bold;
-      border-radius: 6px;
-      cursor: pointer;
-      margin-top: 1rem;
-    }
-    .submitted-message {
-      display: none;
       text-align: center;
-      padding: 2rem;
+      padding: 2rem 1rem;
+      margin-top: 2rem;
     }
-    .submitted-message a {
-      color: #004225;
-      text-decoration: underline;
+    .social-icons img {
+      width: 28px;
+      margin: 0 8px;
+      vertical-align: middle;
+    }
+    .social-icons a {
+      text-decoration: none;
     }
   </style>
 </head>
 <body>
+
   <header>
-    <h1>Back to the Bible Challenge - Quiz</h1>
+    <img src="logo.png" alt="Church Logo" class="logo" />
+    <h1>Oasis of Wisdom Bible Church</h1>
+    <p><strong>The Church of the Distinguished Generation</strong></p>
   </header>
 
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="index.html#programs">Programs</a>
+    <a href="index.html#media">Media</a>
+    <a href="index.html#giving">Giving</a>
+    <a href="index.html#prayer">Prayer</a>
+    <a href="index.html#contact">Contact</a>
+    <a href="news.html">Oasis News</a>
+    <a href="watch-live.html">Watch Live <span class="live-badge">LIVE</span></a>
+    <a href="bbc.html" style="text-decoration: underline;">BBC</a>
+  </nav>
+
   <main>
-    <form id="quizForm" action="https://api.web3forms.com/submit" method="POST">
-      <input type="hidden" name="access_key" value="99dc2fe8-9b17-47af-ab28-cf6e48489d11">
-      <input type="hidden" name="redirect" value="">
-
-      <!-- Intro Section -->
-      <div id="intro">
-        <label>Full Name:</label>
-        <input type="text" name="Name" id="name" required>
-        <label>Exam Number:</label>
-        <input type="text" name="Exam Number" id="exam" required>
-        <button type="button" onclick="startQuiz()">Start Test</button>
-      </div>
-
-      <!-- Quiz Section -->
-      <div id="quizContainer" style="display:none;">
-        <div class="question-count" id="qCount"></div>
-        <div class="timer" id="timer"></div>
-        <div id="questionBlock"></div>
-        <button type="button" onclick="nextQuestion()" id="nextBtn">Next</button>
-        <button type="submit" id="submitBtn" style="display:none;">Submit</button>
-      </div>
-    </form>
-
-    <div class="submitted-message" id="submittedMsg">
-      <h2>Your answer has been submitted.</h2>
-      <p><a href="bbc.html">← Go back to BBC Home</a></p>
+    <div class="intro">
+      <h2>Back to the Bible Challenge (BBC)</h2>
+      <p>
+        Welcome to the BBC – an initiative for higher institution students focused on digging deep into the Word of God through competitive and fun Bible quizzes.<br>
+        Study assigned Bible books, join others across campuses, and test your knowledge digitally from anywhere.
+      </p>
     </div>
+
+    <a href="bbc-quiz.html" class="quiz-card">📘 Try BBC Test Exam 1</a>
   </main>
 
-  <script>
-    const questions = [
-      {
-        q: "Who betrayed Jesus?",
-        options: ["Judas Iscariot", "Peter", "Thomas", "Paul"],
-        name: "Q1"
-      },
-      {
-        q: "Which book contains the Ten Commandments?",
-        options: ["Exodus", "Genesis", "Leviticus", "Numbers"],
-        name: "Q2"
-      },
-      {
-        q: "Where was Jesus born?",
-        options: ["Bethlehem", "Nazareth", "Jerusalem", "Galilee"],
-        name: "Q3"
-      },
-      {
-        q: "Who led the Israelites across the Red Sea?",
-        options: ["Moses", "Abraham", "Joshua", "David"],
-        name: "Q4"
-      },
-      {
-        q: "Who was swallowed by a great fish?",
-        options: ["Jonah", "Noah", "Elijah", "Daniel"],
-        name: "Q5"
-      },
-      {
-        q: "What is the last book of the Bible?",
-        options: ["Revelation", "Jude", "Malachi", "Acts"],
-        name: "Q6"
-      },
-      {
-        q: "Which king wrote many of the Psalms?",
-        options: ["David", "Solomon", "Saul", "Hezekiah"],
-        name: "Q7"
-      },
-      {
-        q: "How many books are in the Bible?",
-        options: ["66", "72", "60", "70"],
-        name: "Q8"
-      },
-      {
-        q: "What did Jesus feed 5,000 people with?",
-        options: ["5 loaves and 2 fish", "Bread and wine", "Manna", "Fish only"],
-        name: "Q9"
-      },
-      {
-        q: "What did God create on the first day?",
-        options: ["Light", "Sky", "Land", "Animals"],
-        name: "Q10"
-      }
-    ];
+  <footer>
+    <p>&copy; 2025 Oasis of Wisdom Bible Church. All rights reserved.</p>
+    <p>KM 11, Adjacent University of Ilorin Teaching Hospital, Ilorin, Kwara State, Nigeria</p>
+    <p>08035685882 | 08060442459</p>
+    <div class="social-icons">
+      <a href="https://facebook.com/oasisofwisdom"><img src="facebook.png" alt="Facebook" /></a>
+      <a href="https://instagram.com/oasisofwisdom"><img src="instagram.png" alt="Instagram" /></a>
+      <a href="https://youtube.com/@oasisofwisdom"><img src="youtube.png" alt="YouTube" /></a>
+      <a href="https://tiktok.com/@oasisofwisdom"><img src="tiktok.png" alt="TikTok" /></a>
+    </div>
+  </footer>
 
-    let current = 0;
-    let timer;
-    let timeLeft = 15;
-
-    function startQuiz() {
-      if (!name.value || !exam.value) {
-        alert("Please enter your full name and exam number.");
-        return;
-      }
-      document.getElementById("intro").style.display = "none";
-      document.getElementById("quizContainer").style.display = "block";
-      navigator.mediaDevices.getUserMedia({ video: true, audio: true });
-      showQuestion();
-      startTimer();
-    }
-
-    function showQuestion() {
-      const block = document.getElementById("questionBlock");
-      const q = questions[current];
-      const options = shuffle([...q.options]);
-      document.getElementById("qCount").textContent = `Question ${current + 1} of ${questions.length}`;
-      block.innerHTML = `<div class="question"><h4>${q.q}</h4>` +
-        options.map((opt, i) => `
-          <label><input type="radio" name="${q.name}" value="${opt}" required> ${String.fromCharCode(65+i)}. ${opt}</label>
-        `).join("") + `</div>`;
-      document.getElementById("nextBtn").style.display = current < questions.length - 1 ? "inline-block" : "none";
-      document.getElementById("submitBtn").style.display = current === questions.length - 1 ? "inline-block" : "none";
-      resetTimer();
-    }
-
-    function nextQuestion() {
-      const qName = questions[current].name;
-      const selected = document.querySelector(`input[name="${qName}"]:checked`);
-      if (!selected) {
-        alert("Please select an answer.");
-        return;
-      }
-      current++;
-      if (current < questions.length) {
-        showQuestion();
-      }
-    }
-
-    function startTimer() {
-      resetTimer();
-    }
-
-    function resetTimer() {
-      clearInterval(timer);
-      timeLeft = 15;
-      document.getElementById("timer").textContent = `Time Left: ${timeLeft}s`;
-      timer = setInterval(() => {
-        timeLeft--;
-        document.getElementById("timer").textContent = `Time Left: ${timeLeft}s`;
-        if (timeLeft <= 0) {
-          clearInterval(timer);
-          if (current === questions.length - 1) {
-            document.getElementById("quizForm").submit();
-          } else {
-            current++;
-            showQuestion();
-          }
-        }
-      }, 1000);
-    }
-
-    // Form submission detection
-    document.getElementById("quizForm").addEventListener("submit", function(e) {
-      e.preventDefault();
-      clearInterval(timer);
-      document.getElementById("quizForm").style.display = "none";
-      document.getElementById("submittedMsg").style.display = "block";
-    });
-
-    // Utility
-    function shuffle(array) {
-      return array.sort(() => Math.random() - 0.5);
-    }
-
-    // Tab switch detection
-    document.addEventListener("visibilitychange", () => {
-      if (document.hidden) {
-        alert("Tab switch detected! Your test will end.");
-        document.getElementById("quizForm").submit();
-      }
-    });
-  </script>
 </body>
 </html>
