@@ -62,7 +62,12 @@
       font-weight: bold;
       margin-top: 1rem;
     }
-    .timer { text-align: right; font-weight: bold; color: #b30000; }
+    .timer {
+      text-align: right;
+      font-weight: bold;
+      color: #b30000;
+      margin-bottom: 1rem;
+    }
     .result-message {
       display: none;
       margin-top: 2rem;
@@ -72,10 +77,9 @@
       color: #004225;
       font-weight: bold;
     }
-    /* 📸 Camera preview style */
     #cameraPreview {
       position: fixed;
-      top: 10px;
+      bottom: 10px;
       right: 10px;
       width: 160px;
       z-index: 999;
@@ -90,12 +94,11 @@
     <p>Test your knowledge in this 10-question timed quiz</p>
   </header>
 
-  <!-- 📸 Persistent Camera Preview -->
+  <!-- 📸 Camera Preview -->
   <video id="cameraPreview" autoplay muted playsinline></video>
 
   <main>
     <form id="quizForm">
-      <!-- User Details -->
       <div class="details active">
         <label>Full Name</label>
         <input type="text" name="Name" required>
@@ -104,7 +107,9 @@
         <button type="button" onclick="startQuiz()">Start Test</button>
       </div>
 
-      <div class="timer" id="timer" style="display:none;">Time left: <span id="countdown">15</span>s</div>
+      <div class="timer" id="timer" style="display:none;">
+        Time left: <span id="countdown">15</span>s
+      </div>
 
       <!-- Questions -->
       <div class="question" data-correct="A">
@@ -123,14 +128,20 @@
         <label><input type="radio" name="Q2" value="D. Acts"> D. Acts</label>
       </div>
 
-      <!-- More questions... -->
+      <div class="question" data-correct="C">
+        <h4>3. Who built the ark?</h4>
+        <label><input type="radio" name="Q3" value="A. Moses"> A. Moses</label>
+        <label><input type="radio" name="Q3" value="B. Abraham"> B. Abraham</label>
+        <label><input type="radio" name="Q3" value="C. Noah"> C. Noah</label>
+        <label><input type="radio" name="Q3" value="D. David"> D. David</label>
+      </div>
 
       <div class="question" data-correct="D">
-        <h4>10. What did Jesus feed 5,000 with?</h4>
-        <label><input type="radio" name="Q10" value="A. Manna"> A. Manna</label>
-        <label><input type="radio" name="Q10" value="B. Fish only"> B. Fish only</label>
-        <label><input type="radio" name="Q10" value="C. Bread and wine"> C. Bread and wine</label>
-        <label><input type="radio" name="Q10" value="D. 5 loaves and 2 fish"> D. 5 loaves and 2 fish</label>
+        <h4>4. What did Jesus feed 5,000 with?</h4>
+        <label><input type="radio" name="Q4" value="A. Manna"> A. Manna</label>
+        <label><input type="radio" name="Q4" value="B. Fish only"> B. Fish only</label>
+        <label><input type="radio" name="Q4" value="C. Bread and wine"> C. Bread and wine</label>
+        <label><input type="radio" name="Q4" value="D. 5 loaves and 2 fish"> D. 5 loaves and 2 fish</label>
         <button type="submit">Submit Quiz</button>
       </div>
     </form>
@@ -143,15 +154,14 @@
   </main>
 
   <script>
-    let current = 0, total = document.querySelectorAll('.question').length;
+    let current = 0;
+    const questions = document.querySelectorAll('.question');
+    const total = questions.length;
     let timer, seconds = 15;
 
     function startQuiz() {
-      // Camera and Mic permission
       navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then(stream => {
-        const video = document.getElementById("cameraPreview");
-        video.srcObject = stream;
-
+        document.getElementById('cameraPreview').srcObject = stream;
         document.querySelector('.details').classList.remove('active');
         showQuestion(current);
         document.getElementById('timer').style.display = 'block';
@@ -162,9 +172,7 @@
     }
 
     function showQuestion(index) {
-      document.querySelectorAll('.question').forEach((q, i) => {
-        q.classList.toggle('active', i === index);
-      });
+      questions.forEach((q, i) => q.classList.toggle('active', i === index));
     }
 
     function startTimer() {
@@ -233,7 +241,6 @@
       });
     });
 
-    // Tab-switch detection
     document.addEventListener("visibilitychange", () => {
       if (document.hidden) {
         alert("You switched tabs. Quiz will be auto-submitted.");
