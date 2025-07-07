@@ -94,7 +94,6 @@
     <p>Test your knowledge in this 10-question timed quiz</p>
   </header>
 
-  <!-- 📸 Camera Preview -->
   <video id="cameraPreview" autoplay muted playsinline></video>
 
   <main>
@@ -118,6 +117,7 @@
         <label><input type="radio" name="Q1" value="B. Peter"> B. Peter</label>
         <label><input type="radio" name="Q1" value="C. John"> C. John</label>
         <label><input type="radio" name="Q1" value="D. Matthew"> D. Matthew</label>
+        <button type="button" onclick="nextQuestion()">Next</button>
       </div>
 
       <div class="question" data-correct="B">
@@ -126,22 +126,15 @@
         <label><input type="radio" name="Q2" value="B. Matthew"> B. Matthew</label>
         <label><input type="radio" name="Q2" value="C. Luke"> C. Luke</label>
         <label><input type="radio" name="Q2" value="D. Acts"> D. Acts</label>
-      </div>
-
-      <div class="question" data-correct="C">
-        <h4>3. Who built the ark?</h4>
-        <label><input type="radio" name="Q3" value="A. Moses"> A. Moses</label>
-        <label><input type="radio" name="Q3" value="B. Abraham"> B. Abraham</label>
-        <label><input type="radio" name="Q3" value="C. Noah"> C. Noah</label>
-        <label><input type="radio" name="Q3" value="D. David"> D. David</label>
+        <button type="button" onclick="nextQuestion()">Next</button>
       </div>
 
       <div class="question" data-correct="D">
-        <h4>4. What did Jesus feed 5,000 with?</h4>
-        <label><input type="radio" name="Q4" value="A. Manna"> A. Manna</label>
-        <label><input type="radio" name="Q4" value="B. Fish only"> B. Fish only</label>
-        <label><input type="radio" name="Q4" value="C. Bread and wine"> C. Bread and wine</label>
-        <label><input type="radio" name="Q4" value="D. 5 loaves and 2 fish"> D. 5 loaves and 2 fish</label>
+        <h4>3. What did Jesus feed 5,000 with?</h4>
+        <label><input type="radio" name="Q3" value="A. Manna"> A. Manna</label>
+        <label><input type="radio" name="Q3" value="B. Fish only"> B. Fish only</label>
+        <label><input type="radio" name="Q3" value="C. Bread and wine"> C. Bread and wine</label>
+        <label><input type="radio" name="Q3" value="D. 5 loaves and 2 fish"> D. 5 loaves and 2 fish</label>
         <button type="submit">Submit Quiz</button>
       </div>
     </form>
@@ -189,13 +182,6 @@
       }, 1000);
     }
 
-    document.querySelectorAll('.question input[type=radio]').forEach(input => {
-      input.addEventListener('change', () => {
-        clearInterval(timer);
-        nextQuestion();
-      });
-    });
-
     function nextQuestion() {
       if (current < total - 1) {
         current++;
@@ -241,6 +227,7 @@
       });
     });
 
+    // Tab switch detection
     document.addEventListener("visibilitychange", () => {
       if (document.hidden) {
         alert("You switched tabs. Quiz will be auto-submitted.");
