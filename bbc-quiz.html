@@ -100,70 +100,60 @@
       {
         question: "Who betrayed Jesus?",
         options: ["Judas Iscariot", "Peter", "Paul", "John"],
-        correct: "A. Judas Iscariot",
-        name: "Q1"
+        correct: "Judas Iscariot"
       },
       {
         question: "Which book contains the Ten Commandments?",
         options: ["Genesis", "Exodus", "Leviticus", "Numbers"],
-        correct: "B. Exodus",
-        name: "Q2"
+        correct: "Exodus"
       },
       {
         question: "Where was Jesus born?",
         options: ["Nazareth", "Galilee", "Jerusalem", "Bethlehem"],
-        correct: "D. Bethlehem",
-        name: "Q3"
+        correct: "Bethlehem"
       },
       {
         question: "Who led the Israelites across the Red Sea?",
         options: ["Abraham", "Moses", "David", "Joshua"],
-        correct: "B. Moses",
-        name: "Q4"
+        correct: "Moses"
       },
       {
         question: "Who was swallowed by a great fish?",
         options: ["Noah", "Elijah", "Daniel", "Jonah"],
-        correct: "D. Jonah",
-        name: "Q5"
+        correct: "Jonah"
       },
       {
         question: "What is the last book of the Bible?",
         options: ["Jude", "Revelation", "Acts", "Malachi"],
-        correct: "B. Revelation",
-        name: "Q6"
+        correct: "Revelation"
       },
       {
         question: "Which king wrote many of the Psalms?",
         options: ["Solomon", "Saul", "David", "Hezekiah"],
-        correct: "C. David",
-        name: "Q7"
+        correct: "David"
       },
       {
         question: "How many books are in the Bible?",
         options: ["66", "72", "70", "60"],
-        correct: "A. 66",
-        name: "Q8"
+        correct: "66"
       },
       {
         question: "What did Jesus feed 5,000 people with?",
         options: ["Fish only", "Manna", "5 loaves and 2 fish", "Bread and wine"],
-        correct: "C. 5 loaves and 2 fish",
-        name: "Q9"
+        correct: "5 loaves and 2 fish"
       },
       {
         question: "What did God create on the first day?",
         options: ["Sky", "Animals", "Land", "Light"],
-        correct: "D. Light",
-        name: "Q10"
+        correct: "Light"
       }
     ];
 
     let current = 0;
     let score = 0;
-    let selectedAnswers = [];
-    let qBox = document.getElementById("qBox");
-    let timerDisplay = document.getElementById("timer");
+    let shuffledOptions = [];
+    const qBox = document.getElementById("qBox");
+    const timerDisplay = document.getElementById("timer");
     let interval;
 
     function startQuiz() {
@@ -179,10 +169,10 @@
     function showQuestion() {
       clearInterval(interval);
       const q = questions[current];
+      shuffledOptions = [...q.options].sort(() => Math.random() - 0.5);
       document.getElementById("progressText").textContent = `Question ${current + 1} of ${questions.length}`;
-      const shuffled = q.options.sort(() => Math.random() - 0.5);
       let html = `<h3>${q.question}</h3>`;
-      shuffled.forEach((opt, i) => {
+      shuffledOptions.forEach((opt, i) => {
         const val = ['A', 'B', 'C', 'D'][i];
         html += `<label><input type="radio" name="option" value="${val}. ${opt}" required> ${val}. ${opt}</label>`;
       });
@@ -211,25 +201,26 @@
     function captureAnswerAndMove() {
       const selected = document.querySelector('input[name="option"]:checked');
       const q = questions[current];
-      let chosen = selected ? selected.value : "No answer selected";
-      if (chosen === q.correct) score++;
+      let chosen = selected ? selected.value : "No answer";
+      const correctLetter = ['A', 'B', 'C', 'D'][shuffledOptions.indexOf(q.correct)];
+      const correctFormatted = `${correctLetter}. ${q.correct}`;
 
-      let summary = `${q.question}\nYou chose: ${chosen}\nCorrect answer: ${q.correct}`;
+      if (chosen === correctFormatted) score++;
+
       const input = document.createElement("input");
       input.type = "hidden";
-      input.name = q.name;
-      input.value = summary;
+      input.name = `Q${current + 1}`;
+      input.value = `Selected: ${chosen} | Correct: ${correctFormatted}`;
       document.getElementById("quizForm").appendChild(input);
 
       current++;
       if (current < questions.length) {
         showQuestion();
       } else {
-        // Final step: total score
         const scoreInput = document.createElement("input");
         scoreInput.type = "hidden";
         scoreInput.name = "Total Score";
-        scoreInput.value = `${score} out of ${questions.length}`;
+        scoreInput.value = `${score}/${questions.length}`;
         document.getElementById("quizForm").appendChild(scoreInput);
 
         document.getElementById("quizContainer").classList.add("hidden");
