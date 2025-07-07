@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <title>BBC Quiz | Oasis of Wisdom</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="BBC Digital Bible Quiz | Oasis of Wisdom Bible Church" />
-  <meta name="keywords" content="Bible Quiz, BBC, Oasis Church, Youth Quiz, Christian Test" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Digital Bible Quiz - BBC by Oasis of Wisdom Bible Church" />
+  <meta name="keywords" content="Bible Quiz, Oasis Church, Youth, Challenge, BBC" />
   <meta name="author" content="Oasis of Wisdom Media Team" />
-  <meta property="og:title" content="BBC Quiz - Back to the Bible Challenge" />
+  <meta property="og:title" content="BBC Quiz | Oasis of Wisdom" />
   <meta property="og:image" content="logo.png" />
-  <meta property="og:description" content="Join the digital Bible quiz challenge hosted by Oasis of Wisdom Bible Church." />
   <meta property="og:url" content="https://www.oowbc.com.ng/bbc-quiz.html" />
+
   <link rel="icon" href="favicon.png" type="image/png" />
 
   <!-- Google Analytics -->
@@ -25,7 +25,7 @@
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
-      background: #f7fff8;
+      background: #f4fdf4;
       margin: 0;
       padding: 0;
       color: #222;
@@ -33,245 +33,237 @@
     header {
       background: #004225;
       color: white;
-      padding: 1.5rem 1rem;
+      padding: 1.5rem;
       text-align: center;
+    }
+    header h1 {
+      margin: 0;
     }
     main {
       max-width: 900px;
       margin: auto;
       padding: 2rem;
-    }
-    .question, #startSection, #quizSection {
       background: #fff;
-      padding: 1.5rem;
       border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      margin-bottom: 2rem;
+      box-shadow: 0 5px 10px rgba(0,0,0,0.05);
     }
-    label {
+    .timer, .question-count {
+      font-weight: bold;
+      color: #b30000;
+      margin-bottom: 1rem;
+      text-align: right;
+    }
+    .question {
+      margin-bottom: 1.5rem;
+    }
+    .question h4 {
+      color: #004225;
+      margin-bottom: 0.5rem;
+    }
+    .question label {
       display: block;
-      margin: 0.4rem 0;
+      padding: 5px;
     }
     input[type="text"] {
       width: 100%;
-      padding: 0.7rem;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 6px;
       border: 1px solid #ccc;
-      border-radius: 5px;
-      margin-bottom: 1rem;
     }
-    .timer, .warning, .success {
-      font-weight: bold;
-      margin-top: 1rem;
-    }
-    .timer { color: #b30000; }
-    .warning { color: red; display: none; }
-    .success { color: green; display: none; }
-
     button {
       background: #004225;
       color: white;
-      border: none;
       padding: 10px 20px;
+      border: none;
       font-weight: bold;
       border-radius: 6px;
       cursor: pointer;
-    }
-    button:hover { background: #006400; }
-
-    video {
-      width: 100%;
-      max-width: 300px;
       margin-top: 1rem;
-      border-radius: 10px;
     }
-
-    .nav-link {
-      display: inline-block;
-      margin-top: 2rem;
+    .submitted-message {
+      display: none;
+      text-align: center;
+      padding: 2rem;
+    }
+    .submitted-message a {
       color: #004225;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    .nav-link:hover {
       text-decoration: underline;
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>📖 BBC Digital Quiz</h1>
-    <p>Back to the Bible Challenge – 10 Questions | 15s per Question</p>
+    <h1>Back to the Bible Challenge - Quiz</h1>
   </header>
 
   <main>
-    <section id="startSection">
-      <form id="startForm">
-        <label>Full Name</label>
-        <input type="text" name="name" required />
-        <label>Exam Number</label>
-        <input type="text" name="exam" required />
-        <button type="submit">Start Test</button>
-      </form>
-    </section>
+    <form id="quizForm" action="https://api.web3forms.com/submit" method="POST">
+      <input type="hidden" name="access_key" value="99dc2fe8-9b17-47af-ab28-cf6e48489d11">
+      <input type="hidden" name="redirect" value="">
 
-    <section id="quizSection" style="display:none;">
-      <form id="quizForm" action="https://api.web3forms.com/submit" method="POST">
-        <input type="hidden" name="access_key" value="99dc2fe8-9b17-47af-ab28-cf6e48489d11" />
-        <input type="hidden" name="Full Name" id="hiddenName" />
-        <input type="hidden" name="Exam Number" id="hiddenExam" />
-        <div class="timer" id="timer">Time: 15s</div>
-        <div class="warning" id="warning">⚠️ Rule Violation Detected! Submitting...</div>
-        <div class="success" id="success">✅ Your response has been submitted successfully.</div>
+      <!-- Intro Section -->
+      <div id="intro">
+        <label>Full Name:</label>
+        <input type="text" name="Name" id="name" required>
+        <label>Exam Number:</label>
+        <input type="text" name="Exam Number" id="exam" required>
+        <button type="button" onclick="startQuiz()">Start Test</button>
+      </div>
 
-        <video id="webcam" autoplay muted playsinline></video>
+      <!-- Quiz Section -->
+      <div id="quizContainer" style="display:none;">
+        <div class="question-count" id="qCount"></div>
+        <div class="timer" id="timer"></div>
+        <div id="questionBlock"></div>
+        <button type="button" onclick="nextQuestion()" id="nextBtn">Next</button>
+        <button type="submit" id="submitBtn" style="display:none;">Submit</button>
+      </div>
+    </form>
 
-        <div id="questionBox" class="question">
-          <h3 id="qText">Question</h3>
-          <label><input type="radio" name="answer" value="A" required> <span id="optA">A</span></label>
-          <label><input type="radio" name="answer" value="B"> <span id="optB">B</span></label>
-          <label><input type="radio" name="answer" value="C"> <span id="optC">C</span></label>
-          <label><input type="radio" name="answer" value="D"> <span id="optD">D</span></label>
-        </div>
-
-        <input type="hidden" name="Q1" />
-        <input type="hidden" name="Q2" />
-        <input type="hidden" name="Q3" />
-        <input type="hidden" name="Q4" />
-        <input type="hidden" name="Q5" />
-        <input type="hidden" name="Q6" />
-        <input type="hidden" name="Q7" />
-        <input type="hidden" name="Q8" />
-        <input type="hidden" name="Q9" />
-        <input type="hidden" name="Q10" />
-
-        <button type="button" id="nextBtn">Next</button>
-      </form>
-    </section>
-
-    <a class="nav-link" href="bbc.html">← Back to BBC Home</a>
+    <div class="submitted-message" id="submittedMsg">
+      <h2>Your answer has been submitted.</h2>
+      <p><a href="bbc.html">← Go back to BBC Home</a></p>
+    </div>
   </main>
 
   <script>
     const questions = [
-      ["Who betrayed Jesus?", "Judas Iscariot", "Peter", "Thomas", "Paul", "A"],
-      ["Which book contains the Ten Commandments?", "Exodus", "Genesis", "Leviticus", "Numbers", "A"],
-      ["Where was Jesus born?", "Bethlehem", "Nazareth", "Jerusalem", "Galilee", "A"],
-      ["Who led the Israelites across the Red Sea?", "Moses", "Abraham", "Joshua", "David", "A"],
-      ["Who was swallowed by a great fish?", "Jonah", "Noah", "Elijah", "Daniel", "A"],
-      ["What is the last book of the Bible?", "Revelation", "Jude", "Malachi", "Acts", "A"],
-      ["Which king wrote many of the Psalms?", "David", "Solomon", "Saul", "Hezekiah", "A"],
-      ["How many books are in the Bible?", "66", "72", "60", "70", "A"],
-      ["What did Jesus feed 5,000 people with?", "5 loaves and 2 fish", "Bread and wine", "Manna", "Fish only", "A"],
-      ["What did God create on the first day?", "Light", "Sky", "Land", "Animals", "A"]
+      {
+        q: "Who betrayed Jesus?",
+        options: ["Judas Iscariot", "Peter", "Thomas", "Paul"],
+        name: "Q1"
+      },
+      {
+        q: "Which book contains the Ten Commandments?",
+        options: ["Exodus", "Genesis", "Leviticus", "Numbers"],
+        name: "Q2"
+      },
+      {
+        q: "Where was Jesus born?",
+        options: ["Bethlehem", "Nazareth", "Jerusalem", "Galilee"],
+        name: "Q3"
+      },
+      {
+        q: "Who led the Israelites across the Red Sea?",
+        options: ["Moses", "Abraham", "Joshua", "David"],
+        name: "Q4"
+      },
+      {
+        q: "Who was swallowed by a great fish?",
+        options: ["Jonah", "Noah", "Elijah", "Daniel"],
+        name: "Q5"
+      },
+      {
+        q: "What is the last book of the Bible?",
+        options: ["Revelation", "Jude", "Malachi", "Acts"],
+        name: "Q6"
+      },
+      {
+        q: "Which king wrote many of the Psalms?",
+        options: ["David", "Solomon", "Saul", "Hezekiah"],
+        name: "Q7"
+      },
+      {
+        q: "How many books are in the Bible?",
+        options: ["66", "72", "60", "70"],
+        name: "Q8"
+      },
+      {
+        q: "What did Jesus feed 5,000 people with?",
+        options: ["5 loaves and 2 fish", "Bread and wine", "Manna", "Fish only"],
+        name: "Q9"
+      },
+      {
+        q: "What did God create on the first day?",
+        options: ["Light", "Sky", "Land", "Animals"],
+        name: "Q10"
+      }
     ];
 
-    let qIndex = 0;
-    let timer, seconds = 15;
+    let current = 0;
+    let timer;
+    let timeLeft = 15;
 
-    const qText = document.getElementById("qText");
-    const optA = document.getElementById("optA");
-    const optB = document.getElementById("optB");
-    const optC = document.getElementById("optC");
-    const optD = document.getElementById("optD");
-    const nextBtn = document.getElementById("nextBtn");
-    const timerBox = document.getElementById("timer");
-    const warning = document.getElementById("warning");
-    const success = document.getElementById("success");
-    const webcam = document.getElementById("webcam");
+    function startQuiz() {
+      if (!name.value || !exam.value) {
+        alert("Please enter your full name and exam number.");
+        return;
+      }
+      document.getElementById("intro").style.display = "none";
+      document.getElementById("quizContainer").style.display = "block";
+      navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+      showQuestion();
+      startTimer();
+    }
 
-    function loadQuestion() {
-      const q = questions[qIndex];
-      qText.textContent = `${qIndex + 1}. ${q[0]}`;
-      optA.textContent = q[1];
-      optB.textContent = q[2];
-      optC.textContent = q[3];
-      optD.textContent = q[4];
-      document.querySelector('input[name="answer"]:checked')?.checked = false;
+    function showQuestion() {
+      const block = document.getElementById("questionBlock");
+      const q = questions[current];
+      const options = shuffle([...q.options]);
+      document.getElementById("qCount").textContent = `Question ${current + 1} of ${questions.length}`;
+      block.innerHTML = `<div class="question"><h4>${q.q}</h4>` +
+        options.map((opt, i) => `
+          <label><input type="radio" name="${q.name}" value="${opt}" required> ${String.fromCharCode(65+i)}. ${opt}</label>
+        `).join("") + `</div>`;
+      document.getElementById("nextBtn").style.display = current < questions.length - 1 ? "inline-block" : "none";
+      document.getElementById("submitBtn").style.display = current === questions.length - 1 ? "inline-block" : "none";
+      resetTimer();
+    }
 
-      seconds = 15;
-      updateTimer();
+    function nextQuestion() {
+      const qName = questions[current].name;
+      const selected = document.querySelector(`input[name="${qName}"]:checked`);
+      if (!selected) {
+        alert("Please select an answer.");
+        return;
+      }
+      current++;
+      if (current < questions.length) {
+        showQuestion();
+      }
+    }
+
+    function startTimer() {
+      resetTimer();
+    }
+
+    function resetTimer() {
+      clearInterval(timer);
+      timeLeft = 15;
+      document.getElementById("timer").textContent = `Time Left: ${timeLeft}s`;
       timer = setInterval(() => {
-        seconds--;
-        updateTimer();
-        if (seconds <= 0) {
+        timeLeft--;
+        document.getElementById("timer").textContent = `Time Left: ${timeLeft}s`;
+        if (timeLeft <= 0) {
           clearInterval(timer);
-          recordAnswer();
-          moveNext();
+          if (current === questions.length - 1) {
+            document.getElementById("quizForm").submit();
+          } else {
+            current++;
+            showQuestion();
+          }
         }
       }, 1000);
     }
 
-    function updateTimer() {
-      timerBox.textContent = `Time: ${seconds}s`;
-    }
-
-    function recordAnswer() {
-      const val = document.querySelector('input[name="answer"]:checked')?.value || "No Answer";
-      document.querySelector(`[name="Q${qIndex + 1}"]`).value = val;
-    }
-
-    function moveNext() {
-      qIndex++;
-      if (qIndex < questions.length) {
-        loadQuestion();
-      } else {
-        document.getElementById("quizForm").submit();
-        success.style.display = "block";
-        document.getElementById("questionBox").style.display = "none";
-        nextBtn.style.display = "none";
-      }
-    }
-
-    nextBtn.addEventListener("click", () => {
-      clearInterval(timer);
-      recordAnswer();
-      moveNext();
-    });
-
-    document.getElementById("startForm").addEventListener("submit", async e => {
+    // Form submission detection
+    document.getElementById("quizForm").addEventListener("submit", function(e) {
       e.preventDefault();
-      document.getElementById("startSection").style.display = "none";
-      document.getElementById("quizSection").style.display = "block";
-      document.getElementById("hiddenName").value = e.target.name.value;
-      document.getElementById("hiddenExam").value = e.target.exam.value;
-      loadQuestion();
-
-      try {
-        const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
-        webcam.srcObject = stream;
-        startMicMonitor(stream);
-      } catch (err) {
-        warning.textContent = "⚠️ Please allow camera and microphone access.";
-        warning.style.display = "block";
-        setTimeout(() => location.reload(), 3000);
-      }
+      clearInterval(timer);
+      document.getElementById("quizForm").style.display = "none";
+      document.getElementById("submittedMsg").style.display = "block";
     });
 
-    // Microphone monitor
-    function startMicMonitor(stream) {
-      const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      const analyser = audioCtx.createAnalyser();
-      const source = audioCtx.createMediaStreamSource(stream);
-      source.connect(analyser);
-      const data = new Uint8Array(analyser.frequencyBinCount);
-
-      function checkNoise() {
-        analyser.getByteFrequencyData(data);
-        const volume = data.reduce((a, b) => a + b) / data.length;
-        if (volume > 30) {
-          warning.style.display = "block";
-          document.getElementById("quizForm").submit();
-        } else {
-          requestAnimationFrame(checkNoise);
-        }
-      }
-      checkNoise();
+    // Utility
+    function shuffle(array) {
+      return array.sort(() => Math.random() - 0.5);
     }
 
+    // Tab switch detection
     document.addEventListener("visibilitychange", () => {
       if (document.hidden) {
-        warning.style.display = "block";
+        alert("Tab switch detected! Your test will end.");
         document.getElementById("quizForm").submit();
       }
     });
