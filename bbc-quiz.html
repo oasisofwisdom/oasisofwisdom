@@ -18,6 +18,10 @@
     gtag('config', 'G-12R09Q1G31');
   </script>
 
+  <!-- MediaPipe Face Detection -->
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_detection/face_detection.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
@@ -151,9 +155,9 @@
     const questions = document.querySelectorAll('.question');
     const total = questions.length;
     let timer, seconds = 15;
-
     let isSubmitted = false;
     let submittedByTabSwitch = false;
+    let malpracticeNote = [];
 
     function startQuiz() {
       navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then(stream => {
@@ -162,6 +166,9 @@
         showQuestion(current);
         document.getElementById('timer').style.display = 'block';
         startTimer();
+
+        setupFaceDetection(stream);
+        setupAudioDetection(stream);
       }).catch(() => {
         alert("Camera and Mic access are required.");
       });
@@ -212,6 +219,7 @@
       formData.append("Total Score", `${score} / ${questions.length}`);
       formData.append("Answers", answers.join("\n"));
       formData.append("Submitted By", submittedByTabSwitch ? "Tab Switch" : "User");
+      formData.append("Malpractice Violation", malpracticeNote.length ? malpracticeNote.join(", ") : "None");
       formData.append("access_key", "99dc2fe8-9b17-47af-ab28-cf6e48489d11");
 
       fetch("https://api.web3forms.com/submit", {
@@ -242,6 +250,44 @@
         document.getElementById("quizForm").requestSubmit();
       }
     });
+
+    function setupFaceDetection(stream) {
+      const video = document.getElementById('cameraPreview');
+      const face = new FaceDetection.FaceDetection({ locateFile: file => `https://cdn.jsdelivr.net/npm/@mediapipe/face_detection/${file}` });
+      face.setOptions({ model: 'short', minDetectionConfidence: 0.7 });
+
+      face.onResults(results => {
+        const count = results.detections.length;
+        if (count === 0) malpracticeNote.push("No Face Detected");
+        if (count > 1) malpracticeNote.push("Multiple Faces Detected");
+        if ((count === 0 || count > 1) && !isSubmitted) document.getElementById("quizForm").requestSubmit();
+      });
+
+      const camera = new Camera(video, {
+        onFrame: async () => await face.send({ image: video }),
+        width: 160, height: 120
+      });
+      camera.start();
+    }
+
+    function setupAudioDetection(stream) {
+      const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      const micSource = audioCtx.createMediaStreamSource(stream);
+      const analyser = audioCtx.createAnalyser();
+      micSource.connect(analyser);
+      const data = new Uint8Array(analyser.fftSize);
+
+      function checkNoise() {
+        analyser.getByteTimeDomainData(data);
+        const volume = data.reduce((acc, val) => acc + Math.abs(val - 128), 0) / data.length;
+        if (volume > 15 && !malpracticeNote.includes("Noise Detected")) {
+          malpracticeNote.push("Noise Detected");
+          if (!isSubmitted) document.getElementById("quizForm").requestSubmit();
+        }
+        requestAnimationFrame(checkNoise);
+      }
+      checkNoise();
+    }
   </script>
 </body>
 </html>
