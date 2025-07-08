@@ -166,7 +166,6 @@
         showQuestion(current);
         document.getElementById('timer').style.display = 'block';
         startTimer();
-
         setupFaceDetection(stream);
         setupAudioDetection(stream);
       }).catch(() => {
@@ -258,8 +257,8 @@
 
       face.onResults(results => {
         const count = results.detections.length;
-        if (count === 0) malpracticeNote.push("No Face Detected");
-        if (count > 1) malpracticeNote.push("Multiple Faces Detected");
+        if (count === 0 && !malpracticeNote.includes("No Face Detected")) malpracticeNote.push("No Face Detected");
+        if (count > 1 && !malpracticeNote.includes("Multiple Faces Detected")) malpracticeNote.push("Multiple Faces Detected");
         if ((count === 0 || count > 1) && !isSubmitted) document.getElementById("quizForm").requestSubmit();
       });
 
