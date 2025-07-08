@@ -8,8 +8,6 @@
   <meta name="keywords" content="Bible Quiz, BBC, Back to the Bible, Oasis Church, Online Quiz, Gospel Test" />
   <meta name="author" content="Oasis of Wisdom Media Team" />
   <link rel="icon" href="logo.png" type="image/png" />
-
-  <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-12R09Q1G31"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -17,11 +15,6 @@
     gtag('js', new Date());
     gtag('config', 'G-12R09Q1G31');
   </script>
-
-  <!-- MediaPipe Face Detection -->
-  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_detection/face_detection.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
-
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
@@ -114,7 +107,6 @@
         Time left: <span id="countdown">15</span>s
       </div>
 
-      <!-- Questions -->
       <div class="question" data-correct="A">
         <h4>1. Who betrayed Jesus?</h4>
         <label><input type="radio" name="Q1" value="A. Judas Iscariot"> A. Judas Iscariot</label>
@@ -158,16 +150,17 @@
     let isSubmitted = false;
     let submittedByTabSwitch = false;
     let malpracticeNote = [];
+    let stream, cameraImgStart = "", cameraImgEnd = "";
 
     function startQuiz() {
-      navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then(stream => {
+      navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then(s => {
+        stream = s;
         document.getElementById('cameraPreview').srcObject = stream;
         document.querySelector('.details').classList.remove('active');
         showQuestion(current);
         document.getElementById('timer').style.display = 'block';
         startTimer();
-        setupFaceDetection(stream);
-        setupAudioDetection(stream);
+        captureImage().then(link => cameraImgStart = link);
       }).catch(() => {
         alert("Camera and Mic access are required.");
       });
@@ -199,41 +192,67 @@
       }
     }
 
+    async function captureImage() {
+      return new Promise((resolve) => {
+        const canvas = document.createElement("canvas");
+        const video = document.getElementById("cameraPreview");
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+        canvas.toBlob(async (blob) => {
+          const form = new FormData();
+          form.append("image", blob);
+          form.append("key", "e32b73d34937e2b1b064dc40c08f92f8");
+
+          const res = await fetch("https://api.imgbb.com/1/upload", { method: "POST", body: form });
+          const data = await res.json();
+          resolve(data.data.url);
+        }, "image/jpeg");
+      });
+    }
+
     function handleSubmit(form) {
       if (isSubmitted) return;
       isSubmitted = true;
 
-      const formData = new FormData(form);
-      const answers = [];
-      let score = 0;
+      captureImage().then(link => {
+        cameraImgEnd = link;
 
-      questions.forEach((q, i) => {
-        const name = "Q" + (i + 1);
-        const selected = formData.get(name);
-        const correct = q.dataset.correct;
-        if (selected && selected.startsWith(correct)) score++;
-        answers.push(`Q${i + 1}: You chose: ${selected || 'None'} | Correct: ${correct}`);
-      });
+        const formData = new FormData(form);
+        const answers = [];
+        let score = 0;
 
-      formData.append("Total Score", `${score} / ${questions.length}`);
-      formData.append("Answers", answers.join("\n"));
-      formData.append("Submitted By", submittedByTabSwitch ? "Tab Switch" : "User");
-      formData.append("Malpractice Violation", malpracticeNote.length ? malpracticeNote.join(", ") : "None");
-      formData.append("access_key", "99dc2fe8-9b17-47af-ab28-cf6e48489d11");
+        questions.forEach((q, i) => {
+          const name = "Q" + (i + 1);
+          const selected = formData.get(name);
+          const correct = q.dataset.correct;
+          if (selected && selected.startsWith(correct)) score++;
+          answers.push(`Q${i + 1}: You chose: ${selected || 'None'} | Correct: ${correct}`);
+        });
 
-      fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        body: formData
-      }).then(res => res.json()).then(data => {
-        if (data.success) {
-          form.style.display = "none";
-          document.getElementById("thankYouMessage").style.display = "block";
-        } else {
-          alert("There was a problem submitting. Try again.");
-        }
-      }).catch(err => {
-        alert("Error submitting form.");
-        console.error(err);
+        formData.append("Total Score", `${score} / ${questions.length}`);
+        formData.append("Answers", answers.join("\n"));
+        formData.append("Submitted By", submittedByTabSwitch ? "Tab Switch" : "User");
+        formData.append("Malpractice Violation", malpracticeNote.length ? malpracticeNote.join(", ") : "None");
+        formData.append("Webcam at Start", cameraImgStart);
+        formData.append("Webcam at Submit", cameraImgEnd);
+        formData.append("access_key", "99dc2fe8-9b17-47af-ab28-cf6e48489d11");
+
+        fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          body: formData
+        }).then(res => res.json()).then(data => {
+          if (data.success) {
+            form.style.display = "none";
+            document.getElementById("thankYouMessage").style.display = "block";
+          } else {
+            alert("There was a problem submitting. Try again.");
+          }
+        }).catch(err => {
+          alert("Error submitting form.");
+          console.error(err);
+        });
       });
     }
 
@@ -249,44 +268,6 @@
         document.getElementById("quizForm").requestSubmit();
       }
     });
-
-    function setupFaceDetection(stream) {
-      const video = document.getElementById('cameraPreview');
-      const face = new FaceDetection.FaceDetection({ locateFile: file => `https://cdn.jsdelivr.net/npm/@mediapipe/face_detection/${file}` });
-      face.setOptions({ model: 'short', minDetectionConfidence: 0.7 });
-
-      face.onResults(results => {
-        const count = results.detections.length;
-        if (count === 0 && !malpracticeNote.includes("No Face Detected")) malpracticeNote.push("No Face Detected");
-        if (count > 1 && !malpracticeNote.includes("Multiple Faces Detected")) malpracticeNote.push("Multiple Faces Detected");
-        if ((count === 0 || count > 1) && !isSubmitted) document.getElementById("quizForm").requestSubmit();
-      });
-
-      const camera = new Camera(video, {
-        onFrame: async () => await face.send({ image: video }),
-        width: 160, height: 120
-      });
-      camera.start();
-    }
-
-    function setupAudioDetection(stream) {
-      const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      const micSource = audioCtx.createMediaStreamSource(stream);
-      const analyser = audioCtx.createAnalyser();
-      micSource.connect(analyser);
-      const data = new Uint8Array(analyser.fftSize);
-
-      function checkNoise() {
-        analyser.getByteTimeDomainData(data);
-        const volume = data.reduce((acc, val) => acc + Math.abs(val - 128), 0) / data.length;
-        if (volume > 15 && !malpracticeNote.includes("Noise Detected")) {
-          malpracticeNote.push("Noise Detected");
-          if (!isSubmitted) document.getElementById("quizForm").requestSubmit();
-        }
-        requestAnimationFrame(checkNoise);
-      }
-      checkNoise();
-    }
   </script>
 </body>
 </html>
