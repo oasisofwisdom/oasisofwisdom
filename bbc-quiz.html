@@ -7,7 +7,7 @@
   <meta name="description" content="Back to the Bible Challenge - Digital Bible Quiz" />
   <meta name="keywords" content="Bible Quiz, BBC, Back to the Bible, Oasis Church, Online Quiz, Gospel Test" />
   <meta name="author" content="Oasis of Wisdom Media Team" />
-  <link rel="icon" href="logo.pAng" type="image/png" />
+  <link rel="icon" href="logo.png" type="image/png" />
 
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-12R09Q1G31"></script>
@@ -152,6 +152,9 @@
     const total = questions.length;
     let timer, seconds = 15;
 
+    let isSubmitted = false;
+    let submittedByTabSwitch = false;
+
     function startQuiz() {
       navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then(stream => {
         document.getElementById('cameraPreview').srcObject = stream;
@@ -190,8 +193,10 @@
       }
     }
 
-    // Submit with Web3Forms
     function handleSubmit(form) {
+      if (isSubmitted) return;
+      isSubmitted = true;
+
       const formData = new FormData(form);
       const answers = [];
       let score = 0;
@@ -206,6 +211,7 @@
 
       formData.append("Total Score", `${score} / ${questions.length}`);
       formData.append("Answers", answers.join("\n"));
+      formData.append("Submitted By", submittedByTabSwitch ? "Tab Switch" : "User");
       formData.append("access_key", "99dc2fe8-9b17-47af-ab28-cf6e48489d11");
 
       fetch("https://api.web3forms.com/submit", {
@@ -229,11 +235,11 @@
       handleSubmit(e.target);
     });
 
-    // ✅ Tab switch detection with same submit logic
     document.addEventListener("visibilitychange", () => {
-      if (document.hidden) {
+      if (document.hidden && !isSubmitted) {
+        submittedByTabSwitch = true;
         alert("You switched tabs. Quiz will be auto-submitted.");
-        handleSubmit(document.getElementById("quizForm"));
+        document.getElementById("quizForm").requestSubmit();
       }
     });
   </script>
