@@ -7,7 +7,7 @@
   <meta name="description" content="Back to the Bible Challenge - Digital Bible Quiz" />
   <meta name="keywords" content="Bible Quiz, BBC, Back to the Bible, Oasis Church, Online Quiz, Gospel Test" />
   <meta name="author" content="Oasis of Wisdom Media Team" />
-  <link rel="icon" href="logo.png" type="image/png" />
+  <link rel="icon" href="logo.pAng" type="image/png" />
 
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-12R09Q1G31"></script>
@@ -191,23 +191,20 @@
     }
 
     // Submit with Web3Forms
-    document.getElementById("quizForm").addEventListener("submit", function(e){
-      e.preventDefault();
-
-      const form = e.target;
+    function handleSubmit(form) {
       const formData = new FormData(form);
       const answers = [];
       let score = 0;
 
-      document.querySelectorAll(".question").forEach((q, i) => {
-        const name = "Q" + (i+1);
+      questions.forEach((q, i) => {
+        const name = "Q" + (i + 1);
         const selected = formData.get(name);
         const correct = q.dataset.correct;
         if (selected && selected.startsWith(correct)) score++;
-        answers.push(`Q${i+1}: You chose: ${selected || 'None'} | Correct: ${correct}`);
+        answers.push(`Q${i + 1}: You chose: ${selected || 'None'} | Correct: ${correct}`);
       });
 
-      formData.append("Total Score", `${score} / ${total}`);
+      formData.append("Total Score", `${score} / ${questions.length}`);
       formData.append("Answers", answers.join("\n"));
       formData.append("access_key", "99dc2fe8-9b17-47af-ab28-cf6e48489d11");
 
@@ -225,13 +222,18 @@
         alert("Error submitting form.");
         console.error(err);
       });
+    }
+
+    document.getElementById("quizForm").addEventListener("submit", function(e){
+      e.preventDefault();
+      handleSubmit(e.target);
     });
 
-    // Tab switch detection
+    // ✅ Tab switch detection with same submit logic
     document.addEventListener("visibilitychange", () => {
       if (document.hidden) {
         alert("You switched tabs. Quiz will be auto-submitted.");
-        document.getElementById("quizForm").submit();
+        handleSubmit(document.getElementById("quizForm"));
       }
     });
   </script>
