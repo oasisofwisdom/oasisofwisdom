@@ -91,11 +91,24 @@
     ];
 
     const today = new Date();
-    const monthIndex = today.getMonth(); // 0 = January, 11 = December
-    const focus = monthlyFocus[monthIndex];
+    const year2026Start = new Date("2026-01-01T00:00:00");
+    const year2026End = new Date("2026-12-31T23:59:59");
+    let focusText;
+
+    if(today < year2026Start) {
+      // Before 2026, show January focus
+      focusText = monthlyFocus[0];
+    } else if(today > year2026End) {
+      // After 2026, show default message
+      focusText = "🎉 Monthly Prophetic Focus for 2027 Coming Soon!";
+    } else {
+      // During 2026
+      const monthIndex = today.getMonth(); // 0 = Jan, 11 = Dec
+      focusText = monthlyFocus[monthIndex];
+    }
 
     document.getElementById("monthly-focus").innerHTML = `
-      <h3>${focus}</h3>
+      <h3>${focusText}</h3>
       <p>Receive and declare this prophetic focus over your life. May the Word of God manifest in your month in the mighty name of Jesus. Amen.</p>
     `;
   </script>
@@ -106,23 +119,4 @@
     <input type="hidden" name="_next" value="https://www.oowbc.com.ng/thank-you.html" />
     <input type="hidden" name="_subject" value="New Prayer Request" />
     <input type="text" name="name" placeholder="Your Name" required />
-    <input type="email" name="email" placeholder="Your Email" required />
-    <textarea name="message" rows="6" placeholder="Write your prayer request here..." required></textarea>
-    <button type="submit">Send Request</button>
-  </form>
-
-  <hr />
-  <h2>💬 Leave a Comment</h2>
-  <form action="https://formsubmit.co/8653cbdf8efa906d17fc35210591cb6e" method="POST">
-    <input type="hidden" name="_next" value="https://www.oowbc.com.ng/thank-you.html" />
-    <input type="hidden" name="_subject" value="New Comment on Prayer Page" />
-    <input type="text" name="name" placeholder="Your Name" required />
-    <input type="email" name="email" placeholder="Your Email" required />
-    <textarea name="message" rows="5" placeholder="Write your comment here..." required></textarea>
-    <button type="submit">Post Comment</button>
-  </form>
-
-  <p style="margin-top:3rem;"><a href="index.html">← Back to Home</a></p>
-
-</body>
-</html>
+    <input type="em
