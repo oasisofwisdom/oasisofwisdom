@@ -311,9 +311,9 @@
   }
 </style>
   
-  <section id="daily-prayer" class="bg">
-  <h3>📖 Daily Prayer</h3>
-  <div class="prayer-frame" id="prayer-preview"></div>
+  <section id="monthly-focus" class="bg">
+  <h3>📖 Monthly Prophetic Focus</h3>
+  <div class="prayer-frame" id="focus-preview"></div>
   <a href="prayer.html" style="display:inline-block; margin-top: 1rem; background:#004225; color:white; padding: 8px 16px; border-radius: 4px; text-decoration: none;">Read Full Prayer</a>
 </section>
 
@@ -331,22 +331,41 @@
 </style>
 
 <script>
-  const prayers = [
-    "Wow... it is the breaking of another beautiful day. Whatever is wilderness in your life shall give way for your fruitfulness...",
-    "Psalms 34:7 – The angel of the Lord encamps around those who fear Him... Your integrity will not crash. God’s favour will uphold you...",
-    "Each time you look back, you will have plenty to thank God for... New era of success begins for you from now...",
-    "God will separate you from toxic atmospheres... Those who have been adversaries will be forced to love you. Your storehouses are blessed...",
-    "This new month will be your month of shield of favour... God's favour will accompany your glory and shield you from destiny destroyers...",
-    "In this new month, your enemies will not mock your downfall... You will not dance to the music of folly in the camp of the enemy...",
-    "Your home will witness immeasurable power of God... Your children will not be a burden. Shout of joy will not cease in your household..."
+  const monthlyFocus = [
+    "January: My Month of Empowered Destiny to Plough My Garden",
+    "February: My Month of Energised Capacity to Manage My Garden",
+    "March: My Month of Fruitful Investments and Good Outcomes from My Labour",
+    "April: My Month of Renewed Commitment to My Faith and My Purpose",
+    "May: My Month of Mandate Fulfilment and Joyful Celebrations",
+    "June: My Month of Remembrance for Good",
+    "July: My Month of Upper Hand in My Pursuits",
+    "August: My Month of Indisputable Advantage",
+    "September: My Month of Undefeatable Strength to Conquer All Obstacles",
+    "October: My Month of Unforgettable Pleasant Experiences",
+    "November: My Month of Uncountable Blessings and Joyful Harvest",
+    "December: My Month of Crowning Glory"
   ];
 
-  const start = new Date("2025-07-07");
   const today = new Date();
-  const dayIndex = Math.floor((today - start) / (1000 * 60 * 60 * 24)) % prayers.length;
+  const year2026Start = new Date("2026-01-01T00:00:00");
+  const year2026End = new Date("2026-12-31T23:59:59");
+  let focusText;
 
-  document.getElementById("prayer-preview").innerHTML = `<p>${prayers[dayIndex]}</p>`;
+  if(today < year2026Start) {
+    // Before 2026, show January focus
+    focusText = monthlyFocus[0];
+  } else if(today > year2026End) {
+    // After 2026
+    focusText = "🎉 Monthly Prophetic Focus for 2027 Coming Soon!";
+  } else {
+    // During 2026
+    const monthIndex = today.getMonth(); // 0 = Jan, 11 = Dec
+    focusText = monthlyFocus[monthIndex];
+  }
+
+  document.getElementById("focus-preview").innerHTML = `<p>${focusText}</p>`;
 </script>
+
   
   <nav>
   ...
