@@ -447,7 +447,7 @@
 
     function startTimer() {
       clearInterval(timer);
-      seconds = 15;
+      seconds = 40;
       document.getElementById("countdown").textContent = seconds;
       timer = setInterval(() => {
         seconds--;
@@ -460,12 +460,15 @@
     }
 
     function nextQuestion() {
-      if (current < total - 1) {
-        current++;
-        showQuestion(current);
-        startTimer();
-      }
-    }
+  if (current < total - 1) {
+    current++;
+    showQuestion(current);
+    startTimer();
+  } else {
+    clearInterval(timer);
+    document.getElementById("quizForm").requestSubmit();
+  }
+}
 
     function handleSubmit(form) {
       if (isSubmitted) return;
