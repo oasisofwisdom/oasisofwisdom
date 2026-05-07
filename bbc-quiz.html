@@ -108,7 +108,7 @@
         <button type="button" onclick="startQuiz()">Start Test</button>
       </div>
 
-      <div class="timer" id="timer" style="display:none;">Time left: <span id="countdown">20</span>s</div>
+      <div class="timer" id="timer" style="display:none;">Time left: <span id="countdown">40</span>s</div>
 
      <div class="question" data-correct="A">
   <h4>1. “That thou mayest walk in the way of good men and keep the paths of the righteous.” Where is the verse cited above found?</h4>
@@ -392,7 +392,7 @@
     let current = 0;
     const questions = document.querySelectorAll('.question');
     const total = questions.length;
-    let timer, seconds = 20;
+    let timer, seconds = 40;
     let isSubmitted = false;
     let submittedByTabSwitch = false;
     let malpracticeNote = [];
